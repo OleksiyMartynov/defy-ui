@@ -1,0 +1,24 @@
+@import "./assets/scss/base.scss";
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  font-weight: normal;
+  display: flex;
+  flex-direction: row;
+  padding:0 6vw;
+  @media only screen and (max-width: 768px) {
+    padding:0 3vw;
+  }
+  &__content{
+    @extend %common-content;
+    overflow-y: auto;
+  }
+  .card{
+    @extend %common-container;
+  }
+  &__card-inverse{
+    margin:auto;
+    @extend %common-container-inverse;
+  }
+}

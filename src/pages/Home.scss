@@ -1,0 +1,21 @@
+@import "../assets/scss/base.scss";
+
+.Home {
+    @extend %fade-in;
+    &__content {
+        &__heading {
+            @extend %common-heading;
+        }
+        &__controls {
+            margin: $space-normal 0;
+            display: flex;
+            flex-direction: row;
+        }
+        &__cards {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            margin-top: $space-small;
+        }
+    }
+}

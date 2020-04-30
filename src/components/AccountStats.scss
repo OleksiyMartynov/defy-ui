@@ -1,0 +1,30 @@
+@import "../assets/scss/base.scss";
+.AccountStats {
+    @extend %common-container;
+    padding: 14px 0px;
+    margin: $space-normal $space-small;
+    border-radius: $radius-small;
+    height: fit-content;
+    &__title {
+        @extend %common-heading-banner-normal;
+        padding-left: $space-small;
+    }
+    &__total {
+        @extend %common-heading;
+        font-weight: 500;
+        font-style: normal;
+    }
+    &__numbers-row {
+        display: flex;
+        padding-left: $space-small;
+        &__subtitle {
+            width: 50%;
+            @extend %common-subtitle;
+        }
+        &__number {
+            @extend %common-subheading;
+            width: 50%;
+            margin-right: 10px;
+        }
+    }
+}

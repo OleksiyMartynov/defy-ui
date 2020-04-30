@@ -1,0 +1,191 @@
+// https://neumorphism.io/#313131
+
+//colors
+$bg-color: #f0f3f2;
+$bg-color-dark: #eaece9;
+$bg-color-middle: #eef1ef;
+$font-color: #5c5c64;
+$gradient-start-color: #70e0b5;
+$gradient-end-color: #55b3b9;
+$accent-gradient: linear-gradient(
+  to right,
+  $gradient-start-color,
+  $gradient-end-color 40%
+);
+$background-gradient: linear-gradient(to right, $bg-color, $bg-color-dark 80%);
+$font-size-small: 12px;
+$font-size-normal: 16px;
+$font-size-large: 24px;
+//sizes
+$space-small: 16px;
+$space-normal: 32px;
+$space-large: 64px;
+$radius-tiny: 8px;
+$radius-small: 16px;
+$radius-normal: 25px;
+$radius-large: 30px;
+//shadows
+$box-shadow-high: -4px -4px 8px rgba(255, 255, 255, 0.8),
+    4px 4px 8px rgba(0, 0, 0, 0.15);
+$box-shadow-normal: -2px -2px 7px rgba(255, 255, 255, 0.8),
+    2px 2px 6px rgba(0, 0, 0, 0.15);
+$box-shadow-small: 0px -1px 3px rgb(255, 255, 255), 
+    0px 1px 3px rgba(0, 0, 0, 0.15);
+$box-shadow-normal-inverse: inset -2px -2px 2px rgb(255, 255, 255),
+    inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+$box-shadow-high-inverse: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
+    inset -4px -4px 8px rgba(255, 255, 255, 1);
+
+//classes
+%common-content {
+  padding: $space-normal $space-normal;
+  width: 100%;
+  min-width: 360px;
+}
+
+%common-container-small {
+  width: min-content;
+  padding: $space-small;
+  color: $font-color;
+  border-radius: $radius-small;
+  background: $background-gradient;
+  transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: $box-shadow-small;
+}
+
+%common-container {
+  width: min-content;
+  padding: $space-small;
+  color: $font-color;
+  border-radius: $radius-large;
+  background: $background-gradient;
+  transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: $box-shadow-high;
+}
+%common-button {
+  @extend %common-container;
+  display: flex;
+  align-items: center;
+  box-shadow: $box-shadow-normal;
+  padding: 10px 20px;
+  border-radius: $radius-large;
+  font-weight: 500;
+  font-style: normal;
+  font-size: $font-size-normal;
+  cursor: pointer;
+  &:after {
+    content: "";
+  }
+  &:active {
+    transform: scale(0.95);
+    box-shadow: $box-shadow-small;
+  }
+}
+%common-button-secondary {
+  @extend %common-container;
+  box-shadow: inset 0px 0px 0px rgba(255, 255, 255, 1),
+    inset 0px 0px 0px rgba(0, 0, 0, 0.15);
+  padding: 10px 20px;
+  border-radius: $radius-large;
+  font-weight: 300;
+  font-style: normal;
+  transition: all 200ms ease-in-out;
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+  &:after {
+    content: "";
+  }
+  &:active {
+    //font-weight: 500;
+    transform: scale(1);
+    box-shadow: $box-shadow-normal-inverse;
+  }
+}
+%common-container-inverse {
+  width: min-content;
+  padding: 25px;
+  color: $font-color;
+  border-radius: $radius-large;
+  background: $bg-color;
+  transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: $box-shadow-high-inverse;
+}
+
+%common-heading {
+  background-image: $accent-gradient;
+  color: $font-color;
+  font-size: 40px;
+  font-weight: 300;
+  font-style: normal;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+%common-subheading {
+  background-image: $accent-gradient;
+  font-size: $font-size-normal;
+  font-weight: normal;
+  font-style: normal;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+%common-heading-banner-normal {
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.089);
+  font-size: $font-size-large;
+  background-image: $accent-gradient;
+}
+
+%common-title {
+  text-shadow: 1px 1px 1px #ffffff;
+  font-size: 32px;
+  color: $font-color;
+}
+%common-subtitle {
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
+  font-size: $font-size-normal;
+  color: $font-color;
+}
+%common-text {
+  font-size: $font-size-normal;
+  color: $font-color;
+}
+%common-input {
+  @extend %common-button-secondary;
+  cursor: text;
+  box-shadow: $box-shadow-normal-inverse;
+  border: none;
+  font-size: $font-size-normal;
+  &:disabled {
+    background-color: #d8f0ef;
+  }
+  &::-webkit-input-placeholder {
+    font-family:'FontAwesome';
+  }
+}
+//animations
+@mixin inline-animation($duration) {
+  $name: inline-#{unique-id()};
+
+  @keyframes #{$name} {
+    @content;
+  }
+  animation-name: $name;
+  animation-duration: 200ms;
+  animation-iteration-count: 1;
+}
+
+%fade-in {
+  @include inline-animation(2s) {
+    from {
+      opacity: 0;
+    }
+    to {
+      background: 1;
+    }
+  }
+}

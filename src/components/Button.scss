@@ -1,0 +1,19 @@
+@import "./../assets/scss/base.scss";
+.Button {
+  &--primary {
+    @extend %common-button;
+    &--selected {
+      transform: scale(0.95);
+      box-shadow:  0px -1px 3px rgb(255, 255, 255),  0px 1px 3px rgba(0, 0, 0, 0.15);
+    }
+  }
+  &--secondary {
+    @extend %common-button-secondary;
+    &--selected {
+        font-weight: 500;
+        transform: scale(1);
+        box-shadow: inset -2px -2px 2px rgb(255, 255, 255), inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+}

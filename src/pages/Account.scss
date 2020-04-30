@@ -1,0 +1,8 @@
+@import "../assets/scss/base.scss";
+
+.Account {
+    @extend %fade-in;
+    &__heading {
+        @extend %common-heading;
+    }
+}

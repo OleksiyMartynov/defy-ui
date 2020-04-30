@@ -1,0 +1,23 @@
+@import "../assets/scss/base.scss";
+
+.Discover {
+    @extend %fade-in;
+    display: flex;
+    flex-direction: column;
+    &__heading {
+        @extend %common-heading;
+    }
+    &__search-wrapper {
+        @extend %common-input;
+        display: flex;
+        margin: $space-normal 0;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-right: 0px;
+        >input {
+            font-size: 20px;
+            background: none;
+            border: none;
+        }
+    }
+}

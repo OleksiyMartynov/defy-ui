@@ -1,0 +1,185 @@
+@import-normalize;
+@import './assets/scss/base.scss';
+@font-face {
+  font-family: 'Lora';
+  src: local('Lora-Italic'), url('./assets/fonts/Lora-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Lora';
+  src: local('Lora-Regular'), url('./assets/fonts/Lora-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lora';
+  src: local('Lora-Medium'), url('./assets/fonts/Lora-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lora';
+  src: local('Lora-MediumItalic'), url('./assets/fonts/Lora-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Lora';
+  src: local('Lora-SemiBold'), url('./assets/fonts/Lora-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lora';
+  src: local('Lora-SemiBoldItalic'), url('./assets/fonts/Lora-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Lora';
+  src: local('Lora-Bold'), url('./assets/fonts/Lora-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lora';
+  src: local('Lora-BoldItalic'), url('./assets/fonts/Lora-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+//lato 
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-Thin'), url('./assets/fonts/Lato-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-ThinItalic'), url('./assets/fonts/Lato-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-Light'), url('./assets/fonts/Lato-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-LightItalic'), url('./assets/fonts/Lato-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-Regular'), url('./assets/fonts/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-Italic'), url('./assets/fonts/Lato-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-Bold'), url('./assets/fonts/Lato-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-BoldItalic'), url('./assets/fonts/Lato-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-Black'), url('./assets/fonts/Lato-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-BlackItalic'), url('./assets/fonts/Lato-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+#root {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  min-width: 100%;
+  position: fixed;
+  z-index: 1;
+}
+
+input[type=button],
+input[type=submit],
+input[type=reset],
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  outline: none;
+  display: inline-block;
+
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+
+  /* Remove excess padding and border in Firefox 4+ */
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+* {
+  &,
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+}
+
+html,
+body {
+  background-color: $bg-color-middle;
+  font-family: 'Lato', sans-serif;
+  font-weight: normal;
+  color: $font-color;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+  // removes blue overlay shown upon pressing buttons and inputs on mobile
+  // Source: https://stackoverflow.com/a/45050338
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  outline: none;
+}

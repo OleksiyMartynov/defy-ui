@@ -1,0 +1,101 @@
+@import "../assets/scss/base.scss";
+
+.NavBar {
+  height: 100vh;
+  background-image: $accent-gradient;
+  color: #f2f2f2;
+  margin: $space-normal $space-small;
+  border-radius: 15px;
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.15), 
+            inset -4px -4px 8px rgba(255, 255, 255, 0.1);
+&__header{
+  padding-top: $space-normal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  >img {
+    width: 50px;
+    height: 50px;
+  }
+  &__heading{
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.089);
+    font-size: 24px;
+  }
+  &__subheading{
+    color: white;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.01);
+    font-size: 12px;
+    text-align: center;
+    margin: 5px;
+  }
+}
+  &__divider {
+    height: 1px;
+    box-shadow: 1px 1px 1px 0 rgba($gradient-start-color, 0.84);
+    background-color: $gradient-end-color;
+    margin: $space-normal 0;
+  }
+  &__list {
+    list-style-type: none;
+    padding: 0px ;
+    margin-top: $space-large;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    &__item-wrapper{
+      width: 100%;
+    &__item {
+      color: white;
+      font-size: 18px;
+      padding: 8px 0 8px 0;
+      text-decoration: none;
+      height: 70px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      border-bottom-left-radius: 40px;
+      border-top-left-radius: 40px;
+      border-bottom-right-radius: 0px;
+      border-top-right-radius: 0px;
+      margin-top: 10px;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.692);
+        border-radius: 0px;
+        color: #4aa27b;
+      }
+      >i {
+          font-size: 20px;
+          padding:15px
+      }
+      >span {
+        padding: 0 14px;
+      }
+      @media only screen and (max-width: 768px) {
+        >span {
+          display: none;
+        }
+      }
+    }
+
+    &__item-selected {
+      @extend %common-container;
+      background-color: $bg-color-middle;
+      background-image: none;
+      width: 100%;
+      box-shadow: -5px -5px 5px rgba(black, 0.15), -9px -9px 18px transparent;
+      color: #4aa27b;
+      cursor: initial;
+      &:hover {
+        background-color: $bg-color-middle;
+        transform: none;
+        border-bottom-left-radius: 40px;
+        border-top-left-radius: 40px;
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+      }
+    }
+  }
+  }
+}

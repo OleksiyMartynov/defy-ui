@@ -1,0 +1,8 @@
+@import "../assets/scss/base.scss";
+
+.Toggle {
+  @extend %common-container;
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+}
