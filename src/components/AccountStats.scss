@@ -1,30 +1,42 @@
 @import "../assets/scss/base.scss";
 .AccountStats {
-    @extend %common-container;
-    padding: 14px 0px;
-    margin: $space-normal $space-small;
-    border-radius: $radius-small;
-    height: fit-content;
-    &__title {
-        @extend %common-heading-banner-normal;
-        padding-left: $space-small;
+  @extend %common-container;
+  padding: 14px 0px;
+  margin: $space-normal $space-small;
+  border-radius: $radius-small;
+  height: fit-content;
+  text-align: center;
+  &__title {
+    @extend %common-heading-banner-normal;
+    padding: $space-tiny;
+  }
+  &__total {
+    @extend %common-heading;
+    font-weight: 500;
+    font-style: normal;
+    padding: $space-tiny $space-small $space-tiny $space-small;
+  }
+  &__numbers-row {
+    display: flex;
+    padding: 0 $space-small;
+    &__subtitle {
+      width: 50%;
+      @extend %common-subtitle;
     }
-    &__total {
-        @extend %common-heading;
-        font-weight: 500;
-        font-style: normal;
+    &__number {
+      @extend %common-subtitle;
+      width: 50%;
+      font-weight: 600;
+      margin-bottom: $space-small;
     }
-    &__numbers-row {
-        display: flex;
-        padding-left: $space-small;
-        &__subtitle {
-            width: 50%;
-            @extend %common-subtitle;
-        }
-        &__number {
-            @extend %common-subheading;
-            width: 50%;
-            margin-right: 10px;
-        }
+    > button {
+      width: 100%;
+      margin: 6px $space-small;
+      text-align: center !important;
     }
+  }
+  &__divider {
+    @extend %common-divider;
+    margin-bottom: $space-small;
+  }
 }

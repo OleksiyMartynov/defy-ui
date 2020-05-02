@@ -17,6 +17,7 @@ $font-size-small: 12px;
 $font-size-normal: 16px;
 $font-size-large: 24px;
 //sizes
+$space-tiny: 8px;
 $space-small: 16px;
 $space-normal: 32px;
 $space-large: 64px;
@@ -26,15 +27,15 @@ $radius-normal: 25px;
 $radius-large: 30px;
 //shadows
 $box-shadow-high: -4px -4px 8px rgba(255, 255, 255, 0.8),
-    4px 4px 8px rgba(0, 0, 0, 0.15);
+  4px 4px 8px rgba(0, 0, 0, 0.15);
 $box-shadow-normal: -2px -2px 7px rgba(255, 255, 255, 0.8),
-    2px 2px 6px rgba(0, 0, 0, 0.15);
-$box-shadow-small: 0px -1px 3px rgb(255, 255, 255), 
-    0px 1px 3px rgba(0, 0, 0, 0.15);
+  2px 2px 6px rgba(0, 0, 0, 0.15);
+$box-shadow-small: 0px -1px 3px rgb(255, 255, 255),
+  0px 1px 3px rgba(0, 0, 0, 0.15);
 $box-shadow-normal-inverse: inset -2px -2px 2px rgb(255, 255, 255),
-    inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+  inset 1px 1px 3px rgba(0, 0, 0, 0.3);
 $box-shadow-high-inverse: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
-    inset -4px -4px 8px rgba(255, 255, 255, 1);
+  inset -4px -4px 8px rgba(255, 255, 255, 1);
 
 //classes
 %common-content {
@@ -72,6 +73,7 @@ $box-shadow-high-inverse: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
   font-weight: 500;
   font-style: normal;
   font-size: $font-size-normal;
+  white-space: nowrap;
   cursor: pointer;
   &:after {
     content: "";
@@ -92,6 +94,7 @@ $box-shadow-high-inverse: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
   transition: all 200ms ease-in-out;
   background-color: transparent;
   background-image: none;
+  white-space: nowrap;
   cursor: pointer;
   &:after {
     content: "";
@@ -144,6 +147,7 @@ $box-shadow-high-inverse: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
   text-shadow: 1px 1px 1px #ffffff;
   font-size: 32px;
   color: $font-color;
+  margin-bottom: $space-tiny;
 }
 %common-subtitle {
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
@@ -161,11 +165,21 @@ $box-shadow-high-inverse: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
   border: none;
   font-size: $font-size-normal;
   &:disabled {
-    background-color: #d8f0ef;
+    background-color: darken($bg-color-dark, 5%);
   }
   &::-webkit-input-placeholder {
-    font-family:'FontAwesome';
+    font-family: "FontAwesome";
   }
+}
+%common-divider {
+  height: 1px;
+  box-shadow: 1px 1px 1px 0 rgba(darken($bg-color-middle, 10%), 0.84);
+  background-color: $bg-color-dark;
+}
+%common-divider-gradient {
+  height: 1px;
+  box-shadow: 1px 1px 1px 0 rgba(darken($gradient-start-color, 10%), 0.84);
+  background-color: $gradient-end-color;
 }
 //animations
 @mixin inline-animation($duration) {

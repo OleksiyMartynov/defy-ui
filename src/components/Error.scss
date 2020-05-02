@@ -1,0 +1,34 @@
+@import "../assets/scss/base.scss";
+.Error {
+  @extend %common-container-small;
+  width: 100%;
+  padding: 5px;
+  &__message {
+    @extend %common-container-inverse;
+    width: 100%;
+    border-radius: $radius-tiny;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    background: adjust-color($bg-color, $red: 10, $green: 1, $blue: 1);
+    & > i {
+      padding: 10px;
+      display: block;
+      height: 100%;
+      font-size: $font-size-large;
+      border-top-left-radius: $radius-tiny;
+      border-bottom-left-radius: $radius-tiny;
+    }
+    & > span {
+      padding-left: $space-small;
+      padding-right: $space-small;
+    }
+    &--warning {
+      color: #e64b4b;
+      & > i {
+        background-color: #e64b4b;
+        color: white;
+      }
+    }
+  }
+}

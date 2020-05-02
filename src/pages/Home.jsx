@@ -5,6 +5,7 @@ import Dropdown from "../components/Dropdown";
 import DebateCard from "../components/DebateCard";
 
 class Home extends React.Component {
+  
   render() {
     return (
       <div className="Home">
@@ -12,7 +13,10 @@ class Home extends React.Component {
 
           <span className="Home__content__heading">Your Debates</span>
           <div className="Home__content__controls">
-            <Toggle />
+            <Toggle 
+              leftText="Active" 
+              rightText="Closed"
+              onChange={(toggle)=>this.setState({showActive:toggle})} />
             &nbsp;&nbsp;&nbsp;
             <Dropdown />
           </div>
@@ -26,4 +30,5 @@ class Home extends React.Component {
     );
   }
 }
+
 export default Home;

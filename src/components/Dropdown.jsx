@@ -13,7 +13,6 @@ class Dropdown extends React.Component {
   };
   render() {
     const { open, selectedIndex } = this.state;
-    console.log(selectedIndex);
     const items = ["Newest", "Oldest", "Stake"];
     const content = items.map((item, index) => (
       <div

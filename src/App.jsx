@@ -1,18 +1,28 @@
 import React from "react";
 import "./App.scss";
-import NavBar from "./components/NavBar";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Discover from "./pages/Discover";
 import Account from "./pages/Account";
 import AccountStats from "./components/AccountStats";
+import { createAccount } from "./actions/account";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    if (!props.account) {
+      props.createAccount();
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -40,5 +50,14 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;
+App.propTypes = {
+  account: PropTypes.object,
+  createAccount: PropTypes.func.isRequired,
+};
+const mapDispatchToProps = (dispatch) => ({
+  createAccount: (account) => dispatch(createAccount(account)),
+});
+const mapStateToProps = (state) => ({
+  account: state.account,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);

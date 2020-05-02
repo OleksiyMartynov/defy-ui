@@ -31,9 +31,7 @@
   }
 }
   &__divider {
-    height: 1px;
-    box-shadow: 1px 1px 1px 0 rgba($gradient-start-color, 0.84);
-    background-color: $gradient-end-color;
+    @extend %common-divider-gradient;
     margin: $space-normal 0;
   }
   &__list {
@@ -67,7 +65,7 @@
       }
       >i {
           font-size: 20px;
-          padding:15px
+          padding-left:15px
       }
       >span {
         padding: 0 14px;
