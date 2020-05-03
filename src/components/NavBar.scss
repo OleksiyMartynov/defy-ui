@@ -6,94 +6,156 @@
   color: #f2f2f2;
   margin: $space-normal $space-small;
   border-radius: 15px;
-  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.15), 
-            inset -4px -4px 8px rgba(255, 255, 255, 0.1);
-&__header{
-  padding-top: $space-normal;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  >img {
-    width: 50px;
-    height: 50px;
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.1);
+  &__header {
+    padding-top: $space-normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > img {
+      width: 50px;
+      height: 50px;
+      @include mobile {
+        margin: 0 $space-tiny;
+      }
+    }
+    &__heading {
+      color: white;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.089);
+      font-size: 24px;
+      @include mobile {
+        display: none;
+      }
+    }
+    &__subheading {
+      color: white;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.01);
+      font-size: 12px;
+      text-align: center;
+      margin: 5px;
+      @include mobile {
+        display: none;
+      }
+    }
+    @include mobile {
+      flex-direction: row;
+      align-items: center;
+      padding-top: 0px;
+    }
   }
-  &__heading{
-    color: white;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.089);
-    font-size: 24px;
-  }
-  &__subheading{
-    color: white;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.01);
-    font-size: 12px;
-    text-align: center;
-    margin: 5px;
-  }
-}
   &__divider {
     @extend %common-divider-gradient;
     margin: $space-normal 0;
+    @include mobile {
+      margin-top: 0px;
+    }
   }
   &__list {
     list-style-type: none;
-    padding: 0px ;
+    padding: 0px;
     margin-top: $space-large;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    &__item-wrapper{
+    &__item-wrapper {
       width: 100%;
-    &__item {
-      color: white;
-      font-size: 18px;
-      padding: 8px 0 8px 0;
-      text-decoration: none;
-      height: 70px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      border-bottom-left-radius: 40px;
-      border-top-left-radius: 40px;
-      border-bottom-right-radius: 0px;
-      border-top-right-radius: 0px;
-      margin-top: 10px;
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.692);
-        border-radius: 0px;
-        color: #4aa27b;
-      }
-      >i {
-          font-size: 20px;
-          padding-left:15px
-      }
-      >span {
-        padding: 0 14px;
-      }
-      @media only screen and (max-width: 768px) {
-        >span {
-          display: none;
-        }
-      }
-    }
-
-    &__item-selected {
-      @extend %common-container;
-      background-color: $bg-color-middle;
-      background-image: none;
-      width: 100%;
-      box-shadow: -5px -5px 5px rgba(black, 0.15), -9px -9px 18px transparent;
-      color: #4aa27b;
-      cursor: initial;
-      &:hover {
-        background-color: $bg-color-middle;
-        transform: none;
+      &__item {
+        color: white;
+        font-size: 18px;
+        padding: 8px 0 8px 0;
+        text-decoration: none;
+        height: 70px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
         border-bottom-left-radius: 40px;
         border-top-left-radius: 40px;
         border-bottom-right-radius: 0px;
         border-top-right-radius: 0px;
+        margin-top: 10px;
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.692);
+          border-radius: 0px;
+          color: #4aa27b;
+        }
+        > i {
+          font-size: 20px;
+          padding-left: 15px;
+          @include mobile {
+            padding-left: 0px;
+          }
+        }
+        > span {
+          padding: 0 14px;
+          @include mobile {
+            padding: 0px;
+          }
+        }
+        @media only screen and (max-width: 768px) {
+          > span {
+            display: none;
+          }
+        }
+        @include mobile {
+          border-bottom-right-radius: 40px;
+          border-top-right-radius: 40px;
+          width: 70px;
+          height: 100%;
+          margin: 0;
+        }
+      }
+
+      &__item-selected {
+        @extend %common-container;
+        background-color: $bg-color-middle;
+        background-image: none;
+        width: 100%;
+        box-shadow: -5px -5px 5px rgba(black, 0.15), -9px -9px 18px transparent;
+        color: #4aa27b;
+        cursor: initial;
+        &:hover {
+          background-color: $bg-color-middle;
+          transform: none;
+          border-bottom-left-radius: 40px;
+          border-top-left-radius: 40px;
+          border-bottom-right-radius: 0px;
+          border-top-right-radius: 0px;
+          @include mobile {
+            border-bottom-right-radius: 40px;
+            border-top-right-radius: 40px;
+          }
+        }
+        @include mobile {
+          border-bottom-right-radius: 40px;
+          border-top-right-radius: 40px;
+          width: 70px;
+        }
+      }
+      @include mobile {
+        height: 100%;
+        margin: 0;
+        padding: 0;
       }
     }
+    @include mobile {
+      flex-direction: row;
+      margin: 0;
+      width: 100%;
+    }
   }
+  @include mobile {
+    width: 100vw;
+    height: 70px;
+    position: fixed;
+    margin: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    z-index: 9999;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 }

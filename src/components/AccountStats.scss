@@ -9,12 +9,20 @@
   &__title {
     @extend %common-heading-banner-normal;
     padding: $space-tiny;
+    @include mobile {
+      display: none;
+    }
   }
   &__total {
     @extend %common-heading;
     font-weight: 500;
     font-style: normal;
     padding: $space-tiny $space-small $space-tiny $space-small;
+  }
+  &__rows-wrapper {
+    @include mobile {
+      flex-grow: 1;
+    }
   }
   &__numbers-row {
     display: flex;
@@ -29,14 +37,35 @@
       font-weight: 600;
       margin-bottom: $space-small;
     }
-    > button {
+    & > button {
       width: 100%;
       margin: 6px $space-small;
       text-align: center !important;
+      @include mobile {
+        height: 50px;
+
+        margin: 6px $space-tiny;
+        & > i {
+          font-size: $font-size-large;
+          margin-right: $space-small;
+        }
+      }
+    }
+    @include mobile {
+      margin: 0;
+      padding: 0 0;
     }
   }
   &__divider {
     @extend %common-divider;
     margin-bottom: $space-small;
+  }
+  @include mobile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
   }
 }

@@ -6,19 +6,22 @@
   font-weight: normal;
   display: flex;
   flex-direction: row;
-  padding:0 6vw;
+  padding: 0 6vw;
   @media only screen and (max-width: 768px) {
-    padding:0 3vw;
+    padding: 0 3vw;
   }
-  &__content{
+  &__content {
     @extend %common-content;
     overflow-y: auto;
   }
-  .card{
+  .card {
     @extend %common-container;
   }
-  &__card-inverse{
-    margin:auto;
+  &__card-inverse {
+    margin: auto;
     @extend %common-container-inverse;
+  }
+  @include mobile {
+    flex-direction: column-reverse;
   }
 }
