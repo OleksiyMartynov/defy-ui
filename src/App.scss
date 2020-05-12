@@ -14,13 +14,25 @@
     @extend %common-content;
     overflow-y: auto;
   }
-  .card {
-    @extend %common-container;
+  &__dialog {
+    @extend %fade-in;
+    background-color: rgba(255,255,255,0.92);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    &__nav{
+      & button{
+        margin: 20px 20px 0 auto;
+      }
+    }
+    &__content{
+      @extend %common-content;
+      overflow-y: auto;
+    }
   }
-  &__card-inverse {
-    margin: auto;
-    @extend %common-container-inverse;
-  }
+  
   @include mobile {
     flex-direction: column-reverse;
   }

@@ -37,6 +37,11 @@ $box-shadow-normal-inverse: inset -2px -2px 2px rgb(255, 255, 255),
 $box-shadow-high-inverse: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
   inset -4px -4px 8px rgba(255, 255, 255, 1);
 
+$box-shadow-accent: -2px -2px 7px rgba($gradient-start-color, 0.8),
+  2px 2px 6px rgba($gradient-end-color, 0.7);
+$box-shadow-accent-small: 0px -1px 3px  rgba($gradient-start-color, 0.95),
+  0px 1px 3px rgba($gradient-end-color, 0.95);
+
 //classes
 
 //MOBILE
@@ -116,6 +121,30 @@ $box-shadow-high-inverse: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
     //font-weight: 500;
     transform: scale(1);
     box-shadow: $box-shadow-normal-inverse;
+  }
+}
+%common-button-accent {
+  @extend %common-container;
+  background-image: $accent-gradient;
+  min-height: 55px;
+  min-width: 55px;
+  display: flex;
+  align-items: center;
+  box-shadow: $box-shadow-accent;
+  padding: 10px 20px;
+  border-radius: $radius-large;
+  font-weight: 500;
+  font-style: normal;
+  font-size: $font-size-large;
+  color: white;
+  white-space: nowrap;
+  cursor: pointer;
+  &:after {
+    content: "";
+  }
+  &:active {
+    transform: scale(0.95);
+    box-shadow: $box-shadow-accent-small;
   }
 }
 %common-container-inverse {

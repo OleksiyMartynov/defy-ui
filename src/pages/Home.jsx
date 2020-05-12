@@ -3,6 +3,7 @@ import "./Home.scss";
 import Toggle from "../components/Toggle";
 import Dropdown from "../components/Dropdown";
 import DebateCard from "../components/DebateCard";
+import DebateList from "../components/DebateList";
 
 class Home extends React.Component {
   
@@ -16,15 +17,12 @@ class Home extends React.Component {
             <Toggle 
               leftText="Active" 
               rightText="Closed"
-              onChange={(toggle)=>this.setState({showActive:toggle})} />
+              onChange={(toggle) => this.setState({ showActive: toggle })}
+            />
             &nbsp;&nbsp;&nbsp;
             <Dropdown />
           </div>
-          <div className="Home__content__cards">
-          <DebateCard />
-          <DebateCard />
-          <DebateCard />
-          </div>
+          <DebateList/>
         </div>
       </div>
     );

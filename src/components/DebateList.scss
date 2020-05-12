@@ -1,0 +1,7 @@
+@import "../assets/scss/base.scss";
+.DebateList {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-top: $space-small;
+}

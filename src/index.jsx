@@ -22,6 +22,14 @@ const enhancer = compose(
 
 const store = createStore(rootReducer, {}, enhancer);
 
+if (process.env.NODE_ENV === "development") {
+  // eslint-disable-next-line global-require
+  const whyDidYouRender = require("@welldone-software/why-did-you-render");
+  whyDidYouRender(React, {
+    trackAllPureComponents: true,
+  });
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

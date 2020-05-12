@@ -1,12 +1,25 @@
 import React from "react";
 import "./AccountStats.scss";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import Button from "./Button";
-import { createAccount } from "../actions/account";
+import {
+  openDepositDialog,
+  openWithdrawalDialog,
+  openCreateDebateDialog,
+} from "../actions/ui";
 
 class AccountStats extends React.Component {
   onDeposit = () => {
-    // todo
+    this.props.openDepositDialog();
+  };
+
+  onWithdrawal = () => {
+    this.props.openWithdrawalDialog();
+  };
+
+  onCreateDebate = () => {
+    this.props.openCreateDebateDialog();
   };
 
   render() {
@@ -36,7 +49,7 @@ class AccountStats extends React.Component {
             </Button>
           </div>
           <div className="AccountStats__numbers-row">
-            <Button>
+            <Button onClick={this.onWithdrawal}>
               <i className="fa fa-arrow-circle-up" />
               <span>&nbsp;Withdraw</span>
             </Button>
@@ -47,8 +60,16 @@ class AccountStats extends React.Component {
   }
 }
 
+AccountStats.propTypes = {
+  openCreateDebateDialog: PropTypes.func.isRequired,
+  openDepositDialog: PropTypes.func.isRequired,
+  openWithdrawalDialog: PropTypes.func.isRequired,
+};
+
 const mapDispatchToProps = (dispatch) => ({
-  createAccount: (account) => dispatch(createAccount(account)),
+  openDepositDialog: () => dispatch(openDepositDialog()),
+  openWithdrawalDialog: () => dispatch(openWithdrawalDialog()),
+  openCreateDebateDialog: () => dispatch(openCreateDebateDialog()),
 });
 
 const mapStateToProps = (state) => ({
