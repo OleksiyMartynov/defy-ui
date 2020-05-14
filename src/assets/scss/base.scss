@@ -124,10 +124,9 @@ $box-shadow-accent-small: 0px -1px 3px  rgba($gradient-start-color, 0.95),
   }
 }
 %common-button-accent {
-  @extend %common-container;
+  @extend %common-button;
+  @extend %common-heading-banner-normal;
   background-image: $accent-gradient;
-  min-height: 55px;
-  min-width: 55px;
   display: flex;
   align-items: center;
   box-shadow: $box-shadow-accent;
@@ -135,7 +134,6 @@ $box-shadow-accent-small: 0px -1px 3px  rgba($gradient-start-color, 0.95),
   border-radius: $radius-large;
   font-weight: 500;
   font-style: normal;
-  font-size: $font-size-large;
   color: white;
   white-space: nowrap;
   cursor: pointer;

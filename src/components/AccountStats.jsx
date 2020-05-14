@@ -8,6 +8,7 @@ import {
   openWithdrawalDialog,
   openCreateDebateDialog,
 } from "../actions/ui";
+import FloatingButton from "./FloatingButton";
 
 class AccountStats extends React.Component {
   onDeposit = () => {
@@ -53,6 +54,12 @@ class AccountStats extends React.Component {
               <i className="fa fa-arrow-circle-up" />
               <span>&nbsp;Withdraw</span>
             </Button>
+          </div>
+          <div className="AccountStats__numbers-row">
+            <FloatingButton onClick={this.onCreateDebate}>
+              <i className="fa fa-plus-circle" />
+              <span>&nbsp;Start Debate</span>
+            </FloatingButton>
           </div>
         </div>
       </div>

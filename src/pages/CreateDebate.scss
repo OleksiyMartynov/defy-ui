@@ -1,3 +1,38 @@
-.CreateDebate{
-    
+@import "../assets/scss/base.scss";
+.CreateDebate {
+  width: 100%;
+  &__content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 680px;
+  }
+  &__heading {
+    @extend %common-title;
+    text-align: center;
+  }
+  &__banner {
+    @extend %common-container;
+    width: 100%;
+    &__inner {
+      @extend %common-container-inverse;
+      width: 100%;
+    }
+  }
+  &__input-wrapper {
+    &__label {
+        @extend %common-subtitle;
+        margin: $space-normal 0 $space-tiny $space-tiny;
+    }
+    & > textarea,
+        input[type] {
+      @extend %common-input;
+      white-space: normal;
+      width: 100%;
+      font-size: $font-size-normal;
+      font-weight: 400;
+    }
+    & > button {
+        margin-top: $space-normal;
+    }
+  }
 }
