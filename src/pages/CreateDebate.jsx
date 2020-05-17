@@ -1,17 +1,25 @@
 import React from "react";
 import "./CreateDebate.scss";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import Button from "../components/Button";
+import { fetchCreateDebate } from "../actions/debates";
 
 class CreateDebate extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { title: "", description: "" };
+    console.log(props);
   }
 
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
+  };
+
+  onCreateClicked = () => {
+    this.props.fetchCreateDebate("Test Title", "Test description", 100);
   };
 
   render() {
@@ -75,7 +83,7 @@ class CreateDebate extends React.PureComponent {
             />
           </div>
           <div className="CreateDebate__input-wrapper">
-            <Button accent>
+            <Button accent onClick={this.onCreateClicked}>
               <i className="fa fa-paper-plane" />
               <span>&nbsp;Create</span>
             </Button>
@@ -89,4 +97,20 @@ class CreateDebate extends React.PureComponent {
     );
   }
 }
-export default CreateDebate;
+CreateDebate.propTypes = {
+  fetchCreateDebate: PropTypes.func.isRequired,
+  account: PropTypes.object.isRequired,
+  createDebate: PropTypes.object.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchCreateDebate: (title, description, stake) =>
+    dispatch(fetchCreateDebate(title, description, stake)),
+});
+
+const mapStateToProps = (state) => ({
+  account: state.account,
+  createDebate: state.debates.createDebate,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateDebate);

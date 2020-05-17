@@ -3,6 +3,7 @@ import "./DebateList.scss";
 import DebateCard from "../components/DebateCard";
 import EmptyState from "./EmptyState";
 import PuzzleIcon from "../assets/images/puzzle-large.svg";
+import { connect } from "react-redux";
 
 class DebateList extends React.PureComponent {
   render() {
@@ -18,5 +19,8 @@ class DebateList extends React.PureComponent {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  debates: state.debates,
+});
 
-export default DebateList;
+export default connect(mapStateToProps)(DebateList);

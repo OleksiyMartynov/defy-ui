@@ -8,8 +8,13 @@ import DebateCard from "../components/DebateCard";
 import DebateList from "../components/DebateList";
 import FloatingButton from "../components/FloatingButton";
 import { openCreateDebateDialog } from "../actions/ui";
+import { fetchDebates } from "../actions/debates";
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    props.fetchDebates();
+  }
   onCreateDebate = () => {
     this.props.openCreateDebateDialog();
   };
@@ -43,6 +48,7 @@ Home.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   openCreateDebateDialog: () => dispatch(openCreateDebateDialog()),
+  fetchDebates: () => dispatch(fetchDebates()),
 });
 
 export default connect(null, mapDispatchToProps)(Home);

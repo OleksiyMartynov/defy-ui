@@ -1,16 +1,8 @@
-import { SET_ACCOUNT, GET_ACCOUNT } from "../actions/account";
+import { ACCOUNT_UPDATE } from "../actions/account";
+import ReduxUtils from "../utils/ReduxUtils";
 
 const initialState = null;
 
-const account = (previousState = initialState, action) => {
-  switch (action.type) {
-    case SET_ACCOUNT:
-      return { ...previousState, ...action.account };
-    case GET_ACCOUNT:
-      return previousState;
-    default:
-      return previousState;
-  }
-};
-
-export default account;
+export default ReduxUtils.createReducer(initialState, {
+  ...ReduxUtils.createObjectHandler(ACCOUNT_UPDATE, "account"),
+});

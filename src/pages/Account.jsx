@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { ethers } from "ethers";
 import PropTypes from "prop-types";
 import Toggle from "../components/Toggle";
-import { setAccount } from "../actions/account";
+import { updateAccount } from "../actions/account";
 import Error from "../components/Error";
 import Button from "../components/Button";
 import AccountModel from "../models/Account";
@@ -24,15 +24,19 @@ class Account extends React.Component {
   };
 
   onImport = () => {
-    const { setAccount } = this.props;
+    const { updateAccount } = this.props;
     const { newSeed } = this.state;
     const newAccount = new AccountModel(newSeed);
-    setAccount(newAccount);
+    updateAccount(newAccount);
   };
 
   render() {
     const { showWords, newSeed, newSeedValid } = this.state;
     const { account } = this.props;
+    console.log(account);
+    const accountObject = new AccountModel(account.mnemonic);
+    console.log(accountObject);
+    console.log(accountObject.getAddress());
     return (
       <div className="Account">
         <span className="Account__heading">Account</span>
@@ -81,12 +85,12 @@ class Account extends React.Component {
 }
 Account.propTypes = {
   account: PropTypes.object.isRequired,
-  setAccount: PropTypes.func.isRequired,
+  updateAccount: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
   account: state.account,
 });
 const mapDispatchToProps = (dispatch) => ({
-  setAccount: (account) => dispatch(setAccount(account)),
+  updateAccount: (account) => dispatch(updateAccount(account)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Account);
