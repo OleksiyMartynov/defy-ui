@@ -9,7 +9,7 @@ class ApiService {
 
   async getAccountInfo(address) {
     // consider getting all created debates and opinions here as well
-    const resp = await fetch(`${this.url}/accounts/balance?account=${address}`);
+    const resp = await fetch(`${this.url}/accounts?account=${address}`);
     return ApiService.toDataModel(resp);
   }
 
@@ -86,19 +86,22 @@ class ApiService {
       `${this.url}/debates` +
         `?page=${page}` +
         `&pageSize=${PAGE_SIZE}` +
-        `&finished=${finished}&` +
-        `${filterForAddress ? "filterCreatorAddress=true" : ""}&` +
-        `${sortByDate ? "sortByDate=true" : "sortBySize=true"}`
+        `&finished=${finished}` +
+        `${
+          filterForAddress ? `&filterCreatorAddress=${filterForAddress}` : ""
+        }` +
+        `&${sortByDate ? "sortByDate=true" : "sortBySize=true"}`
     );
     return ApiService.toDataModel(resp);
   }
 
   // example respone {"debate":{"tags":[],"duration":86400000,"finished":false,"_id":"5ebdd03fdffcc7a8de40b2d6","creator":{"_id":"5ebdcdf8db564ea8569c6c36","address":"0x8437A282A68949db59358387fdcC6842a552BFba"},"title":"Test Title","description":"Test description","stake":100,"created":"2020-05-14T23:11:59.273Z","id":"5ebdd03fdffcc7a8de40b2d6"}}
-  async createDebate(title, description, stake, account) {
+  async createDebate(title, description, stake, tags, account) {
     const stringBody = JSON.stringify({
       title,
       description,
       stake,
+      tags,
     });
     const s = await account.sign(stringBody);
     const resp = await fetch(`${this.url}/debates/new`, {
@@ -106,6 +109,7 @@ class ApiService {
         title,
         description,
         stake,
+        tags,
         signature: s.signature,
         message: s.message,
         address: account.getAddress(),

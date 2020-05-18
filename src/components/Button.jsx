@@ -40,7 +40,6 @@ Button.propTypes = {
   secondary: PropTypes.bool,
   selected: PropTypes.bool,
   accent: PropTypes.bool,
-  children: PropTypes.element,
 };
 
 export default Button;

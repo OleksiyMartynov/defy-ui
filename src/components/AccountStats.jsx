@@ -24,23 +24,33 @@ class AccountStats extends React.Component {
   };
 
   render() {
-    // const { account } = this.props;
-
+    const { account } = this.props;
+    console.log(account);
     return (
       <div className="AccountStats">
-        <div className="AccountStats__rows-wrapper">
-          <div className="AccountStats__title">Funds</div>
-          <div className="AccountStats__total">999,999</div>
+        {account.loading ? (
+          "loading"
+        ) : (
+          <div className="AccountStats__rows-wrapper">
+            <div className="AccountStats__title">Funds</div>
+            <div className="AccountStats__total">{account.data.balance}</div>
 
-          <div className="AccountStats__numbers-row">
-            <div className="AccountStats__numbers-row__subtitle">Available</div>
-            <div className="AccountStats__numbers-row__subtitle">Locked</div>
+            <div className="AccountStats__numbers-row">
+              <div className="AccountStats__numbers-row__subtitle">
+                Available
+              </div>
+              <div className="AccountStats__numbers-row__subtitle">Locked</div>
+            </div>
+            <div className="AccountStats__numbers-row">
+              <div className="AccountStats__numbers-row__number">
+                {account.data.balance - account.data.lockedBalance}
+              </div>
+              <div className="AccountStats__numbers-row__number">
+                {account.data.lockedBalance}
+              </div>
+            </div>
           </div>
-          <div className="AccountStats__numbers-row">
-            <div className="AccountStats__numbers-row__number">49,999</div>
-            <div className="AccountStats__numbers-row__number">49,999</div>
-          </div>
-        </div>
+        )}
         <div className="AccountStats__divider" />
         <div className="AccountStats__rows-wrapper">
           <div className="AccountStats__numbers-row">
@@ -71,6 +81,7 @@ AccountStats.propTypes = {
   openCreateDebateDialog: PropTypes.func.isRequired,
   openDepositDialog: PropTypes.func.isRequired,
   openWithdrawalDialog: PropTypes.func.isRequired,
+  account: PropTypes.object.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({

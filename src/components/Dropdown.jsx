@@ -1,16 +1,23 @@
 import React from "react";
 import "./Dropdown.scss";
 import Button from "./Button";
+
 class Dropdown extends React.Component {
-  state = { left: true, selectedIndex: 0 };
+  constructor(props) {
+    super(props);
+    this.state = { selectedIndex: 0 };
+  }
+
   handleToggleChange = () => {
     this.setState({
       open: !this.state.open,
     });
   };
+
   onItemClick = (index) => {
     this.setState({ selectedIndex: index });
   };
+
   render() {
     const { open, selectedIndex } = this.state;
     const items = ["Newest", "Oldest", "Stake"];
@@ -30,8 +37,8 @@ class Dropdown extends React.Component {
     return (
       <div className="Dropdown">
         <Button selected={open} onClick={this.handleToggleChange}>
-          {items[selectedIndex]}&nbsp;&nbsp;
-          <i className={"fa fa-chevron-down"+(open?" selected":"")}></i>
+          {items[selectedIndex]}
+          <i className={`fa fa-chevron-down${open ? " selected" : ""}`} />
           {open && <div className="Dropdown__content">{content}</div>}
         </Button>
       </div>

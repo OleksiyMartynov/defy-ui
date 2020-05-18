@@ -1,20 +1,16 @@
-import { CREATE_DEBATE, CREATE_DEBATE_FINISHED } from "../actions/debates";
+import { CREATE_DEBATE, CREATE_DEBATE_FINISHED, DEBATES_UPDATED, DEBATE_DETAILS_UPDATED } from "../actions/debates";
+import ReduxUtils from "../utils/ReduxUtils";
 
 const initialState = {
   createDebate: null,
   filtered: null,
+  debates: null,
+  details: null,
 };
 
-const transactions = (previousState = initialState, action) => {
-  switch (action.type) {
-    case CREATE_DEBATE: {
-      return { ...previousState, createDebate: action.createDebate };
-    }
-    case CREATE_DEBATE_FINISHED:
-      return { ...previousState, createDebate: action.createDebate };
-    default:
-      return previousState;
-  }
-};
-
-export default transactions;
+export default ReduxUtils.createReducer(initialState, {
+  ...ReduxUtils.createObjectHandler(CREATE_DEBATE, "createDebate"),
+  ...ReduxUtils.createObjectHandler(CREATE_DEBATE_FINISHED, "createDebate"),
+  ...ReduxUtils.createObjectHandler(DEBATES_UPDATED, "debates"),
+  ...ReduxUtils.createObjectHandler(DEBATE_DETAILS_UPDATED, "details"),
+});

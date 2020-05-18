@@ -1,17 +1,23 @@
 import React from "react";
 import "./DebateList.scss";
-import DebateCard from "../components/DebateCard";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import DebateCard from "./DebateCard";
 import EmptyState from "./EmptyState";
 import PuzzleIcon from "../assets/images/puzzle-large.svg";
-import { connect } from "react-redux";
 
 class DebateList extends React.PureComponent {
   render() {
     const { debates } = this.props;
+    console.log(debates);
     return (
       <div className="DebateList">
-        {debates && debates.length > 0 ? (
-          <div>todo list here</div>
+        {debates.data &&
+        debates.data.debates &&
+        debates.data.debates.length > 0 ? (
+          debates.data.debates.map((debate) => (
+            <DebateCard key={debate} title={debate.title} description={debate.description} />
+          ))
         ) : (
           <EmptyState icon={PuzzleIcon} message="No debates" />
         )}
@@ -20,7 +26,11 @@ class DebateList extends React.PureComponent {
   }
 }
 const mapStateToProps = (state) => ({
-  debates: state.debates,
+  debates: state.debateList,
 });
+
+DebateList.propTypes = {
+  debates: PropTypes.object.isRequired,
+};
 
 export default connect(mapStateToProps)(DebateList);

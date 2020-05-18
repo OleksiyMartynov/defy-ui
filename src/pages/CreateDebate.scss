@@ -5,6 +5,10 @@
     margin-left: auto;
     margin-right: auto;
     max-width: 680px;
+    &__error {
+      @extend %common-subtitle;
+      color: #ff0000;
+    }
   }
   &__heading {
     @extend %common-title;
@@ -18,21 +22,34 @@
       width: 100%;
     }
   }
-  &__input-wrapper {
-    &__label {
-        @extend %common-subtitle;
-        margin: $space-normal 0 $space-tiny $space-tiny;
+  &__label {
+    margin: $space-normal 0 $space-tiny $space-tiny;
+    &__tag {
+      background-image: $accent-gradient;
+      color: white;
+      padding: 3px;
+      border-radius: 10px;
+      margin-left: 5px;
+      & > i {
+        cursor: pointer;
+      }
     }
+  }
+  &__input-wrapper {
+    @extend %common-input;
+    display: flex;
+    padding-right: 0px;
+    width: 100%;
     & > textarea,
-        input[type] {
-      @extend %common-input;
-      white-space: normal;
+    input {
+      font-size: 20px;
+      background: none;
+      border: none;
       width: 100%;
-      font-size: $font-size-normal;
-      font-weight: 400;
     }
     & > button {
-        margin-top: $space-normal;
+      margin-top: -10px;
+      margin-bottom: -10px;
     }
   }
 }

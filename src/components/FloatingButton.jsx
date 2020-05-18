@@ -14,6 +14,6 @@ class FloatingButton extends React.PureComponent {
 }
 FloatingButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.array.isRequired,
 };
 export default FloatingButton;

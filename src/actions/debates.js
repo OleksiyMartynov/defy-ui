@@ -42,7 +42,7 @@ export const fetchDebates = () => async (
   }
 };
 
-export const fetchCreateDebate = (title, description, stake) => async (
+export const fetchCreateDebate = (title, description, stake, tags) => async (
   dispatch,
   getState,
   { apiService }
@@ -57,12 +57,16 @@ export const fetchCreateDebate = (title, description, stake) => async (
       title,
       description,
       stake,
+      tags,
       acct
     );
     dispatch(receiveCreateDebate(response));
+    return response;
   } catch (ex) {
     console.log(ex);
-    dispatch(receiveCreateDebate(DataModel.error(0, ex.message)));
+    const err = DataModel.error(0, ex.message);
+    dispatch(receiveCreateDebate(err));
+    return err;
   }
 };
 

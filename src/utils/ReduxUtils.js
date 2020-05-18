@@ -21,7 +21,7 @@ class ReduxUtils {
   static createArrayHandler(type, name) {
     return {
       [type](state, action) {
-        return [...state, action[name]];
+        return [...state, ...action[name]];
       },
     };
   }

@@ -13,7 +13,7 @@ import Home from "./pages/Home";
 import Discover from "./pages/Discover";
 import Account from "./pages/Account";
 import AccountStats from "./components/AccountStats";
-import { createAccount } from "./actions/account";
+import { createAccount, fetchAccountInfo } from "./actions/account";
 import {
   closeDepositDialog,
   closeWithdrawalDialog,
@@ -29,6 +29,8 @@ class App extends React.Component {
     super(props);
     if (!props.account) {
       props.createAccount();
+    }else{
+      props.fetchAccountInfo();
     }
   }
 
@@ -78,7 +80,7 @@ class App extends React.Component {
         <Router>
           <NavBar
             items={[
-              { text: "Home", link: "/home", icon: "fa fa-gavel" },
+              { text: "Debates", link: "/home", icon: "fa fa-gavel" },
               { text: "Discover", link: "/discover", icon: "fa fa-globe" },
               { text: "Account", link: "/account", icon: "fa fa-cog" },
             ]}
@@ -104,12 +106,14 @@ App.propTypes = {
   account: PropTypes.object.isRequired,
   ui: PropTypes.object.isRequired,
   createAccount: PropTypes.func.isRequired,
+  fetchAccountInfo: PropTypes.func.isRequired,
   closeDepositDialog: PropTypes.func.isRequired,
   closeWithdrawalDialog: PropTypes.func.isRequired,
   closeCreateDebateDialog: PropTypes.func.isRequired,
 };
 const mapDispatchToProps = (dispatch) => ({
   createAccount: (account) => dispatch(createAccount(account)),
+  fetchAccountInfo: () => dispatch(fetchAccountInfo()),
   closeDepositDialog: () => dispatch(closeDepositDialog()),
   closeWithdrawalDialog: () => dispatch(closeWithdrawalDialog()),
   closeCreateDebateDialog: () => dispatch(closeCreateDebateDialog()),

@@ -27,9 +27,9 @@ class Account {
     return ethers.utils.HDNode.entropyToMnemonic(bytes, ethers.wordlists.en);
   }
 
-  sign(message) {
-    const hexMessage = ethers.utils.hexlify(message);
-    const signature = this.getWallet().signMessage(hexMessage);
+  async sign(message) {
+    const hexMessage = ethers.utils.id(message);
+    const signature = await this.getWallet().signMessage(hexMessage);
     return { signature, message: hexMessage };
   }
 }
