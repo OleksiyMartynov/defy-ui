@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Toggle from "../components/Toggle";
 import Dropdown from "../components/Dropdown";
-import DebateCard from "../components/DebateCard";
 import DebateList from "../components/DebateList";
-import FloatingButton from "../components/FloatingButton";
 import { openCreateDebateDialog } from "../actions/ui";
 import { fetchDebates } from "../actions/debates";
 
@@ -23,7 +21,7 @@ class Home extends React.Component {
     return (
       <div className="Home">
         <div className="Home__content">
-          <span className="Home__content__heading">Your Debates</span>
+          <span className="Home__content__heading">Debates</span>
           <div className="Home__content__controls">
             <Toggle
               leftText="Active"
@@ -48,7 +46,7 @@ Home.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   openCreateDebateDialog: () => dispatch(openCreateDebateDialog()),
-  fetchDebates: () => dispatch(fetchDebates()),
+  fetchDebates: (loadNextPage) => dispatch(fetchDebates(loadNextPage)),
 });
 
 export default connect(null, mapDispatchToProps)(Home);

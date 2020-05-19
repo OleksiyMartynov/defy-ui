@@ -51,15 +51,17 @@ export const fetchAccountInfo = () => async (
   getState,
   { apiService }
 ) => {
-  dispatch(updateAccountInfo(new DataModel(null, true)));
+  const { account, accountInfo } = getState();
   try {
-    const { account } = getState();
     const acct = new Account(account.mnemonic);
+    console.log(account.data)
+    dispatch(updateAccountInfo(new DataModel(account.data, true)));
     const response = await apiService.getAccountInfo(acct.getAddress());
-    console.log(response);
     dispatch(updateAccountInfo(response));
   } catch (ex) {
-    dispatch(updateAccountInfo(DataModel.error(0, ex.message)));
+    dispatch(
+      updateAccountInfo(new DataModel(accountInfo.data, false, 0, ex.message))
+    );
   }
 };
 
@@ -73,7 +75,6 @@ export const fetchDeposit = (amount) => async (
     const { account } = getState();
     const acct = new Account(account.mnemonic);
     const response = await apiService.createAccountDeposit(amount, acct);
-    console.log(response);
     dispatch(updateAccountDeposit(response));
   } catch (ex) {
     dispatch(updateAccountDeposit(DataModel.error(0, ex.message)));

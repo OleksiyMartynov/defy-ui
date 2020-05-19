@@ -31,11 +31,9 @@ const store = createStore(rootReducer, {}, enhancer);
 // }
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <App id="app" />
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById("root")
 );
 

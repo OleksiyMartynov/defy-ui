@@ -1,10 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./DebateList.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import DebateCard from "./DebateCard";
 import EmptyState from "./EmptyState";
 import PuzzleIcon from "../assets/images/puzzle-large.svg";
+import Button from "./Button";
+import { fetchDebates } from "../actions/debates";
 
 class DebateList extends React.PureComponent {
   render() {
@@ -15,9 +17,16 @@ class DebateList extends React.PureComponent {
         {debates.data &&
         debates.data.debates &&
         debates.data.debates.length > 0 ? (
-          debates.data.debates.map((debate) => (
-            <DebateCard key={debate} title={debate.title} description={debate.description} />
-          ))
+          <>
+            {debates.data.debates.map((debate) => (
+              <DebateCard
+                key={debate["_id"]}
+                title={debate.title}
+                description={debate.description}
+              />
+            ))}
+            {debates.data.page+1<debates.data.pages&&<Button onClick={()=>this.props.fetchDebates(true)}> load more</Button>}
+          </>
         ) : (
           <EmptyState icon={PuzzleIcon} message="No debates" />
         )}
@@ -32,5 +41,8 @@ const mapStateToProps = (state) => ({
 DebateList.propTypes = {
   debates: PropTypes.object.isRequired,
 };
+const mapDispatchToProps = (dispatch) => ({
+  fetchDebates: (loadNextPage) => dispatch(fetchDebates(loadNextPage)),
+});
 
-export default connect(mapStateToProps)(DebateList);
+export default connect(mapStateToProps,mapDispatchToProps)(DebateList);

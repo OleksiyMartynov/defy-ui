@@ -25,7 +25,6 @@ class AccountStats extends React.Component {
 
   render() {
     const { account } = this.props;
-    console.log(account);
     return (
       <div className="AccountStats">
         {account.loading ? (

@@ -26,18 +26,32 @@ const updateDebateDetails = ReduxUtils.createAction(
   "details"
 );
 
-export const fetchDebates = () => async (
+export const fetchDebates = (loadNextPage) => async (
   dispatch,
   getState,
   { apiService }
 ) => {
-  dispatch(updateDebates(new DataModel(null, true)));
+  const { debates } = getState();
+
+  let nextPage = 0;
+  if (loadNextPage) {
+    nextPage = debates.data.page + 1;
+  }
+  dispatch(updateDebates(new DataModel(debates.data, true)));
   try {
-    // get filter
-    const response = await apiService.getDebates(0);
-    console.log(response);
-    dispatch(updateDebates(response));
+    // todo: get filter
+    const response = await apiService.getDebates(nextPage);
+    if (debates.data) {
+      response.data.debates = [
+        ...debates.data.debates,
+        ...response.data.debates,
+      ];
+      dispatch(updateDebates(response));
+    } else {
+      dispatch(updateDebates(response));
+    }
   } catch (ex) {
+    console.log(ex);
     dispatch(updateDebates(DataModel.error(0, ex.message)));
   }
 };

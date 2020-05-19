@@ -173,9 +173,9 @@ class CreateDebate extends React.PureComponent {
               />
               <Button secondary disabled={loading}>
                 {loading ? (
-                  <i className="fa fa-spinner" aria-hidden="true"></i>
+                  <i className="fa fa-spinner" aria-hidden="true" />
                 ) : (
-                  <i className="fa fa-plus" aria-hidden="true"></i>
+                  <i className="fa fa-plus" aria-hidden="true" />
                 )}
               </Button>
             </div>

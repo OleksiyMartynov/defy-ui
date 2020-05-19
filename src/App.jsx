@@ -29,7 +29,7 @@ class App extends React.Component {
     super(props);
     if (!props.account) {
       props.createAccount();
-    }else{
+    } else {
       props.fetchAccountInfo();
     }
   }
@@ -74,6 +74,7 @@ class App extends React.Component {
   };
 
   render() {
+    console.log("App.render()");
     const { ui } = this.props;
     return (
       <div className="App">
