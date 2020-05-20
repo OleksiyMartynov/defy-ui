@@ -1,6 +1,7 @@
 import DataModel from "../models/DataModel";
 import Account from "../models/Account";
 import ReduxUtils from "../utils/ReduxUtils";
+import DebateFilter from "../models/DebateFilter";
 
 export const CREATE_DEBATE = "CREATE_DEBATE";
 export const CREATE_DEBATE_FINISHED = "CREATE_DEBATE_FINISHED";
@@ -8,6 +9,8 @@ export const CREATE_DEBATE_FINISHED = "CREATE_DEBATE_FINISHED";
 export const DEBATES_UPDATED = "DEBATES_UPDATED";
 
 export const DEBATE_DETAILS_UPDATED = "DEBATE_DETAILS_UPDATED";
+
+export const DEBATE_FILTER_UPDATED = "DEBATE_FILTER_UPDATED";
 
 const requestCreateDebate = () => ({
   type: CREATE_DEBATE,
@@ -26,24 +29,29 @@ const updateDebateDetails = ReduxUtils.createAction(
   "details"
 );
 
-export const fetchDebates = (loadNextPage) => async (
+const updateDebateFilter = ReduxUtils.createAction(
+  DEBATE_FILTER_UPDATED,
+  "filter"
+);
+
+export const fetchDebates = (loadNextPage, filterReset = false) => async (
   dispatch,
   getState,
   { apiService }
 ) => {
-  const { debates } = getState();
-
+  const { debateList } = getState();
+  console.log(debateList);
   let nextPage = 0;
   if (loadNextPage) {
-    nextPage = debates.data.page + 1;
+    nextPage = debateList.data.page + 1;
   }
-  dispatch(updateDebates(new DataModel(debates.data, true)));
+  dispatch(updateDebates(new DataModel(debateList.data, true)));
   try {
-    // todo: get filter
-    const response = await apiService.getDebates(nextPage);
-    if (debates.data) {
+    
+    const response = await apiService.getDebates(nextPage, !debateList.filter.active);
+    if (debateList.data&&!filterReset) {
       response.data.debates = [
-        ...debates.data.debates,
+        ...debateList.data.debates,
         ...response.data.debates,
       ];
       dispatch(updateDebates(response));
@@ -98,4 +106,16 @@ export const fetchDebateDetails = () => async (
   } catch (ex) {
     dispatch(updateDebateDetails(DataModel.error(0, ex.message)));
   }
+};
+
+export const fetchDebatesWithFilter = (newFilter) => async (
+  dispatch,
+  getState,
+  { apiService }
+) => {
+  const { debateList } = getState();
+  const filterReset = debateList.filter!==newFilter
+  if(filterReset)
+    dispatch(updateDebateFilter({filter: newFilter}));
+  return dispatch(fetchDebates(!filterReset, filterReset));
 };

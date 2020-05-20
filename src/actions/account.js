@@ -54,7 +54,7 @@ export const fetchAccountInfo = () => async (
   const { account, accountInfo } = getState();
   try {
     const acct = new Account(account.mnemonic);
-    console.log(account.data)
+    console.log(account.data);
     dispatch(updateAccountInfo(new DataModel(account.data, true)));
     const response = await apiService.getAccountInfo(acct.getAddress());
     dispatch(updateAccountInfo(response));

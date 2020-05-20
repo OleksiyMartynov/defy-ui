@@ -7,6 +7,7 @@ class Toggle extends React.Component {
     super(props);
     this.state = { left: props.left };
   }
+
   handleToggleChange = () => {
     const left = !this.state.left;
     this.props.onChange(left)
@@ -14,6 +15,7 @@ class Toggle extends React.Component {
       left,
     });
   };
+
   render() {
     const { left } = this.state;
     const { leftText, rightText, leftIcon, rightIcon } = this.props;

@@ -6,15 +6,22 @@ import Toggle from "../components/Toggle";
 import Dropdown from "../components/Dropdown";
 import DebateList from "../components/DebateList";
 import { openCreateDebateDialog } from "../actions/ui";
-import { fetchDebates } from "../actions/debates";
+import {  fetchDebatesWithFilter } from "../actions/debates";
+import DebateFilter from "../models/DebateFilter";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    props.fetchDebates();
+    this.state = {showActive:true}
+    props.fetchDebatesWithFilter(new DebateFilter(true));
   }
   onCreateDebate = () => {
     this.props.openCreateDebateDialog();
+  };
+
+  onActiveToggled = (finished) => {
+    this.setState({ showActive: !finished });
+    this.props.fetchDebatesWithFilter(new DebateFilter(finished));
   };
 
   render() {
@@ -24,17 +31,15 @@ class Home extends React.Component {
           <span className="Home__content__heading">Debates</span>
           <div className="Home__content__controls">
             <Toggle
+              left={true}
               leftText="Active"
               rightText="Closed"
-              onChange={(toggle) => this.setState({ showActive: toggle })}
+              onChange={this.onActiveToggled}
             />
             &nbsp;&nbsp;&nbsp;
             <Dropdown />
           </div>
           <DebateList />
-          {/* <FloatingButton onClick={this.onCreateDebate}>
-            Create Debate
-          </FloatingButton> */}
         </div>
       </div>
     );
@@ -46,7 +51,8 @@ Home.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   openCreateDebateDialog: () => dispatch(openCreateDebateDialog()),
-  fetchDebates: (loadNextPage) => dispatch(fetchDebates(loadNextPage)),
+  fetchDebatesWithFilter: (newFilter) =>
+    dispatch(fetchDebatesWithFilter(newFilter)),
 });
 
 export default connect(null, mapDispatchToProps)(Home);
