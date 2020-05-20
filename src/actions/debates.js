@@ -47,9 +47,11 @@ export const fetchDebates = (loadNextPage, filterReset = false) => async (
   }
   dispatch(updateDebates(new DataModel(debateList.data, true)));
   try {
-    
-    const response = await apiService.getDebates(nextPage, !debateList.filter.active);
-    if (debateList.data&&!filterReset) {
+    const response = await apiService.getDebates(
+      nextPage,
+      !debateList.filter.active
+    );
+    if (debateList.data && !filterReset) {
       response.data.debates = [
         ...debateList.data.debates,
         ...response.data.debates,
@@ -114,8 +116,7 @@ export const fetchDebatesWithFilter = (newFilter) => async (
   { apiService }
 ) => {
   const { debateList } = getState();
-  const filterReset = debateList.filter!==newFilter
-  if(filterReset)
-    dispatch(updateDebateFilter({filter: newFilter}));
+  const filterReset = debateList.filter !== newFilter;
+  if (filterReset) dispatch(updateDebateFilter({ filter: newFilter }));
   return dispatch(fetchDebates(!filterReset, filterReset));
 };
