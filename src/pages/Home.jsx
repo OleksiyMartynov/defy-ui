@@ -6,14 +6,16 @@ import Toggle from "../components/Toggle";
 import Dropdown from "../components/Dropdown";
 import DebateList from "../components/DebateList";
 import { openCreateDebateDialog } from "../actions/ui";
-import {  fetchDebatesWithFilter } from "../actions/debates";
+import { fetchDebatesWithFilter } from "../actions/debates";
 import DebateFilter from "../models/DebateFilter";
+import AccountModel from "../models/Account";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {showActive:true}
-    props.fetchDebatesWithFilter(new DebateFilter(true));
+    this.state = { showActive: true };
+    const accountObject = new AccountModel(props.account.mnemonic);
+    props.fetchDebatesWithFilter(new DebateFilter(true, true, accountObject.getAddress()));
   }
   onCreateDebate = () => {
     this.props.openCreateDebateDialog();
@@ -24,6 +26,15 @@ class Home extends React.Component {
     this.props.fetchDebatesWithFilter(new DebateFilter(finished));
   };
 
+  itemSelectedListener = (index) => {
+    const { showActive } = this.state;
+    const { fetchDebatesWithFilter, account } = this.props;
+    const accountObject = new AccountModel(account.mnemonic);
+    fetchDebatesWithFilter(
+      new DebateFilter(!showActive, index === 0, accountObject.getAddress())
+    );
+  };
+
   render() {
     return (
       <div className="Home">
@@ -31,13 +42,16 @@ class Home extends React.Component {
           <span className="Home__content__heading">Debates</span>
           <div className="Home__content__controls">
             <Toggle
-              left={true}
+              left
               leftText="Active"
               rightText="Closed"
               onChange={this.onActiveToggled}
             />
             &nbsp;&nbsp;&nbsp;
-            <Dropdown />
+            <Dropdown
+              items={["Stake", "Newest"]}
+              itemSelectedListener={this.itemSelectedListener}
+            />
           </div>
           <DebateList />
         </div>
@@ -49,10 +63,14 @@ Home.propTypes = {
   openCreateDebateDialog: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  account: state.account,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   openCreateDebateDialog: () => dispatch(openCreateDebateDialog()),
   fetchDebatesWithFilter: (newFilter) =>
     dispatch(fetchDebatesWithFilter(newFilter)),
 });
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,8 +1,8 @@
 class DebateFilter {
-    constructor(active=true){
-        this.active = active;
-        this.sortByStake = true;
-        this.sortByAccount = false;
-    }
+  constructor(active = true, sortByStake = true, sortByAccount = false) {
+    this.active = active;
+    this.sortByStake = sortByStake;
+    this.sortByAccount = sortByAccount;
+  }
 }
 export default DebateFilter;

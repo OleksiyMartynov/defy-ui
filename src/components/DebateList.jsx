@@ -2,6 +2,7 @@ import React from "react";
 import "./DebateList.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import moment from "moment";
 import DebateCard from "./DebateCard";
 import EmptyState from "./EmptyState";
 import PuzzleIcon from "../assets/images/puzzle-large.svg";
@@ -23,6 +24,8 @@ class DebateList extends React.PureComponent {
                 key={debate["_id"]}
                 title={debate.title}
                 description={debate.description}
+                endTime={debate.duration + moment(debate.created).unix() * 1000}
+                stake={debate.stake}
               />
             ))}
             {debates.data.page+1<debates.data.pages&&<Button onClick={()=>this.props.fetchDebates(true)}> load more</Button>}

@@ -1,7 +1,6 @@
 import DataModel from "../models/DataModel";
 import Account from "../models/Account";
 import ReduxUtils from "../utils/ReduxUtils";
-import DebateFilter from "../models/DebateFilter";
 
 export const CREATE_DEBATE = "CREATE_DEBATE";
 export const CREATE_DEBATE_FINISHED = "CREATE_DEBATE_FINISHED";
@@ -49,7 +48,9 @@ export const fetchDebates = (loadNextPage, filterReset = false) => async (
   try {
     const response = await apiService.getDebates(
       nextPage,
-      !debateList.filter.active
+      !debateList.filter.active,
+      debateList.filter.sortByAccount,
+      !debateList.filter.sortByStake
     );
     if (debateList.data && !filterReset) {
       response.data.debates = [
@@ -77,6 +78,7 @@ export const fetchCreateDebate = (title, description, stake, tags) => async (
 
     const acct = new Account(account.mnemonic);
     console.log(acct);
+    console.log({ title, description, stake, tags });
     const response = await apiService.createDebate(
       title,
       description,
@@ -112,8 +114,7 @@ export const fetchDebateDetails = () => async (
 
 export const fetchDebatesWithFilter = (newFilter) => async (
   dispatch,
-  getState,
-  { apiService }
+  getState
 ) => {
   const { debateList } = getState();
   const filterReset = debateList.filter !== newFilter;

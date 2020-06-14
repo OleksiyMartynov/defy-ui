@@ -1,5 +1,6 @@
 import React from "react";
 import "./Dropdown.scss";
+import PropTypes from "prop-types";
 import Button from "./Button";
 
 class Dropdown extends React.Component {
@@ -16,11 +17,14 @@ class Dropdown extends React.Component {
 
   onItemClick = (index) => {
     this.setState({ selectedIndex: index });
+    const { itemSelectedListener } = this.props;
+    itemSelectedListener(index);
   };
 
   render() {
     const { open, selectedIndex } = this.state;
-    const items = ["Newest", "Oldest", "Stake"];
+    const {items} = this.props;
+    //const items = ["Newest", "Oldest", "Stake"];
     const content = items.map((item, index) => (
       <div
         key={index}
@@ -45,4 +49,8 @@ class Dropdown extends React.Component {
     );
   }
 }
+Dropdown.propTypes = {
+  items: PropTypes.array.isRequired,
+  itemSelectedListener: PropTypes.func.isRequired
+};
 export default Dropdown;
