@@ -22,6 +22,7 @@ class DebateList extends React.PureComponent {
             {debates.data.debates.map((debate) => (
               <DebateCard
                 key={debate["_id"]}
+                id={debate["_id"]}
                 title={debate.title}
                 description={debate.description}
                 endTime={debate.duration + moment(debate.created).unix() * 1000}

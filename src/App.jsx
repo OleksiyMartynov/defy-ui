@@ -23,6 +23,7 @@ import Button from "./components/Button";
 import Withdraw from "./pages/Withdraw";
 import Deposit from "./pages/Deposit";
 import CreateDebate from "./pages/CreateDebate";
+import DebateDetail from "./pages/DebateDetail";
 
 class App extends React.Component {
   constructor(props) {
@@ -91,6 +92,7 @@ class App extends React.Component {
               <Route exact path="/home" component={Home} />
               <Route exact path="/discover" component={Discover} />
               <Route exact path="/account" component={Account} />
+              <Route path="/debate/:slug" component={DebateDetail} />
               <Route>
                 <Redirect to="/home" />
               </Route>

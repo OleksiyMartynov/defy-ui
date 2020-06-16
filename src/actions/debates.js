@@ -25,7 +25,7 @@ const updateDebates = ReduxUtils.createAction(DEBATES_UPDATED, "debates");
 
 const updateDebateDetails = ReduxUtils.createAction(
   DEBATE_DETAILS_UPDATED,
-  "details"
+  "debateDetails"
 );
 
 const updateDebateFilter = ReduxUtils.createAction(
@@ -96,19 +96,18 @@ export const fetchCreateDebate = (title, description, stake, tags) => async (
   }
 };
 
-export const fetchDebateDetails = () => async (
+export const fetchDebateDetails = (debateId) => async (
   dispatch,
   getState,
   { apiService }
 ) => {
-  dispatch(updateDebateDetails(new DataModel(null, true)));
+  dispatch(updateDebateDetails({debateDetails:new DataModel(null, true)}));
   try {
-    // get filter
-    const response = await apiService.getDebateDetails(1);
+    const response = await apiService.getDebateDetails(debateId);
     console.log(response);
-    dispatch(updateDebateDetails(response));
+    dispatch(updateDebateDetails({debateDetails:response}));
   } catch (ex) {
-    dispatch(updateDebateDetails(DataModel.error(0, ex.message)));
+    dispatch(updateDebateDetails({debateDetails:DataModel.error(0, ex.message)}));
   }
 };
 
