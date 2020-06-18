@@ -2,7 +2,7 @@ import React from "react";
 import "./DebateProgress.scss";
 class DebateProgress extends React.Component {
   render() {
-    const left =90;
+    const left =51;
     const right = 100 - left;
     const width = Math.max(left, right);
     return (

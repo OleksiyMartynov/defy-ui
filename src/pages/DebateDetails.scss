@@ -1,0 +1,13 @@
+@import "../assets/scss/base.scss";
+
+.DebateDetails{
+    // @extend %common-container;
+    width: 100%;
+    &__chart{
+        height: 30vh;
+        min-height: 250px;
+    }
+    &__title{
+        @extend %common-heading;
+    }
+}

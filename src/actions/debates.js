@@ -101,13 +101,15 @@ export const fetchDebateDetails = (debateId) => async (
   getState,
   { apiService }
 ) => {
-  dispatch(updateDebateDetails({debateDetails:new DataModel(null, true)}));
+  dispatch(updateDebateDetails({ debateDetails: new DataModel(null, true) }));
   try {
     const response = await apiService.getDebateDetails(debateId);
     console.log(response);
-    dispatch(updateDebateDetails({debateDetails:response}));
+    dispatch(updateDebateDetails({ debateDetails: response }));
   } catch (ex) {
-    dispatch(updateDebateDetails({debateDetails:DataModel.error(0, ex.message)}));
+    dispatch(
+      updateDebateDetails({ debateDetails: DataModel.error(0, ex.message) })
+    );
   }
 };
 
