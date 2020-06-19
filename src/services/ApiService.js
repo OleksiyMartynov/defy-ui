@@ -54,20 +54,13 @@ class ApiService {
     return ApiService.toDataModel(resp);
   }
 
-  async getOpinions(
-    debateId,
-    page = 0,
-    finished = false,
-    filterForAddress = false,
-    sortByDate = false // if false then sort by debate stake
-  ) {
-    const resp = await fetch(`${this.url}/opinions
-    ?debateId=${debateId}
-    &page=${page}
-    &pageSize=${PAGE_SIZE}
-    &finished=${finished}
-    &${filterForAddress ? "filterCreatorAddress=true" : ""}
-    &${sortByDate ? "sortByDate=true" : "sortBySize=true"}`);
+  async getOpinions(debateId, page = 0) {
+    const resp = await fetch(
+      `${this.url}/opinions` +
+        `?debateId=${debateId}` +
+        `&page=${page}` +
+        `&pageSize=${PAGE_SIZE}`
+    );
     return ApiService.toDataModel(resp);
   }
 

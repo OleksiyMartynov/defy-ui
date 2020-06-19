@@ -1,6 +1,7 @@
 @import "../assets/scss/base.scss";
 
 .DebateDetails{
+    @extend %fade-in;
     // @extend %common-container;
     width: 100%;
     &__chart{
@@ -9,5 +10,19 @@
     }
     &__title{
         @extend %common-heading;
+    }
+    &__opinions-container{
+        &__controls{
+            display: flex;
+            &__column{
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        &__list{
+
+        }
     }
 }
