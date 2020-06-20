@@ -7,6 +7,14 @@
     &__chart{
         height: 30vh;
         min-height: 250px;
+        margin-top: $space-normal;
+        display: flex;
+        flex-direction: row;
+        &__progress{
+            padding-top: 4px;
+            padding-bottom: 50px;
+            transform: translateX(0px);
+        }
     }
     &__title{
         @extend %common-heading;

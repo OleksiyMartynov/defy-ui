@@ -1,6 +1,9 @@
-import { OPINIONS_UPDATED, CREATE_OPINION, CREATE_OPINION_FINISHED } from "../actions/opinions";
+import {
+  OPINIONS_UPDATED,
+  CREATE_OPINION,
+  CREATE_OPINION_FINISHED,
+} from "../actions/opinions";
 import ReduxUtils from "../utils/ReduxUtils";
-import DebateFilter from "../models/DebateFilter";
 import DataModel from "../models/DataModel";
 
 const initialState = {

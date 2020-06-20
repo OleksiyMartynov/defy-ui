@@ -1,0 +1,40 @@
+@import "../assets/scss/base.scss";
+.VerticalDebateProgress {
+    padding: 0px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    &__wrapper {
+        // @extend %common-container-small;
+        padding: 0px;
+        height: 100%;
+        width: 12px;
+        &__bar {
+            width: 100%;
+            // border-radius: $radius-small;
+        }
+    }
+    &__tooltip-wrapper{
+        height: 100%;
+        &__tooltip {
+            @extend %common-container;
+            padding: 8px 10px;
+            height: min-content;
+            border-radius: $radius-tiny;
+            transform: translate(20%, -50%);
+            &::after {
+                content: "";
+                display: block;
+                width: 10px;
+                height: 10px;
+                position: static;
+                margin-top: -12px;
+                margin-left: -45%;
+                transform-origin: center;
+                transform: rotateZ(225deg) translate(8px, 8px);
+                background-image: linear-gradient(45deg, rgba(0,0,0,0) 50%, $bg-color-middle 50%);
+                padding-bottom: auto;
+            }
+        }
+    }
+}

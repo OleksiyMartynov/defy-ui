@@ -5,39 +5,10 @@ import { connect } from "react-redux";
 import { fetchDebateDetails } from "../actions/debates";
 import { fetchOpinions, fetchCreateOpinion } from "../actions/opinions";
 import "./DebateDetails.scss";
-import DebateProgress from "../components/DebateProgress";
 import DebateChart from "../components/DebateChart";
 import Button from "../components/Button";
-const CHART_TEST_DATA = [
-  {
-    Pro: 0,
-    Con: 0,
-  },
-  {
-    Pro: 500,
-    Con: 500,
-  },
-  {
-    Pro: 1000,
-    Con: 700,
-  },
-  {
-    Pro: 1300,
-    Con: 1600,
-  },
-  {
-    Pro: 5000,
-    Con: 3500,
-  },
-  {
-    Pro: 15500,
-    Con: 4500,
-  },
-  {
-    Pro: 15500,
-    Con: 5900,
-  },
-];
+import VerticalDebateProgress from "../components/VerticalDebateProgress";
+
 class DebateDetail extends PureComponent {
   constructor(props) {
     super(props);
@@ -51,12 +22,13 @@ class DebateDetail extends PureComponent {
   onStake = (pro) => {
     const { match, fetchCreateOpinion } = this.props;
     const drawId = match.params.slug;
-    fetchCreateOpinion(drawId, "http://www.example.com", "link", 100, pro);
+    // fetchCreateOpinion(drawId, "http://www.example.com", "link", 550, pro);
+    fetchCreateOpinion(drawId, null, "vote", 500, pro);
   };
 
   render() {
-    const { debateDetails, opinions, blah } = this.props;
-    console.log(blah);
+    const { debateDetails, opinions } = this.props;
+    console.log(debateDetails);
     return (
       <div>
         {debateDetails.data ? (
@@ -64,9 +36,23 @@ class DebateDetail extends PureComponent {
             <div className="DebateDetails__title">
               {debateDetails.data.debate.title}
             </div>
-            <DebateProgress />
+
             <div className="DebateDetails__chart">
-              <DebateChart data={CHART_TEST_DATA} />
+              <DebateChart
+                data={debateDetails.data.history.map((item) => ({
+                  Pro: item.totalPro,
+                  Con: item.totalCon,
+                }))}
+              />
+              <div className="DebateDetails__chart__progress">
+                <VerticalDebateProgress
+                  pro={debateDetails.data.debate.totalPro}
+                  total={
+                    debateDetails.data.debate.totalPro +
+                    debateDetails.data.debate.totalCon
+                  }
+                />
+              </div>
             </div>
             <div className="DebateDetails__description">
               {debateDetails.data.debate.description}
@@ -95,9 +81,13 @@ class DebateDetail extends PureComponent {
               </div>
               <div className="DebateDetails__opinions-container__list">
                 {opinions.data &&
-                  opinions.data.opinions.map((opinion) => (
-                    <div className="DebateDetails__opinions-container__list__item">
-                      Stake Vote:{opinion.stake}
+                  opinions.data.opinions.map((opinion, i) => (
+                    <div
+                      key={i}
+                      className="DebateDetails__opinions-container__list__item"
+                    >
+                      Stake Vote:
+                      {opinion.stake}
                     </div>
                   ))}
               </div>
@@ -125,6 +115,5 @@ const mapStateToProps = (state) => ({
   debateDetails: state.debates.debateDetails,
   opinions: state.opinionList,
   ui: state.ui,
-  blah: state,
 });
 export default connect(mapStateToProps, mapDispatchToProps)(DebateDetail);

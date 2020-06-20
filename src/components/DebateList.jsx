@@ -25,8 +25,10 @@ class DebateList extends React.PureComponent {
                 id={debate["_id"]}
                 title={debate.title}
                 description={debate.description}
-                endTime={debate.duration + moment(debate.created).unix() * 1000}
+                endTime={debate.duration + moment(debate.updated).unix() * 1000}
                 stake={debate.stake}
+                totalPro={debate.totalPro}
+                totalCon={debate.totalCon}
               />
             ))}
             {debates.data.page+1<debates.data.pages&&<Button onClick={()=>this.props.fetchDebates(true)}> load more</Button>}

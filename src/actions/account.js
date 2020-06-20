@@ -54,7 +54,6 @@ export const fetchAccountInfo = () => async (
   const { account, accountInfo } = getState();
   try {
     const acct = new Account(account.mnemonic);
-    console.log(account.data);
     dispatch(updateAccountInfo(new DataModel(account.data, true)));
     const response = await apiService.getAccountInfo(acct.getAddress());
     dispatch(updateAccountInfo(response));
@@ -91,7 +90,6 @@ export const fetchWithdrawal = (amount) => async (
     const { account } = getState();
     const acct = new Account(account.mnemonic);
     const response = await apiService.createAccountWithdrawal(amount, acct);
-    console.log(response);
     dispatch(updateAccountWithdrawal(response));
   } catch (ex) {
     dispatch(updateAccountWithdrawal(DataModel.error(0, ex.message)));
@@ -109,7 +107,6 @@ export const fetchAccountHistory = () => async (
     const acct = new Account(account.mnemonic);
     // todo pagination
     const response = await apiService.getHistory(0, acct);
-    console.log(response);
     dispatch(updateAccountHistory(response));
   } catch (ex) {
     dispatch(updateAccountHistory(DataModel.error(0, ex.message)));

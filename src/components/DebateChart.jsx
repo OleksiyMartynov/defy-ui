@@ -17,7 +17,7 @@ const MyResponsiveStream = ({ data /* see data tab */ }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "Day",
+      legend: "Hour",
       legendOffset: 36,
     }}
     axisLeft={{
@@ -25,7 +25,7 @@ const MyResponsiveStream = ({ data /* see data tab */ }) => (
       tickSize: 12,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "Sats",
+      legend: "Votes (Sats)",
       legendOffset: -50,
       format: (values) => `${values / 1000}k`,
     }}
@@ -37,8 +37,7 @@ const MyResponsiveStream = ({ data /* see data tab */ }) => (
     dotColor={{ from: "color" }}
     dotBorderWidth={2}
     dotBorderColor={{ from: "color", modifiers: [["darker", 0.7]] }}
-    animate={true}
-    tooltipFormat
+    animate
     motionStiffness={90}
     motionDamping={15}
     legends={[
