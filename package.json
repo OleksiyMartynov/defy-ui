@@ -21,6 +21,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "start-debug-browser": "/Applications/Brave\\ Browser.app/Contents/MacOS/Brave\\ Browser --remote-debugging-port=9222  http://localhost:3000",
     "start": "npm run lint && react-scripts start",
     "build": "npm run lint && react-scripts build",
     "test": "npm run lint && react-scripts test",

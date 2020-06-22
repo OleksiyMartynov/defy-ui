@@ -8,6 +8,7 @@ import "./DebateDetails.scss";
 import DebateChart from "../components/DebateChart";
 import Button from "../components/Button";
 import VerticalDebateProgress from "../components/VerticalDebateProgress";
+import OpinionCard from "../components/OpinionCard";
 
 class DebateDetail extends PureComponent {
   constructor(props) {
@@ -86,8 +87,13 @@ class DebateDetail extends PureComponent {
                       key={i}
                       className="DebateDetails__opinions-container__list__item"
                     >
-                      Stake Vote:
-                      {opinion.stake}
+                      <OpinionCard
+                        content={opinion.content}
+                        contentType={opinion.contentType}
+                        created={opinion.created}
+                        pro={opinion.pro}
+                        stake={opinion.stake}
+                      />
                     </div>
                   ))}
               </div>

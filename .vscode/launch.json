@@ -1,0 +1,17 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        // NOTE: First start Brave Browser from terminal with: /Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser --remote-debugging-port=9222
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Brave against localhost",
+            "url": "http://localhost:3000/",
+            "runtimeExecutable": "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
