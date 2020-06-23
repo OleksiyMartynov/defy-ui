@@ -59,7 +59,8 @@ class ApiService {
       `${this.url}/opinions` +
         `?debateId=${debateId}` +
         `&page=${page}` +
-        `&pageSize=${PAGE_SIZE}`
+        `&pageSize=${PAGE_SIZE}` +
+        `&sortByDate=true`
     );
     return ApiService.toDataModel(resp);
   }

@@ -5,6 +5,7 @@ $bg-color: #f0f3f2;
 $bg-color-dark: #eaece9;
 $bg-color-middle: #eef1ef;
 $font-color: #5c5c64;
+$font-color-light: lighten($font-color, 15%);
 $gradient-start-color: #70e0b5;
 $gradient-end-color: #55b3b9;
 $accent-gradient: linear-gradient(
@@ -183,6 +184,11 @@ $box-shadow-accent-small: 0px -1px 3px  rgba($gradient-start-color, 0.95),
   background-image: $accent-gradient;
 }
 
+%common-heading-banner-small{
+  @extend %common-heading-banner-normal;
+  font-size: $font-size-normal;
+}
+
 %common-title {
   text-shadow: 1px 1px 1px #ffffff;
   font-size: 32px;
@@ -193,6 +199,11 @@ $box-shadow-accent-small: 0px -1px 3px  rgba($gradient-start-color, 0.95),
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
   font-size: $font-size-normal;
   color: $font-color;
+}
+%common-label {
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
+  font-size: $font-size-normal;
+  color: $font-color-light;
 }
 %common-text {
   font-size: $font-size-normal;

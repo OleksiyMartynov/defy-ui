@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./DebateCard.scss";
+import moment from "moment";
+import "./OpinionCard.scss";
 
 class OpinionCard extends React.Component {
   constructor(props) {
@@ -32,20 +33,53 @@ class OpinionCard extends React.Component {
     let metaSection = null;
     if (content) {
       if (loadingMeta) {
-        metaSection = <div>loading preview</div>;
+        metaSection = (
+          <div className="OpinionCard__loading">loading preview</div>
+        );
       } else if (metadata) {
-        metaSection = <div>{metadata.title}</div>;
+        metaSection = (
+          <div className="OpinionCard__content-wrapper__content">
+            <div className="OpinionCard__content-wrapper__content__image">
+              <img src={metadata.image} alt="Article preview" />
+            </div>
+            <div className="OpinionCard__content-wrapper__content__details">
+              <div className="OpinionCard__content-wrapper__content__details__title">
+                {metadata.title}
+              </div>
+              <div className="OpinionCard__content-wrapper__content__details__description">
+                {metadata.description}
+              </div>
+            </div>
+          </div>
+        );
       } else {
-        metaSection = <div>{metaError}</div>;
+        metaSection = <div className="OpinionCard__error">{metaError}</div>;
       }
     }
     return (
-      <div className="OpinionCard">
-        {stake}
-        <br />
-        {created}
-        <br />
-        {metaSection}
+      <div
+        className="OpinionCard"
+        style={{ flexDirection: pro ? "row" : "row-reverse" }}
+      >
+        <div
+          className={`OpinionCard__content-wrapper${
+            contentType === "vote" ? "--small" : ""
+          }`}
+        >
+          <div className="OpinionCard__content-wrapper__top">
+            <div className="OpinionCard__content-wrapper__top__stake">
+              {stake}
+              Sats
+            </div>
+            <div className="OpinionCard__content-wrapper__top__date">
+              {moment(created).fromNow()}
+            </div>
+          </div>
+          {metaSection}
+        </div>
+        <div className="OpinionCard__dotted">
+          <div className="OpinionCard__dotted__dotted-line" />
+        </div>
       </div>
     );
   }

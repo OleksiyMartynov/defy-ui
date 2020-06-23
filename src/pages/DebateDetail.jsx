@@ -73,6 +73,7 @@ class DebateDetail extends PureComponent {
                     <span>&nbsp;Pro</span>
                   </Button>
                 </div>
+                <div className="DebateDetails__opinions-container__controls__spacer" />
                 <div className="DebateDetails__opinions-container__controls__column">
                   <Button onClick={() => this.onStake(false)}>
                     <i className="fa fa-arrow-circle-down" />

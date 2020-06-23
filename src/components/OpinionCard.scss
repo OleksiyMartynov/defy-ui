@@ -1,5 +1,75 @@
 @import "../assets/scss/base.scss";
 
 .OpinionCard {
-
+    width: 100%;
+    display: flex;
+    &__dotted{
+        width: 30%;
+        &__dotted-line{
+            display: none;
+            margin-left: auto;
+            margin-right: auto;
+            width: 2px;
+            height: 100%;
+            border-right: dashed 2px rgb(175, 175, 175) ;
+        }
+    }
+    &__content-wrapper{
+        @extend %common-container-small;
+        width: 70%;
+        margin-top: $space-small;
+        margin-bottom: $space-small;
+        &--small{
+            @extend %common-container-small;
+            width: fit-content;
+            margin-top: $space-small;
+            margin-bottom: $space-small;
+        }
+        &__top{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            &__stake{
+                @extend %common-heading-banner-small;
+                width: 20%;
+                padding: 4px;
+                border-radius: $radius-tiny;
+                text-align: center;
+                min-width: min-content;
+            }
+            &__date{
+                @extend %common-label;
+                width: 80%;
+                margin-left: $space-small;
+            }
+        }
+        &__loading{
+    
+        }
+        &__content{
+            display: flex;
+            align-items: center;
+            &__image {
+                width: 20%;
+                height: auto;
+                img{
+                    width: 100%;
+                }
+            }
+            &__details {
+                width: 80%;
+                padding-left: $space-small;
+                &__title {
+                    @extend %common-title;
+                    font-size: $font-size-large;
+                }
+                &__description{
+                    @extend %common-text;
+                }
+            }
+        }
+        &__error{
+    
+        }
+    }
 }
