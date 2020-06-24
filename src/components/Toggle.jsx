@@ -16,6 +16,10 @@ class Toggle extends React.Component {
     });
   };
 
+  UNSAFE_componentWillReceiveProps = (newProps) => {
+    this.setState({left:newProps.left});
+  } 
+
   render() {
     const { left } = this.state;
     const { leftText, rightText, leftIcon, rightIcon } = this.props;
