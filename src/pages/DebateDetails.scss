@@ -33,36 +33,5 @@
         width: 60%;
       }
     }
-    &__list {
-      &__item {
-        padding-top: $space-normal;
-        background: repeating-linear-gradient(
-            to bottom,
-            $bg-color-middle 0,
-            $bg-color-middle 3px,
-            transparent 3px,
-            transparent 10px
-          ),
-          linear-gradient(
-            to right,
-            transparent 0%,
-            transparent calc(90% - 0.81px),
-            $font-color-light calc(90% - 0.8px),
-            $font-color-light calc(90% + 0.8px),
-            transparent calc(90% + 0.9px),
-            transparent 100%
-          ),
-          linear-gradient(
-            to right,
-            transparent 0%,
-            transparent calc(10% - 0.9px),
-            $font-color-light calc(10% - 0.9px),
-            $font-color-light calc(10% + 0.9px),
-            transparent calc(10% + 0.9px),
-            transparent 100%
-          );
-        background-repeat: space;
-      }
-    }
   }
 }

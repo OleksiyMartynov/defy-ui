@@ -31,7 +31,12 @@ class DebateList extends React.PureComponent {
                 totalCon={debate.totalCon}
               />
             ))}
-            {debates.data.page+1<debates.data.pages&&<Button onClick={()=>this.props.fetchDebates(true)}> load more</Button>}
+            {debates.data.page + 1 < debates.data.pages && (
+              <Button onClick={() => this.props.fetchDebates(true)}>
+                {" "}
+                load more
+              </Button>
+            )}
           </>
         ) : (
           <EmptyState icon={PuzzleIcon} message="No debates" />
@@ -51,4 +56,4 @@ const mapDispatchToProps = (dispatch) => ({
   fetchDebates: (loadNextPage) => dispatch(fetchDebates(loadNextPage)),
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(DebateList);
+export default connect(mapStateToProps, mapDispatchToProps)(DebateList);

@@ -8,27 +8,27 @@ import "./DebateDetails.scss";
 import DebateChart from "../components/DebateChart";
 import Button from "../components/Button";
 import VerticalDebateProgress from "../components/VerticalDebateProgress";
-import OpinionCard from "../components/OpinionCard";
+import OpinionList from "../components/OpinionList";
 
 class DebateDetail extends PureComponent {
   constructor(props) {
     super(props);
     const { match, fetchDebateDetails, fetchOpinions } = this.props;
-    const drawId = match.params.slug;
-    // todo validate drawId
-    fetchDebateDetails(drawId);
-    fetchOpinions(drawId, false);
+    const debateId = match.params.slug;
+    // todo validate debateId
+    fetchDebateDetails(debateId);
   }
 
   onStake = (pro) => {
     const { match, fetchCreateOpinion } = this.props;
-    const drawId = match.params.slug;
+    const debateId = match.params.slug;
     // fetchCreateOpinion(drawId, "http://www.example.com", "link", 550, pro);
-    fetchCreateOpinion(drawId, null, "vote", 500, pro);
+    fetchCreateOpinion(debateId, null, "vote", 500, pro);
   };
 
   render() {
-    const { debateDetails, opinions } = this.props;
+    const { match, debateDetails } = this.props;
+    const debateId = match.params.slug;
     console.log(debateDetails);
     return (
       <div>
@@ -81,23 +81,7 @@ class DebateDetail extends PureComponent {
                   </Button>
                 </div>
               </div>
-              <div className="DebateDetails__opinions-container__list">
-                {opinions.data &&
-                  opinions.data.opinions.map((opinion, i) => (
-                    <div
-                      key={i}
-                      className="DebateDetails__opinions-container__list__item"
-                    >
-                      <OpinionCard
-                        content={opinion.content}
-                        contentType={opinion.contentType}
-                        created={opinion.created}
-                        pro={opinion.pro}
-                        stake={opinion.stake}
-                      />
-                    </div>
-                  ))}
-              </div>
+              <OpinionList debateId={debateId} />
             </div>
           </div>
         ) : (
@@ -113,14 +97,11 @@ DebateDetail.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchDebateDetails: (debateId) => dispatch(fetchDebateDetails(debateId)),
-  fetchOpinions: (debateId, loadNextPage) =>
-    dispatch(fetchOpinions(debateId, loadNextPage)),
   fetchCreateOpinion: (debateId, content, contentType, stake, pro) =>
     dispatch(fetchCreateOpinion(debateId, content, contentType, stake, pro)),
 });
 const mapStateToProps = (state) => ({
   debateDetails: state.debates.debateDetails,
-  opinions: state.opinionList,
   ui: state.ui,
 });
 export default connect(mapStateToProps, mapDispatchToProps)(DebateDetail);

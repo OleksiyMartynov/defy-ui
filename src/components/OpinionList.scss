@@ -1,0 +1,52 @@
+@import "../assets/scss/base.scss";
+.OpinionList{
+    &__opinions-container {
+        &__list {
+          &__item {
+            padding-top: $space-small;
+            background: repeating-linear-gradient(
+                to bottom,
+                $bg-color-middle 0,
+                $bg-color-middle 3px,
+                transparent 3px,
+                transparent 10px
+              ),
+              linear-gradient(
+                to right,
+                transparent 0%,
+                transparent calc(90% - 0.81px),
+                $font-color-light calc(90% - 0.8px),
+                $font-color-light calc(90% + 0.8px),
+                transparent calc(90% + 0.9px),
+                transparent 100%
+              ),
+              linear-gradient(
+                to right,
+                transparent 0%,
+                transparent calc(10% - 0.9px),
+                $font-color-light calc(10% - 0.9px),
+                $font-color-light calc(10% + 0.9px),
+                transparent calc(10% + 0.9px),
+                transparent 100%
+              );
+            background-repeat: space;
+          }
+          &__end{
+              margin: 0 10% 10% 10%;
+              border: dashed 2px $font-color-light;
+              border-top: none;
+              border-right: none;
+              border-left: none;
+              border-radius: 20px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transform: translateY(-2px);
+              z-index: 0;
+              button{
+                  transform: translateY(50%);
+              }
+          }
+        }
+      }
+}

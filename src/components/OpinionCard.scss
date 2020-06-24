@@ -15,15 +15,12 @@
         }
     }
     &__content-wrapper{
+        z-index: 1;
         @extend %common-container-small;
         width: 70%;
-        margin-top: $space-small;
-        margin-bottom: $space-small;
         &--small{
             @extend %common-container-small;
             width: fit-content;
-            margin-top: $space-small;
-            margin-bottom: $space-small;
         }
         &__top{
             display: flex;
