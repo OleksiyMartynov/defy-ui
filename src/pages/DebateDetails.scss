@@ -21,16 +21,35 @@
   }
   &__opinions-container {
     &__controls {
+      z-index: 2;
+      position: relative;
+      margin-bottom: -30px;
       padding-top: $space-normal;
+      padding-bottom: $space-small;
       display: flex;
       justify-content: space-evenly;
       &__column {
-        width: 10%;
+        min-width: 20%;
         display: flex;
         align-items: center;
+        justify-content: center;
+        flex-direction: column;
       }
       &__spacer {
-        width: 60%;
+        flex-grow: 1;
+      }
+    }
+    &__new-opinion-container{
+      @extend %double-dashed-lines;
+      padding-top: $space-normal;
+      padding-bottom: $space-small;
+      &__card-wrapper{
+        width: 70%;
+        &--right{
+          width: 80%;
+          margin-left: auto;
+          right: 0;
+        }
       }
     }
   }

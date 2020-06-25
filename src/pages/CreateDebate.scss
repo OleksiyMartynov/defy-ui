@@ -1,6 +1,7 @@
 @import "../assets/scss/base.scss";
 .CreateDebate {
   width: 100%;
+  z-index: 999;
   &__content {
     margin-left: auto;
     margin-right: auto;
@@ -23,33 +24,9 @@
     }
   }
   &__label {
-    margin: $space-normal 0 $space-tiny $space-tiny;
-    &__tag {
-      background-image: $accent-gradient;
-      color: white;
-      padding: 3px;
-      border-radius: 10px;
-      margin-left: 5px;
-      & > i {
-        cursor: pointer;
-      }
-    }
+    @extend %common-input-label;
   }
   &__input-wrapper {
-    @extend %common-input;
-    display: flex;
-    padding-right: 0px;
-    width: 100%;
-    & > textarea,
-    input {
-      font-size: 20px;
-      background: none;
-      border: none;
-      width: 100%;
-    }
-    & > button {
-      margin-top: -10px;
-      margin-bottom: -10px;
-    }
+    @extend %common-input-wrapper;
   }
 }

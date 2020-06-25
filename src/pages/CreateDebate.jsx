@@ -32,10 +32,7 @@ class CreateDebate extends React.PureComponent {
       this.setState({
         loading: true,
       });
-      console.log({title,
-        description,
-        stake,
-        tags})
+      console.log({ title, description, stake, tags });
       const resp = await this.props.fetchCreateDebate(
         title,
         description,
@@ -176,11 +173,7 @@ class CreateDebate extends React.PureComponent {
                 onChange={this.handleChange}
               />
               <Button secondary disabled={loading}>
-                {loading ? (
-                  <i className="fa fa-spinner" aria-hidden="true" />
-                ) : (
-                  <i className="fa fa-plus" aria-hidden="true" />
-                )}
+                <i className="fa fa-plus" aria-hidden="true" />
               </Button>
             </div>
           </form>
@@ -207,7 +200,11 @@ class CreateDebate extends React.PureComponent {
             </>
           )}
           <Button accent onClick={this.onCreateClicked}>
-            <i className="fa fa-paper-plane" />
+            {loading ? (
+              <i className="fa fa-spinner" aria-hidden="true" />
+            ) : (
+              <i className="fa fa-paper-plane" />
+            )}
             <span>&nbsp;Create</span>
           </Button>
         </div>

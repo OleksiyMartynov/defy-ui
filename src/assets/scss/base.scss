@@ -13,7 +13,6 @@ $accent-gradient: linear-gradient(
   $gradient-start-color,
   $gradient-end-color 40%
 );
-$background-gradient: linear-gradient(to right, $bg-color, $bg-color-dark 80%);
 $font-size-small: 12px;
 $font-size-normal: 16px;
 $font-size-large: 24px;
@@ -40,8 +39,40 @@ $box-shadow-high-inverse: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
 
 $box-shadow-accent: -2px -2px 7px rgba($gradient-start-color, 0.8),
   2px 2px 6px rgba($gradient-end-color, 0.7);
-$box-shadow-accent-small: 0px -1px 3px  rgba($gradient-start-color, 0.95),
+$box-shadow-accent-small: 0px -1px 3px rgba($gradient-start-color, 0.95),
   0px 1px 3px rgba($gradient-end-color, 0.95);
+
+//backgrounds
+$background-gradient: linear-gradient(to right, $bg-color, $bg-color-dark 80%);
+%double-dashed-lines {
+  background: repeating-linear-gradient(
+      to bottom,
+      $bg-color-middle 0,
+      $bg-color-middle 3px,
+      transparent 3px,
+      transparent 10px
+    ),
+    linear-gradient(
+      to right,
+      transparent 0%,
+      transparent calc(90% - 0.81px),
+      $font-color-light calc(90% - 0.8px),
+      $font-color-light calc(90% + 0.8px),
+      transparent calc(90% + 0.9px),
+      transparent 100%
+    ),
+    linear-gradient(
+      to right,
+      transparent 0%,
+      transparent calc(10% - 0.9px),
+      $font-color-light calc(10% - 0.9px),
+      $font-color-light calc(10% + 0.9px),
+      transparent calc(10% + 0.9px),
+      transparent 100%
+    ),
+    linear-gradient(to bottom, $bg-color-middle, $bg-color-middle);
+  background-repeat: space;
+}
 
 //classes
 
@@ -184,7 +215,7 @@ $box-shadow-accent-small: 0px -1px 3px  rgba($gradient-start-color, 0.95),
   background-image: $accent-gradient;
 }
 
-%common-heading-banner-small{
+%common-heading-banner-small {
   @extend %common-heading-banner-normal;
   font-size: $font-size-normal;
 }
@@ -222,6 +253,23 @@ $box-shadow-accent-small: 0px -1px 3px  rgba($gradient-start-color, 0.95),
     font-family: "FontAwesome";
   }
 }
+%common-input-wrapper {
+  @extend %common-input;
+  display: flex;
+  padding-right: 0px;
+  width: 100%;
+  & > textarea,
+  input {
+    font-size: 20px;
+    background: none;
+    border: none;
+    width: 100%;
+  }
+  & > button {
+    margin-top: -10px;
+    margin-bottom: -10px;
+  }
+}
 %common-divider {
   height: 1px;
   box-shadow: 1px 1px 1px 0 rgba(darken($bg-color-middle, 10%), 0.84);
@@ -240,6 +288,19 @@ $box-shadow-accent-small: 0px -1px 3px  rgba($gradient-start-color, 0.95),
   @include mobile {
     width: 1px;
     height: 100%;
+  }
+}
+%common-input-label {
+  margin: $space-normal 0 $space-tiny $space-tiny;
+  &__tag {
+    background-image: $accent-gradient;
+    color: white;
+    padding: 3px;
+    border-radius: 10px;
+    margin-left: 5px;
+    & > i {
+      cursor: pointer;
+    }
   }
 }
 //animations

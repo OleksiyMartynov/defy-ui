@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import VerticalDebateProgress from "../components/VerticalDebateProgress";
 import OpinionList from "../components/OpinionList";
 import Toggle from "../components/Toggle";
+import CreateOpinionCard from "../components/CreateOpinionCard";
 
 class DebateDetail extends PureComponent {
   constructor(props) {
@@ -26,7 +27,6 @@ class DebateDetail extends PureComponent {
     // const debateId = match.params.slug;
     // fetchCreateOpinion(drawId, "http://www.example.com", "link", 550, pro);
     // fetchCreateOpinion(debateId, null, "vote", 500, pro);
-
     //this.setState({ showSection: pro ? 0 : 1 });
   };
 
@@ -34,7 +34,6 @@ class DebateDetail extends PureComponent {
     const { match, debateDetails } = this.props;
     const { showSection } = this.state;
     const debateId = match.params.slug;
-    console.log(debateDetails);
     return (
       <div>
         {debateDetails.data ? (
@@ -73,35 +72,33 @@ class DebateDetail extends PureComponent {
             <div className="DebateDetails__opinions-container">
               <div className="DebateDetails__opinions-container__controls">
                 <div className="DebateDetails__opinions-container__controls__column">
-                  <div className="DebateDetails__opinions-container__controls__column__exanded">
-                    <Toggle
-                      left={showSection === 0}
-                      leftText="Pro"
-                      leftIcon={<i className="fa fa-arrow-circle-up" />}
-                      onChange={(toggle) => this.setState({ showSection: toggle ? 0 : null })}
-                    />
-                    {showSection === 0 && (
-                      <div className="todo">
-                        <textarea value="sup" disabled />
-                      </div>
-                    )}
-                  </div>
+                  <Toggle
+                    left={showSection === 0}
+                    leftText="Pro"
+                    leftIcon={<i className="fa fa-arrow-circle-up" />}
+                    onChange={(toggle) =>
+                      this.setState({ showSection: toggle ? 0 : null })
+                    }
+                  />
                 </div>
                 <div className="DebateDetails__opinions-container__controls__spacer" />
                 <div className="DebateDetails__opinions-container__controls__column">
-                  <div className="DebateDetails__opinions-container__controls__column__exanded">
-                    <Toggle
-                      left={showSection === 1}
-                      leftText="Con"
-                      leftIcon={<i className="fa fa-arrow-circle-down" />}
-                      onChange={(toggle) => this.setState({ showSection: toggle ? 1 : null })}
-                    />
-                    {showSection === 1 && (
-                      <div className="todo">
-                        <textarea value="sup" disabled />
-                      </div>
-                    )}
-                  </div>
+                  <Toggle
+                    left={showSection === 1}
+                    leftText="Con"
+                    leftIcon={<i className="fa fa-arrow-circle-down" />}
+                    onChange={(toggle) =>
+                      this.setState({ showSection: toggle ? 1 : null })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="DebateDetails__opinions-container__new-opinion-container">
+                <div className="DebateDetails__opinions-container__new-opinion-container__card-wrapper">
+                  {showSection === 0 && <CreateOpinionCard />}
+                </div>
+                <div className="DebateDetails__opinions-container__new-opinion-container__card-wrapper DebateDetails__opinions-container__new-opinion-container__card-wrapper--right">
+                  {showSection === 1 && <CreateOpinionCard />}
                 </div>
               </div>
               <OpinionList debateId={debateId} />

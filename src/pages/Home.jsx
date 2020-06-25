@@ -22,7 +22,7 @@ class Home extends React.Component {
   };
 
   onActiveToggled = (finished) => {
-    this.setState({ showActive: !finished });
+    this.setState({ showActive: finished });
     this.props.fetchDebatesWithFilter(new DebateFilter(finished));
   };
 
@@ -36,13 +36,14 @@ class Home extends React.Component {
   };
 
   render() {
+    const {showActive} = this.state;
     return (
       <div className="Home">
         <div className="Home__content">
           <span className="Home__content__heading">Debates</span>
           <div className="Home__content__controls">
             <Toggle
-              left
+              left={showActive}
               leftText="Active"
               rightText="Closed"
               onChange={this.onActiveToggled}
