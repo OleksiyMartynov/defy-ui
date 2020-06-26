@@ -12,11 +12,19 @@
         margin-left: -$space-small;
         margin-bottom: $space-small;
         padding: $space-tiny;
+        text-align: center;
     }
     &__label {
         @extend %common-input-label;
     }
     &__input-wrapper {
         @extend %common-input-wrapper;
+    }
+    &__error {
+        @extend %common-subtitle;
+        color: #ff0000;
+        min-height: $space-normal;
+        display: flex;
+        align-items: center;
     }
 }

@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { connect } from "react-redux";
 import { fetchDebateDetails } from "../actions/debates";
-import { fetchOpinions, fetchCreateOpinion } from "../actions/opinions";
+import { fetchCreateOpinion } from "../actions/opinions";
 import "./DebateDetails.scss";
 import DebateChart from "../components/DebateChart";
-import Button from "../components/Button";
 import VerticalDebateProgress from "../components/VerticalDebateProgress";
 import OpinionList from "../components/OpinionList";
 import Toggle from "../components/Toggle";
@@ -21,14 +20,6 @@ class DebateDetail extends PureComponent {
     // todo validate debateId
     fetchDebateDetails(debateId);
   }
-
-  onStakeSelected = (pro) => {
-    // const { match, fetchCreateOpinion } = this.props;
-    // const debateId = match.params.slug;
-    // fetchCreateOpinion(drawId, "http://www.example.com", "link", 550, pro);
-    // fetchCreateOpinion(debateId, null, "vote", 500, pro);
-    //this.setState({ showSection: pro ? 0 : 1 });
-  };
 
   render() {
     const { match, debateDetails } = this.props;
@@ -95,10 +86,32 @@ class DebateDetail extends PureComponent {
               </div>
               <div className="DebateDetails__opinions-container__new-opinion-container">
                 <div className="DebateDetails__opinions-container__new-opinion-container__card-wrapper">
-                  {showSection === 0 && <CreateOpinionCard />}
+                  {showSection === 0 && (
+                    <CreateOpinionCard
+                      debateId={debateId}
+                      pro={false}
+                      minOpinionStake={
+                        debateDetails.data.rules.minOpinionCreationStake
+                      }
+                      minVoteStake={
+                        debateDetails.data.rules.minVoteCreationStake
+                      }
+                    />
+                  )}
                 </div>
                 <div className="DebateDetails__opinions-container__new-opinion-container__card-wrapper DebateDetails__opinions-container__new-opinion-container__card-wrapper--right">
-                  {showSection === 1 && <CreateOpinionCard />}
+                  {showSection === 1 && (
+                    <CreateOpinionCard
+                      debateId={debateId}
+                      pro
+                      minOpinionStake={
+                        debateDetails.data.rules.minOpinionCreationStake
+                      }
+                      minVoteStake={
+                        debateDetails.data.rules.minVoteCreationStake
+                      }
+                    />
+                  )}
                 </div>
               </div>
               <OpinionList debateId={debateId} />
