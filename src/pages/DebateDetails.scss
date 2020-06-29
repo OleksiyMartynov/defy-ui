@@ -16,8 +16,21 @@
       transform: translateX(0px);
     }
   }
+  &__head-content {
+    display: flex;
+    align-items: center;
+  }
   &__title {
     @extend %common-heading;
+  }
+  &__subtitle {
+    @extend %common-subtitle;
+  }
+  &__stake {
+    @extend %common-heading-banner-normal;
+    border-radius: $radius-normal;
+    padding: 10px;
+    margin-left: $space-normal;
   }
   &__opinions-container {
     &__controls {
@@ -39,13 +52,13 @@
         flex-grow: 1;
       }
     }
-    &__new-opinion-container{
+    &__new-opinion-container {
       @extend %double-dashed-lines;
       padding-top: $space-normal;
       padding-bottom: $space-small;
-      &__card-wrapper{
+      &__card-wrapper {
         width: 70%;
-        &--right{
+        &--right {
           width: 80%;
           margin-left: auto;
           right: 0;

@@ -10,6 +10,7 @@ import VerticalDebateProgress from "../components/VerticalDebateProgress";
 import OpinionList from "../components/OpinionList";
 import Toggle from "../components/Toggle";
 import CreateOpinionCard from "../components/CreateOpinionCard";
+import CountdownCounter from "../components/CountdownCounter";
 
 class DebateDetail extends PureComponent {
   constructor(props) {
@@ -29,10 +30,29 @@ class DebateDetail extends PureComponent {
       <div>
         {debateDetails.data ? (
           <div className="DebateDetails">
-            <div className="DebateDetails__title">
-              {debateDetails.data.debate.title}
+            <div className="DebateDetails__head-content">
+              <div>
+                <div className="DebateDetails__title">
+                  {debateDetails.data.debate.title}
+                </div>
+                <div className="DebateDetails__subtitle">
+                  Created {moment(debateDetails.data.debate.created).fromNow()}
+                  <br />
+                  Finishes{" "}
+                  <CountdownCounter
+                    endTime={
+                      moment(debateDetails.data.debate.updated).unix() +
+                      debateDetails.data.debate.duration / 1000
+                    }
+                  />
+                </div>
+              </div>
+              <div className="DebateDetails__stake">
+                {debateDetails.data.debate.stake}
+                <br />
+                Sats
+              </div>
             </div>
-
             <div className="DebateDetails__chart">
               <DebateChart
                 data={debateDetails.data.history.map((item) => ({
@@ -53,13 +73,6 @@ class DebateDetail extends PureComponent {
             <div className="DebateDetails__description">
               {debateDetails.data.debate.description}
             </div>
-            <div>
-              {moment(
-                debateDetails.data.debate.duration +
-                  moment(debateDetails.data.debate.created).unix() * 1000
-              ).fromNow()}
-            </div>
-            <div>{debateDetails.data.debate.stake}</div>
             <div className="DebateDetails__opinions-container">
               <div className="DebateDetails__opinions-container__controls">
                 <div className="DebateDetails__opinions-container__controls__column">
