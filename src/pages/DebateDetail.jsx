@@ -15,7 +15,7 @@ class DebateDetail extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { showSection: false }; // 0 for pro, 1 for con
-    const { match, fetchDebateDetails, fetchOpinions } = this.props;
+    const { match, fetchDebateDetails } = this.props;
     const debateId = match.params.slug;
     // todo validate debateId
     fetchDebateDetails(debateId);

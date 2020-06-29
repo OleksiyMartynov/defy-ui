@@ -199,13 +199,18 @@ class CreateDebate extends React.PureComponent {
               <br />
             </>
           )}
-          <Button accent onClick={this.onCreateClicked}>
+          <Button disabled={loading} accent onClick={this.onCreateClicked}>
             {loading ? (
-              <i className="fa fa-spinner" aria-hidden="true" />
+              <>
+                <i className="fa fa-spinner" aria-hidden="true" />
+                <span>&nbsp;Creating</span>
+              </>
             ) : (
-              <i className="fa fa-paper-plane" />
+              <>
+                <i className="fa fa-paper-plane" />
+                <span>&nbsp;Create</span>
+              </>
             )}
-            <span>&nbsp;Create</span>
           </Button>
         </div>
         <br />
@@ -219,7 +224,6 @@ class CreateDebate extends React.PureComponent {
 CreateDebate.propTypes = {
   fetchCreateDebate: PropTypes.func.isRequired,
   account: PropTypes.object.isRequired,
-  createDebate: PropTypes.object.isRequired,
   closeCreateDebateDialog: PropTypes.func.isRequired,
 };
 
@@ -231,7 +235,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   account: state.account,
-  createDebate: state.debates.createDebate,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateDebate);

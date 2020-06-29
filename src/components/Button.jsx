@@ -9,6 +9,7 @@ class Button extends PureComponent {
       secondary,
       selected,
       accent,
+      disabled,
       ...nativeProps
     } = this.props;
     let classes = "Button";
@@ -29,17 +30,22 @@ class Button extends PureComponent {
       }
     }
     return (
-      <button selected className={classes} {...nativeProps}>
+      <button disabled={disabled} selected={selected} className={classes} {...nativeProps}>
         {children}
       </button>
     );
   }
 }
 
+Button.defaultProps = {
+  disabled: false,
+};
+
 Button.propTypes = {
   secondary: PropTypes.bool,
   selected: PropTypes.bool,
   accent: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default Button;

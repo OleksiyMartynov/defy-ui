@@ -9,7 +9,7 @@ import { fetchCreateOpinion } from "../actions/opinions";
 class CreateOpinionCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { stake: "", link: "", showLink: false };
+    this.state = { stake: "", link: "", showLink: false, loading: false };
   }
 
   onActiveToggled = (showLink) => {
@@ -24,20 +24,32 @@ class CreateOpinionCard extends Component {
 
   onCreateClicked = async () => {
     const { pro, fetchCreateOpinion, debateId } = this.props;
-    const { showLink, stake } = this.state;
+    const { showLink, stake, link } = this.state;
     if (this.isFormValid()) {
-      fetchCreateOpinion(
+      this.setState({
+        loading: true,
+      });
+      const resp = await fetchCreateOpinion(
         debateId,
-        debateId,
+        link,
         showLink ? "link" : "vote",
         stake,
         pro
       );
-      // todo fix redux opinions loading state
+      if (resp.error) {
+        this.setState({
+          error: resp.error.message
+            ? resp.error.message
+            : "Failed creating opinion. ",
+          loading: false,
+        });
+      } else {
+        this.props.onNewOpinionCreated();
+      }
     }
   };
 
-  isFormValid = async () => {
+  isFormValid = () => {
     const { showLink, link, stake } = this.state;
     const { minOpinionStake, minVoteStake } = this.props;
     if (showLink) {
@@ -64,15 +76,14 @@ class CreateOpinionCard extends Component {
   };
 
   isValidLink = (text) => {
-    const expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+    const expression = /[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi;
     const regex = new RegExp(expression);
     return text.match(regex);
   };
 
   render() {
-    const { pro, minOpinionStake, minVoteStake, opinions } = this.props;
+    const { pro, minOpinionStake, minVoteStake } = this.props;
     const { stake, showLink, link, loading, error } = this.state;
-    console.log(opinions);
     return (
       <div className="CreateOpinionCard">
         <div className="CreateOpinionCard__title">
@@ -116,13 +127,18 @@ class CreateOpinionCard extends Component {
           </div>
         )}
         <div className="CreateOpinionCard__error">{error}</div>
-        <Button accent onClick={this.onCreateClicked}>
+        <Button disabled={loading} accent onClick={this.onCreateClicked}>
           {loading ? (
-            <i className="fa fa-spinner" aria-hidden="true" />
+            <>
+              <i className="fa fa-spinner" aria-hidden="true" />
+              <span>&nbsp;Creating</span>
+            </>
           ) : (
-            <i className="fa fa-paper-plane" />
+            <>
+              <i className="fa fa-paper-plane" />
+              <span>&nbsp;Create</span>
+            </>
           )}
-          <span>&nbsp;Create</span>
         </Button>
       </div>
     );
@@ -139,6 +155,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchCreateOpinion(debateId, content, contentType, stake, pro)),
 });
 const mapStateToProps = (state) => ({
-  opinions: state.opinions,
+  createOpinion: state.createOpinion,
 });
 export default connect(mapStateToProps, mapDispatchToProps)(CreateOpinionCard);

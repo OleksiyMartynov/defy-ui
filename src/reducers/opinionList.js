@@ -1,8 +1,4 @@
-import {
-  OPINIONS_UPDATED,
-  CREATE_OPINION,
-  CREATE_OPINION_FINISHED,
-} from "../actions/opinions";
+import { OPINIONS_UPDATED } from "../actions/opinions";
 import ReduxUtils from "../utils/ReduxUtils";
 import DataModel from "../models/DataModel";
 
@@ -12,6 +8,4 @@ const initialState = {
 
 export default ReduxUtils.createReducer(initialState, {
   ...ReduxUtils.createObjectHandler(OPINIONS_UPDATED, "opinions"),
-  ...ReduxUtils.createObjectHandler(CREATE_OPINION, "createOpinion"),
-  ...ReduxUtils.createObjectHandler(CREATE_OPINION_FINISHED, "createOpinion"),
 });

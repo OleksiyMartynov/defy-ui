@@ -17,7 +17,6 @@ class OpinionList extends PureComponent {
 
   render() {
     const { debateId, opinions } = this.props;
-    console.log(opinions)
     return (
       <div>
         {opinions.data ? (

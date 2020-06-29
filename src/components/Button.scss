@@ -19,5 +19,16 @@
   }
   &--accent {
     @extend %common-button-accent;
+    font-size: $font-size-normal;
+    &:disabled,
+    &[disabled]{
+      background: linear-gradient(
+        to right,
+        lighten($gradient-start-color, 20%),
+        lighten($gradient-end-color, 20%) 40%
+      );
+      pointer-events: none;
+    }
   }
+  
 }
