@@ -127,7 +127,12 @@ class CreateOpinionCard extends Component {
           </div>
         )}
         <div className="CreateOpinionCard__error">{error}</div>
-        <Button disabled={loading} accent onClick={this.onCreateClicked}>
+        <Button
+          style={{ marginLeft: pro ? "initial" : "auto" }}
+          disabled={loading}
+          accent
+          onClick={this.onCreateClicked}
+        >
           {loading ? (
             <>
               <i className="fa fa-spinner" aria-hidden="true" />

@@ -39,7 +39,6 @@ export const fetchDebates = (loadNextPage, filterReset = false) => async (
   { apiService }
 ) => {
   const { debateList } = getState();
-  console.log(debateList);
   let nextPage = 0;
   if (loadNextPage) {
     nextPage = debateList.data.page + 1;
@@ -62,6 +61,7 @@ export const fetchDebates = (loadNextPage, filterReset = false) => async (
       dispatch(updateDebates(response));
     }
   } catch (ex) {
+    // eslint-disable-next-line no-console
     console.log(ex);
     dispatch(updateDebates(DataModel.error(0, ex.message)));
   }
@@ -77,8 +77,6 @@ export const fetchCreateDebate = (title, description, stake, tags) => async (
     const { account } = getState();
 
     const acct = new Account(account.mnemonic);
-    console.log(acct);
-    console.log({ title, description, stake, tags });
     const response = await apiService.createDebate(
       title,
       description,
@@ -89,6 +87,7 @@ export const fetchCreateDebate = (title, description, stake, tags) => async (
     dispatch(receiveCreateDebate(response));
     return response;
   } catch (ex) {
+    // eslint-disable-next-line no-console
     console.log(ex);
     const err = DataModel.error(0, ex.message);
     dispatch(receiveCreateDebate(err));
@@ -104,7 +103,6 @@ export const fetchDebateDetails = (debateId) => async (
   dispatch(updateDebateDetails({ debateDetails: new DataModel(null, true) }));
   try {
     const response = await apiService.getDebateDetails(debateId);
-    console.log(response);
     dispatch(updateDebateDetails({ debateDetails: response }));
   } catch (ex) {
     dispatch(

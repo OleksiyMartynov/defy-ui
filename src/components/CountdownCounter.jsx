@@ -1,9 +1,7 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import moment from "moment";
 
-const styles = {
-  root: {},
-};
 class CountdownCounter extends Component {
   timerId;
 
@@ -24,14 +22,12 @@ class CountdownCounter extends Component {
   }
 
   doCalc() {
-    let endTime = this.state.endTime;
-    let endTimeFormatted;
-    endTimeFormatted = moment.unix(endTime).fromNow();
-    this.setState({ endTimeFormatted: endTimeFormatted });
+    const { endTime } = this.state;
+    const endTimeFormatted = moment.unix(endTime).fromNow();
+    this.setState({ endTimeFormatted });
   }
 
   render() {
-    //const { classes } = this.props;
     const { endTimeFormatted } = this.state;
 
     return <React.Fragment>{endTimeFormatted}</React.Fragment>;
@@ -39,3 +35,7 @@ class CountdownCounter extends Component {
 }
 
 export default CountdownCounter;
+
+CountdownCounter.propTypes = {
+  endTime: PropTypes.number.isRequired,
+};

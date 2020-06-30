@@ -31,8 +31,6 @@ export const fetchCreateOpinion = (
     const { account } = getState();
 
     const acct = new Account(account.mnemonic);
-    console.log(acct);
-    console.log({ debateId, content, contentType, stake, pro });
     const response = await apiService.createOpinion(
       debateId,
       content,
@@ -44,6 +42,7 @@ export const fetchCreateOpinion = (
     dispatch(receiveCreateOpinion(response));
     return response;
   } catch (ex) {
+    // eslint-disable-next-line no-console
     console.log(ex);
     const err = DataModel.error(0, ex.message);
     dispatch(receiveCreateOpinion(err));
@@ -57,7 +56,6 @@ export const fetchOpinions = (debateId, loadNextPage) => async (
   { apiService }
 ) => {
   const { opinionList } = getState();
-  console.log(opinionList);
   let nextPage = 0;
   if (loadNextPage) {
     nextPage = opinionList.data.page + 1;
@@ -75,6 +73,7 @@ export const fetchOpinions = (debateId, loadNextPage) => async (
       dispatch(updateOpinions(response));
     }
   } catch (ex) {
+    // eslint-disable-next-line no-console
     console.log(ex);
     dispatch(updateOpinions(DataModel.error(0, ex.message)));
   }
