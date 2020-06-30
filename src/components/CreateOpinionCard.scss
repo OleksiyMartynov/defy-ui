@@ -1,30 +1,37 @@
 @import "../assets/scss/base.scss";
-.CreateOpinionCard{
-    @extend %common-container;
-    @extend %fade-in;
-    border-radius: $radius-small;
-    width: 100%;
+.CreateOpinionCard {
+  @extend %common-container;
+  @include inline-animation(1s) {
+    from {
+      height: 0px;
+    }
+    to {
+      height: 300px;
+    }
+  }
+  border-radius: $radius-small;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  &__title {
+    @extend %common-heading-banner-normal;
+    margin-right: -$space-small;
+    margin-left: -$space-small;
+    margin-bottom: $space-small;
+    padding: $space-tiny;
+    text-align: center;
+  }
+  &__label {
+    @extend %common-input-label;
+  }
+  &__input-wrapper {
+    @extend %common-input-wrapper;
+  }
+  &__error {
+    @extend %common-subtitle;
+    color: #ff0000;
+    min-height: $space-normal;
     display: flex;
-    flex-direction: column;
-    &__title{
-        @extend %common-heading-banner-normal;
-        margin-right: -$space-small;
-        margin-left: -$space-small;
-        margin-bottom: $space-small;
-        padding: $space-tiny;
-        text-align: center;
-    }
-    &__label {
-        @extend %common-input-label;
-    }
-    &__input-wrapper {
-        @extend %common-input-wrapper;
-    }
-    &__error {
-        @extend %common-subtitle;
-        color: #ff0000;
-        min-height: $space-normal;
-        display: flex;
-        align-items: center;
-    }
+    align-items: center;
+  }
 }
