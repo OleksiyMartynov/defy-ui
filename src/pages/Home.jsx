@@ -15,7 +15,9 @@ class Home extends React.Component {
     super(props);
     this.state = { showActive: true };
     const accountObject = new AccountModel(props.account.mnemonic);
-    props.fetchDebatesWithFilter(new DebateFilter(true, true, accountObject.getAddress()));
+    props.fetchDebatesWithFilter(
+      new DebateFilter(true, true, accountObject.getAddress())
+    );
   }
   onCreateDebate = () => {
     this.props.openCreateDebateDialog();
@@ -36,7 +38,7 @@ class Home extends React.Component {
   };
 
   render() {
-    const {showActive} = this.state;
+    const { showActive } = this.state;
     return (
       <div className="Home">
         <div className="Home__content">
@@ -54,6 +56,8 @@ class Home extends React.Component {
               itemSelectedListener={this.itemSelectedListener}
             />
           </div>
+          todo: add filter option for user. "created by me", "participated by
+          me"
           <DebateList />
         </div>
       </div>
