@@ -75,6 +75,9 @@ $background-gradient: linear-gradient(to right, $bg-color, $bg-color-dark 80%);
   background-repeat: space;
 }
 
+//misc
+$common-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
 //classes
 
 //MOBILE
@@ -101,7 +104,7 @@ $background-gradient: linear-gradient(to right, $bg-color, $bg-color-dark 80%);
   color: $font-color;
   border-radius: $radius-small;
   background: $background-gradient;
-  transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 200ms $common-timing-function;
   box-shadow: $box-shadow-small;
 }
 
@@ -111,7 +114,7 @@ $background-gradient: linear-gradient(to right, $bg-color, $bg-color-dark 80%);
   color: $font-color;
   border-radius: $radius-large;
   background: $background-gradient;
-  transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 200ms $common-timing-function;
   box-shadow: $box-shadow-high;
 }
 %common-button {
@@ -184,7 +187,7 @@ $background-gradient: linear-gradient(to right, $bg-color, $bg-color-dark 80%);
   color: $font-color;
   border-radius: $radius-large;
   background: $bg-color;
-  transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 300ms $common-timing-function;
   box-shadow: $box-shadow-high-inverse;
 }
 
@@ -219,6 +222,13 @@ $background-gradient: linear-gradient(to right, $bg-color, $bg-color-dark 80%);
 %common-heading-banner-small {
   @extend %common-heading-banner-normal;
   font-size: $font-size-normal;
+}
+
+%common-stake-badge {
+  @extend %common-heading-banner-normal;
+  border-radius: $radius-normal;
+  padding: 10px;
+  margin-left: $space-normal;
 }
 
 %common-title {
@@ -305,15 +315,17 @@ $background-gradient: linear-gradient(to right, $bg-color, $bg-color-dark 80%);
   }
 }
 //animations
-@mixin inline-animation($duration) {
+@mixin inline-animation($duration, $func: "ease", $delay: "0ms") {
   $name: inline-#{unique-id()};
 
   @keyframes #{$name} {
     @content;
   }
   animation-name: $name;
-  animation-duration: 200ms;
+  animation-duration: $duration;
+  animation-delay: $delay;
   animation-iteration-count: 1;
+  animation-timing-function: $func;
 }
 
 %fade-in {

@@ -18,6 +18,7 @@
     font-weight: 500;
     font-style: normal;
     padding: $space-tiny $space-small $space-tiny $space-small;
+    white-space: nowrap;
   }
   &__rows-wrapper {
     @include mobile {

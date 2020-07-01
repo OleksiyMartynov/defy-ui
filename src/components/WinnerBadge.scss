@@ -1,0 +1,37 @@
+@import "../assets/scss/base.scss";
+.WinnerBadge {
+  &__emoji {
+    @extend %common-heading-banner-normal;
+    border-radius: $radius-normal;
+    padding: $space-small;
+    font-size: $font-size-xl;
+    text-align: center;
+    &--winner {
+      color: gold;
+      border-color: gold;
+      border-width: 5px;
+      border-style: solid;
+      @include inline-animation(500ms, $common-timing-function, 500ms) {
+        from {
+          transform: rotate(90deg);
+        }
+        to {
+          transform: rotate(0deg);
+        }
+      }
+    }
+    &--loser {
+      color: #854545;
+      transform: scale(0.8);
+    }
+    span:first-of-type {
+      font-size: $font-size-xl;
+      color: white;
+      text-transform: uppercase;
+    }
+    div:first-of-type {
+      font-size: $font-size-large;
+      color: white;
+    }
+  }
+}

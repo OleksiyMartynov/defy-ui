@@ -33,15 +33,7 @@
     @extend %common-subtitle;
   }
   &__stake {
-    @extend %common-heading-banner-normal;
-    border-radius: $radius-normal;
-    padding: 10px;
-    margin-left: $space-normal;
-    &__stake-unit {
-      font-size: 6px;
-      text-transform: uppercase;
-      font-size: 8px;
-    }
+    @extend %common-stake-badge;
   }
   &__opinions-container {
     &__controls {

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
+import Formatter from "../utils/Formatter";
 import "./OpinionCard.scss";
 
 class OpinionCard extends React.Component {
@@ -43,11 +44,16 @@ class OpinionCard extends React.Component {
               <img src={metadata.image} alt="Article preview" />
             </div>
             <div className="OpinionCard__content-wrapper__content__details">
-              <div className="OpinionCard__content-wrapper__content__details__title">
-                {metadata.title}
-              </div>
+              <a href={metadata.url} target="_blank" rel="noopener noreferrer">
+                <div className="OpinionCard__content-wrapper__content__details__title">
+                  {metadata.title}
+                </div>
+              </a>
               <div className="OpinionCard__content-wrapper__content__details__description">
                 {metadata.description}
+              </div>
+              <div className="OpinionCard__content-wrapper__content__details__domain">
+                {Formatter.getBaseUrl(metadata.url)}
               </div>
             </div>
           </div>
@@ -68,17 +74,16 @@ class OpinionCard extends React.Component {
         >
           <div className="OpinionCard__content-wrapper__top">
             <div className="OpinionCard__content-wrapper__top__stake">
-              {stake}
-              Sats
+              <div>
+                <i className="fa fa-bolt" />
+                {Formatter.kFormatter(stake)}
+              </div>
             </div>
             <div className="OpinionCard__content-wrapper__top__date">
               {moment(created).fromNow()}
             </div>
           </div>
           {metaSection}
-        </div>
-        <div className="OpinionCard__dotted">
-          <div className="OpinionCard__dotted__dotted-line" />
         </div>
       </div>
     );

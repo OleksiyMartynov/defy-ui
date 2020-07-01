@@ -1,23 +1,32 @@
 @import "../assets/scss/base.scss";
 .DebateCard {
-    @extend %common-container;
-    width: 100%;
-    margin-bottom: 40px;
-    &__title{
-        @extend %common-title;
-    }
-    &__description{
-        @extend %common-text;
-        margin-bottom:10px;
-    }
-    &:hover {
-        cursor: pointer;
-        box-shadow: -6px -6px 12px rgba(255, 255, 255, 0.8),
-            6px 6px 12px rgba(0, 0, 0, 0.15);
-    }
-    &:active {
-        transform: scale(0.998);
-        box-shadow: 0px -1px 3px rgb(255, 255, 255), 
-            0px 1px 3px rgba(0, 0, 0, 0.15);
-    }
+  @extend %common-container;
+  width: 100%;
+  margin-bottom: 40px;
+  text-decoration: inherit;
+  &__heading-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__title {
+    @extend %common-title;
+  }
+  &__description {
+    @extend %common-text;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  &__stake {
+    @extend %common-stake-badge;
+  }
+  &:hover {
+    cursor: pointer;
+    box-shadow: -6px -6px 12px rgba(255, 255, 255, 0.8),
+      6px 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  &:active {
+    transform: scale(0.998);
+    box-shadow: 0px -1px 3px rgb(255, 255, 255), 0px 1px 3px rgba(0, 0, 0, 0.15);
+  }
 }

@@ -64,10 +64,9 @@ export const fetchOpinions = (debateId, loadNextPage) => async (
   try {
     const response = await apiService.getOpinions(debateId, nextPage);
     if (opinionList.data) {
-      response.data.opinions = [
-        ...opinionList.data.opinions,
-        ...response.data.opinions,
-      ];
+      response.data.opinions = loadNextPage
+        ? [...opinionList.data.opinions, ...response.data.opinions]
+        : response.data.opinions;
       dispatch(updateOpinions(response));
     } else {
       dispatch(updateOpinions(response));

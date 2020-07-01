@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import moment from "moment";
 import { connect } from "react-redux";
 import { fetchDebateDetails } from "../actions/debates";
 import { fetchCreateOpinion } from "../actions/opinions";
@@ -10,10 +9,11 @@ import VerticalDebateProgress from "../components/VerticalDebateProgress";
 import OpinionList from "../components/OpinionList";
 import Toggle from "../components/Toggle";
 import CreateOpinionCard from "../components/CreateOpinionCard";
-import CountdownCounter from "../components/CountdownCounter";
 import Formatter from "../utils/Formatter";
+import DebateTime from "../components/DebateTime";
+import WinnerBadge from "../components/WinnerBadge";
 
-class DebateDetail extends PureComponent {
+class DebateDetails extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { showSection: false }; // 0 for pro, 1 for con
@@ -21,30 +21,6 @@ class DebateDetail extends PureComponent {
     const debateId = match.params.slug;
     // todo validate debateId
     fetchDebateDetails(debateId);
-  }
-
-  createEmoji(winner, amount) {
-    if (winner) {
-      return (
-        <span className="DebateDetails__opinions-container__controls__column__emoji DebateDetails__opinions-container__controls__column__emoji--winner">
-          <i className="fa fa-trophy" />
-          <div>
-            <i className="fa fa-bolt" />
-            {Formatter.kFormatter(amount)}
-          </div>
-        </span>
-      );
-    } else {
-      return (
-        <span className="DebateDetails__opinions-container__controls__column__emoji DebateDetails__opinions-container__controls__column__emoji--loser">
-          <i className="fas fa-poo" />
-          <div>
-            <i className="fa fa-bolt" />
-            {Formatter.kFormatter(amount)}
-          </div>
-        </span>
-      );
-    }
   }
 
   render() {
@@ -61,33 +37,28 @@ class DebateDetail extends PureComponent {
                 <div className="DebateDetails__title">
                   {debateDetails.data.debate.title}
                 </div>
-                <div className="DebateDetails__subtitle">
-                  {!debateDetails.data.debate.finished ? (
-                    <span>
-                      Ongoing for{" "}
-                      {moment(debateDetails.data.debate.updated).from(
-                        debateDetails.data.debate.created,
-                        true
-                      )}
-                    </span>
-                  ) : (
-                    <span>
-                      Finished{" "}
-                      <CountdownCounter
-                        endTime={
-                          moment(debateDetails.data.debate.updated).unix() +
-                          debateDetails.data.debate.duration / 1000
-                        }
-                      />
-                    </span>
-                  )}
-                </div>
+                <DebateTime
+                  finished={debateDetails.data.debate.finished}
+                  dateCreated={debateDetails.data.debate.created}
+                  dateUpdated={debateDetails.data.debate.updated}
+                  durationMilli={debateDetails.data.debate.duration}
+                />
               </div>
               <div className="DebateDetails__stake">
                 <i className="fa fa-bolt" />
-                {debateDetails.data.debate.stake}
+                {Formatter.kFormatter(
+                  debateDetails.data.debate.stake +
+                    debateDetails.data.debate.totalPro +
+                    debateDetails.data.debate.totalCon
+                )}
               </div>
             </div>
+            <br />
+            todo: show tags
+            <br />
+            todo: show "creator stake"
+            <br />
+            todo: show pro/con totals for ongoing
             <div className="DebateDetails__chart">
               <DebateChart
                 data={debateDetails.data.history.map((item) => ({
@@ -121,11 +92,14 @@ class DebateDetail extends PureComponent {
                       }
                     />
                   ) : (
-                    this.createEmoji(
-                      debateDetails.data.debate.totalPro >
-                        debateDetails.data.debate.totalCon,
-                      debateDetails.data.debate.totalPro
-                    )
+                    <WinnerBadge
+                      heading="Pro"
+                      winner={
+                        debateDetails.data.debate.totalPro >
+                        debateDetails.data.debate.totalCon
+                      }
+                      amount={debateDetails.data.debate.totalPro}
+                    />
                   )}
                 </div>
                 <div className="DebateDetails__opinions-container__controls__spacer" />
@@ -140,11 +114,14 @@ class DebateDetail extends PureComponent {
                       }
                     />
                   ) : (
-                    this.createEmoji(
-                      debateDetails.data.debate.totalPro <
-                        debateDetails.data.debate.totalCon,
-                      debateDetails.data.debate.totalCon
-                    )
+                    <WinnerBadge
+                      heading="Con"
+                      winner={
+                        debateDetails.data.debate.totalPro <
+                        debateDetails.data.debate.totalCon
+                      }
+                      amount={debateDetails.data.debate.totalCon}
+                    />
                   )}
                 </div>
               </div>
@@ -188,7 +165,7 @@ class DebateDetail extends PureComponent {
     );
   }
 }
-DebateDetail.propTypes = {
+DebateDetails.propTypes = {
   debateDetails: PropTypes.object.isRequired,
 };
 
@@ -201,4 +178,4 @@ const mapStateToProps = (state) => ({
   debateDetails: state.debates.debateDetails,
   ui: state.ui,
 });
-export default connect(mapStateToProps, mapDispatchToProps)(DebateDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(DebateDetails);

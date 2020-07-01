@@ -1,112 +1,130 @@
 @import-normalize;
-@import './assets/scss/base.scss';
+@import "./assets/scss/base.scss";
 @font-face {
-  font-family: 'Lora';
-  src: local('Lora-Italic'), url('./assets/fonts/Lora-Italic.ttf') format('truetype');
+  font-family: "Lora";
+  src: local("Lora-Italic"),
+    url("./assets/fonts/Lora-Italic.ttf") format("truetype");
   font-weight: normal;
   font-style: italic;
 }
 @font-face {
-  font-family: 'Lora';
-  src: local('Lora-Regular'), url('./assets/fonts/Lora-Regular.ttf') format('truetype');
+  font-family: "Lora";
+  src: local("Lora-Regular"),
+    url("./assets/fonts/Lora-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lora';
-  src: local('Lora-Medium'), url('./assets/fonts/Lora-Medium.ttf') format('truetype');
+  font-family: "Lora";
+  src: local("Lora-Medium"),
+    url("./assets/fonts/Lora-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lora';
-  src: local('Lora-MediumItalic'), url('./assets/fonts/Lora-MediumItalic.ttf') format('truetype');
+  font-family: "Lora";
+  src: local("Lora-MediumItalic"),
+    url("./assets/fonts/Lora-MediumItalic.ttf") format("truetype");
   font-weight: 500;
   font-style: italic;
 }
 @font-face {
-  font-family: 'Lora';
-  src: local('Lora-SemiBold'), url('./assets/fonts/Lora-SemiBold.ttf') format('truetype');
+  font-family: "Lora";
+  src: local("Lora-SemiBold"),
+    url("./assets/fonts/Lora-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lora';
-  src: local('Lora-SemiBoldItalic'), url('./assets/fonts/Lora-SemiBoldItalic.ttf') format('truetype');
+  font-family: "Lora";
+  src: local("Lora-SemiBoldItalic"),
+    url("./assets/fonts/Lora-SemiBoldItalic.ttf") format("truetype");
   font-weight: 600;
   font-style: italic;
 }
 @font-face {
-  font-family: 'Lora';
-  src: local('Lora-Bold'), url('./assets/fonts/Lora-Bold.ttf') format('truetype');
+  font-family: "Lora";
+  src: local("Lora-Bold"),
+    url("./assets/fonts/Lora-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lora';
-  src: local('Lora-BoldItalic'), url('./assets/fonts/Lora-BoldItalic.ttf') format('truetype');
+  font-family: "Lora";
+  src: local("Lora-BoldItalic"),
+    url("./assets/fonts/Lora-BoldItalic.ttf") format("truetype");
   font-weight: bold;
   font-style: italic;
 }
 
-//lato 
+//lato
 @font-face {
-  font-family: 'Lato';
-  src: local('Lato-Thin'), url('./assets/fonts/Lato-Thin.ttf') format('truetype');
+  font-family: "Lato";
+  src: local("Lato-Thin"),
+    url("./assets/fonts/Lato-Thin.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lato';
-  src: local('Lato-ThinItalic'), url('./assets/fonts/Lato-ThinItalic.ttf') format('truetype');
+  font-family: "Lato";
+  src: local("Lato-ThinItalic"),
+    url("./assets/fonts/Lato-ThinItalic.ttf") format("truetype");
   font-weight: 100;
   font-style: italic;
 }
 @font-face {
-  font-family: 'Lato';
-  src: local('Lato-Light'), url('./assets/fonts/Lato-Light.ttf') format('truetype');
+  font-family: "Lato";
+  src: local("Lato-Light"),
+    url("./assets/fonts/Lato-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lato';
-  src: local('Lato-LightItalic'), url('./assets/fonts/Lato-LightItalic.ttf') format('truetype');
+  font-family: "Lato";
+  src: local("Lato-LightItalic"),
+    url("./assets/fonts/Lato-LightItalic.ttf") format("truetype");
   font-weight: 300;
   font-style: italic;
 }
 @font-face {
-  font-family: 'Lato';
-  src: local('Lato-Regular'), url('./assets/fonts/Lato-Regular.ttf') format('truetype');
+  font-family: "Lato";
+  src: local("Lato-Regular"),
+    url("./assets/fonts/Lato-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lato';
-  src: local('Lato-Italic'), url('./assets/fonts/Lato-Italic.ttf') format('truetype');
+  font-family: "Lato";
+  src: local("Lato-Italic"),
+    url("./assets/fonts/Lato-Italic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
 }
 @font-face {
-  font-family: 'Lato';
-  src: local('Lato-Bold'), url('./assets/fonts/Lato-Bold.ttf') format('truetype');
+  font-family: "Lato";
+  src: local("Lato-Bold"),
+    url("./assets/fonts/Lato-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lato';
-  src: local('Lato-BoldItalic'), url('./assets/fonts/Lato-BoldItalic.ttf') format('truetype');
+  font-family: "Lato";
+  src: local("Lato-BoldItalic"),
+    url("./assets/fonts/Lato-BoldItalic.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
 }
 @font-face {
-  font-family: 'Lato';
-  src: local('Lato-Black'), url('./assets/fonts/Lato-Black.ttf') format('truetype');
+  font-family: "Lato";
+  src: local("Lato-Black"),
+    url("./assets/fonts/Lato-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lato';
-  src: local('Lato-BlackItalic'), url('./assets/fonts/Lato-BlackItalic.ttf') format('truetype');
+  font-family: "Lato";
+  src: local("Lato-BlackItalic"),
+    url("./assets/fonts/Lato-BlackItalic.ttf") format("truetype");
   font-weight: 900;
   font-style: italic;
 }
@@ -119,9 +137,9 @@
   z-index: 1;
 }
 
-input[type=button],
-input[type=submit],
-input[type=reset],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
 button {
   border: none;
   margin: 0;
@@ -163,7 +181,7 @@ button {
 html,
 body {
   background-color: $bg-color-middle;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: normal;
   color: $font-color;
   height: 100%;
@@ -180,11 +198,15 @@ select,
 a {
   // removes blue overlay shown upon pressing buttons and inputs on mobile
   // Source: https://stackoverflow.com/a/45050338
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   outline: none;
 }
 .fa-spinner {
   animation: App-logo-spin infinite 1s linear;
+}
+
+.fa-bolt {
+  margin-right: 0.2em;
 }
 
 @keyframes App-logo-spin {

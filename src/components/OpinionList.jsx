@@ -39,7 +39,14 @@ class OpinionList extends PureComponent {
                     </div>
                   ))}
                   <div className="OpinionList__opinions-container__list__end">
-                    {opinions.data.page+1<opinions.data.pages&&<Button onClick={()=>this.props.fetchOpinions(debateId, true)}> load more</Button>}
+                    {opinions.data.page + 1 < opinions.data.pages && (
+                      <Button
+                        onClick={() => this.props.fetchOpinions(debateId, true)}
+                      >
+                        {" "}
+                        Load more
+                      </Button>
+                    )}
                   </div>
                 </div>
               )}
@@ -53,7 +60,7 @@ class OpinionList extends PureComponent {
   }
 }
 OpinionList.propTypes = {
-  debateId: PropTypes.string.isRequired
+  debateId: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

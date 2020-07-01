@@ -9,6 +9,7 @@ import {
   openCreateDebateDialog,
 } from "../actions/ui";
 import FloatingButton from "./FloatingButton";
+import Formatter from "../utils/Formatter";
 
 class AccountStats extends React.Component {
   onDeposit = () => {
@@ -32,7 +33,10 @@ class AccountStats extends React.Component {
         ) : (
           <div className="AccountStats__rows-wrapper">
             <div className="AccountStats__title">Funds</div>
-            <div className="AccountStats__total">{account.data.balance}</div>
+            <div className="AccountStats__total">
+              <i className="fa fa-bolt" />
+              {Formatter.addCommas(account.data.balance)}
+            </div>
 
             <div className="AccountStats__numbers-row">
               <div className="AccountStats__numbers-row__subtitle">
@@ -42,10 +46,12 @@ class AccountStats extends React.Component {
             </div>
             <div className="AccountStats__numbers-row">
               <div className="AccountStats__numbers-row__number">
-                {account.data.balance - account.data.lockedBalance}
+                {Formatter.addCommas(
+                  account.data.balance - account.data.lockedBalance
+                )}
               </div>
               <div className="AccountStats__numbers-row__number">
-                {account.data.lockedBalance}
+                {Formatter.addCommas(account.data.lockedBalance)}
               </div>
             </div>
           </div>
@@ -80,7 +86,7 @@ AccountStats.propTypes = {
   openCreateDebateDialog: PropTypes.func.isRequired,
   openDepositDialog: PropTypes.func.isRequired,
   openWithdrawalDialog: PropTypes.func.isRequired,
-  account: PropTypes.object.isRequired
+  account: PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
