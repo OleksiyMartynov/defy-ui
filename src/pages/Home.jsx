@@ -58,6 +58,10 @@ class Home extends React.Component {
           </div>
           todo: add filter option for user. "created by me", "participated by
           me"
+          <br />
+          todo: update horzontal progress bar
+          <br />
+          todo: update nav
           <DebateList />
         </div>
       </div>
