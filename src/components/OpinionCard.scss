@@ -49,6 +49,7 @@ $card-image-width: 120px;
       }
     }
     &__loading {
+      padding: $space-small;
     }
     &__content {
       display: flex;
@@ -58,8 +59,12 @@ $card-image-width: 120px;
         height: auto;
         min-width: $card-image-width;
         max-width: $card-image-width;
+        text-align: center;
         img {
           width: 100%;
+        }
+        i {
+          font-size: 60px;
         }
       }
       &__details {
@@ -85,6 +90,7 @@ $card-image-width: 120px;
       }
     }
     &__error {
+      padding: $space-small;
     }
   }
 }

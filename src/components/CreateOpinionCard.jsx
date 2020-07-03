@@ -23,7 +23,12 @@ class CreateOpinionCard extends Component {
   };
 
   onCreateClicked = async () => {
-    const { pro, fetchCreateOpinion, debateId } = this.props;
+    const {
+      pro,
+      fetchCreateOpinion,
+      debateId,
+      onNewOpinionCreated,
+    } = this.props;
     const { showLink, stake, link } = this.state;
     if (this.isFormValid()) {
       this.setState({
@@ -43,9 +48,7 @@ class CreateOpinionCard extends Component {
             : "Failed creating opinion. ",
           loading: false,
         });
-      } else {
-        this.props.onNewOpinionCreated();
-      }
+      } else if (onNewOpinionCreated) onNewOpinionCreated();
     }
   };
 

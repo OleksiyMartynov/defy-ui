@@ -20,7 +20,7 @@ class OpinionCard extends React.Component {
     const metaRes = await res.json();
     if (metaRes.error) {
       this.setState({
-        metaError: "Failed loading metadata",
+        metaError: "Failed loading link preview",
         loadingMeta: false,
       });
     } else {
@@ -35,13 +35,20 @@ class OpinionCard extends React.Component {
     if (content) {
       if (loadingMeta) {
         metaSection = (
-          <div className="OpinionCard__loading">loading preview</div>
+          <div className="OpinionCard__content-wrapper__loading">
+            <i className="fa fa-spinner fa-4x" aria-hidden="true" />
+            Loading <a href={content}>link</a> preview
+          </div>
         );
       } else if (metadata) {
         metaSection = (
           <div className="OpinionCard__content-wrapper__content">
             <div className="OpinionCard__content-wrapper__content__image">
-              <img src={metadata.image} alt="Article preview" />
+              {metadata.image ? (
+                <img src={metadata.image} alt="Article preview" />
+              ) : (
+                <i className="far fa-newspaper"></i>
+              )}
             </div>
             <div className="OpinionCard__content-wrapper__content__details">
               <a href={metadata.url} target="_blank" rel="noopener noreferrer">
@@ -58,8 +65,13 @@ class OpinionCard extends React.Component {
             </div>
           </div>
         );
-      } else {
-        metaSection = <div className="OpinionCard__error">{metaError}</div>;
+      } else if (metaError) {
+        metaSection = (
+          <div className="OpinionCard__content-wrapper__error">
+            <i class="fas fa-link fa-4x"></i>
+            Error loading <a href={content}>link</a> preview
+          </div>
+        );
       }
     }
     return (

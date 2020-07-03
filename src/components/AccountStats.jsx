@@ -60,13 +60,13 @@ class AccountStats extends React.Component {
         <div className="AccountStats__rows-wrapper">
           <div className="AccountStats__numbers-row">
             <Button onClick={this.onDeposit}>
-              <i className="fa fa-arrow-circle-down" />
+              <i className="fas fa-piggy-bank" />
               <span>&nbsp;Deposit</span>
             </Button>
           </div>
           <div className="AccountStats__numbers-row">
             <Button onClick={this.onWithdrawal}>
-              <i className="fa fa-arrow-circle-up" />
+              <i className="fas fa-wallet" />
               <span>&nbsp;Withdraw</span>
             </Button>
           </div>

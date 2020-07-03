@@ -1,7 +1,7 @@
 @import "../assets/scss/base.scss";
 .CreateOpinionCard {
   @extend %common-container;
-  @include inline-animation(1s) {
+  @include inline-animation(300ms) {
     from {
       height: 0px;
     }

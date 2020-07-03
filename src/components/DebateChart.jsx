@@ -1,5 +1,6 @@
 import React from "react";
 import { ResponsiveStream } from "@nivo/stream";
+import Formatter from "../utils/Formatter";
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -27,7 +28,7 @@ const MyResponsiveStream = ({ data /* see data tab */ }) => (
       tickRotation: 0,
       legend: "Votes (Sats)",
       legendOffset: -50,
-      format: (values) => `${values / 1000}k`,
+      format: (values) => `${Formatter.kFormatter(values)}`,
     }}
     offsetType="diverging"
     colors={["#70e0b5", "#55b3b9"]}

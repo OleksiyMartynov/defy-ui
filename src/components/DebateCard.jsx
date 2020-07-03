@@ -35,8 +35,10 @@ class DebateCard extends React.PureComponent {
           dateUpdated={dateUpdated}
           durationMilli={durationMilli}
         />
+        {totalPro > 0 && (
+          <DebateProgress pro={totalPro} total={totalPro + totalCon} />
+        )}
 
-        <DebateProgress pro={totalPro} total={totalPro + totalCon} />
         <div className="DebateCard__description">{description}</div>
       </Link>
     );

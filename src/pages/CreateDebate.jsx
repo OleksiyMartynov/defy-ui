@@ -228,8 +228,8 @@ CreateDebate.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCreateDebate: (title, description, stake) =>
-    dispatch(fetchCreateDebate(title, description, stake)),
+  fetchCreateDebate: (title, description, stake, tags) =>
+    dispatch(fetchCreateDebate(title, description, stake, tags)),
   closeCreateDebateDialog: () => dispatch(closeCreateDebateDialog()),
 });
 

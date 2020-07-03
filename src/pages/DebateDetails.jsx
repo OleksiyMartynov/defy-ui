@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchDebateDetails } from "../actions/debates";
@@ -13,7 +13,7 @@ import Formatter from "../utils/Formatter";
 import DebateTime from "../components/DebateTime";
 import WinnerBadge from "../components/WinnerBadge";
 
-class DebateDetails extends PureComponent {
+class DebateDetails extends Component {
   constructor(props) {
     super(props);
     this.state = { showSection: false }; // 0 for pro, 1 for con
@@ -22,6 +22,10 @@ class DebateDetails extends PureComponent {
     // todo validate debateId
     fetchDebateDetails(debateId);
   }
+
+  closeSections = () => {
+    this.setState({ showSection: false });
+  };
 
   render() {
     const { match, debateDetails } = this.props;
@@ -58,71 +62,82 @@ class DebateDetails extends PureComponent {
             <br />
             todo: show "creator stake"
             <br />
-            todo: show pro/con totals for ongoing
-            <div className="DebateDetails__chart">
-              <DebateChart
-                data={debateDetails.data.history.map((item) => ({
-                  Pro: item.totalPro,
-                  Con: item.totalCon,
-                }))}
-              />
-              <div className="DebateDetails__chart__progress">
-                <VerticalDebateProgress
-                  pro={debateDetails.data.debate.totalPro}
-                  total={
-                    debateDetails.data.debate.totalPro +
-                    debateDetails.data.debate.totalCon
-                  }
+            todo: show time remaining
+            <br />
+            todo: update list after new vote
+            <br />
+            todo: handle tie
+            <br />
+            {debateDetails.data.history.length > 0 ? (
+              <div className="DebateDetails__chart">
+                <DebateChart
+                  data={debateDetails.data.history.map((item) => ({
+                    Pro: item.totalPro,
+                    Con: item.totalCon,
+                  }))}
                 />
+                <div className="DebateDetails__chart__progress">
+                  {debateDetails.data.debate.totalPro +
+                    debateDetails.data.debate.totalCon >
+                    0 && (
+                    <VerticalDebateProgress
+                      pro={debateDetails.data.debate.totalPro}
+                      total={
+                        debateDetails.data.debate.totalPro +
+                        debateDetails.data.debate.totalCon
+                      }
+                    />
+                  )}
+                </div>
               </div>
-            </div>
+            ) : null}
             <div className="DebateDetails__description">
               {debateDetails.data.debate.description}
             </div>
             <div className="DebateDetails__opinions-container">
               <div className="DebateDetails__opinions-container__controls">
                 <div className="DebateDetails__opinions-container__controls__column">
+                  <WinnerBadge
+                    heading="Pro"
+                    ongoing={!debateDetails.data.debate.finished}
+                    winner={
+                      debateDetails.data.debate.totalPro >
+                      debateDetails.data.debate.totalCon
+                    }
+                    amount={debateDetails.data.debate.totalPro}
+                  />
                   {!debateDetails.data.debate.finished ? (
                     <Toggle
                       left={showSection === 0}
                       leftText="Pro"
-                      leftIcon={<i className="fa fa-arrow-circle-up" />}
+                      leftIcon={<i className="fa fa-plus-circle" />}
                       onChange={(toggle) =>
                         this.setState({ showSection: toggle ? 0 : null })
                       }
                     />
-                  ) : (
-                    <WinnerBadge
-                      heading="Pro"
-                      winner={
-                        debateDetails.data.debate.totalPro >
-                        debateDetails.data.debate.totalCon
-                      }
-                      amount={debateDetails.data.debate.totalPro}
-                    />
-                  )}
+                  ) : null}
                 </div>
                 <div className="DebateDetails__opinions-container__controls__spacer" />
                 <div className="DebateDetails__opinions-container__controls__column">
+                  <WinnerBadge
+                    heading="Con"
+                    ongoing={!debateDetails.data.debate.finished}
+                    winner={
+                      debateDetails.data.debate.totalPro <
+                      debateDetails.data.debate.totalCon
+                    }
+                    amount={debateDetails.data.debate.totalCon}
+                  />
                   {!debateDetails.data.debate.finished ? (
                     <Toggle
                       left={showSection === 1}
                       leftText="Con"
-                      leftIcon={<i className="fa fa-arrow-circle-down" />}
+                      leftIcon={<i className="fa fa-plus-circle" />}
                       onChange={(toggle) =>
                         this.setState({ showSection: toggle ? 1 : null })
                       }
                     />
-                  ) : (
-                    <WinnerBadge
-                      heading="Con"
-                      winner={
-                        debateDetails.data.debate.totalPro <
-                        debateDetails.data.debate.totalCon
-                      }
-                      amount={debateDetails.data.debate.totalCon}
-                    />
-                  )}
+                  ) : null}
                 </div>
               </div>
               <div className="DebateDetails__opinions-container__new-opinion-container">
@@ -137,6 +152,7 @@ class DebateDetails extends PureComponent {
                       minVoteStake={
                         debateDetails.data.rules.minVoteCreationStake
                       }
+                      onNewOpinionCreated={this.closeSections}
                     />
                   )}
                 </div>
@@ -151,6 +167,7 @@ class DebateDetails extends PureComponent {
                       minVoteStake={
                         debateDetails.data.rules.minVoteCreationStake
                       }
+                      onNewOpinionCreated={this.closeSections}
                     />
                   )}
                 </div>

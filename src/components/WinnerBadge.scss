@@ -1,6 +1,7 @@
 @import "../assets/scss/base.scss";
 .WinnerBadge {
   &__emoji {
+    margin-bottom: $space-normal;
     @extend %common-heading-banner-normal;
     border-radius: $radius-normal;
     padding: $space-small;
@@ -23,6 +24,12 @@
     &--loser {
       color: #854545;
       transform: scale(0.8);
+    }
+    &--leader {
+      color: rgb(255, 150, 89);
+    }
+    &--not-leader {
+      color: rgba(255, 255, 255, 1);
     }
     span:first-of-type {
       font-size: $font-size-xl;
