@@ -18,7 +18,7 @@
       }
     }
     &__words-container {
-      @include inline-animation(1s) {
+      @include inline-animation(300ms) {
         from {
           height: 0px;
         }

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.scss";
+import "./Debates.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Toggle from "../components/Toggle";
@@ -62,6 +62,10 @@ class Home extends React.Component {
           todo: update horzontal progress bar
           <br />
           todo: update nav
+          <br />
+          todo: add information tool tip
+          <br />
+          todo: add tag/title search
           <DebateList />
         </div>
       </div>

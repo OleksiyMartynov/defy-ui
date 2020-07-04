@@ -1,4 +1,4 @@
-@import './../assets/scss/base.scss';
+@import "./../assets/scss/base.scss";
 .Button {
   &--primary {
     @extend %common-button;
@@ -6,6 +6,11 @@
       transform: scale(0.95);
       box-shadow: 0px -1px 3px rgb(255, 255, 255),
         0px 1px 3px rgba(0, 0, 0, 0.15);
+    }
+    &:hover {
+      cursor: pointer;
+      box-shadow: -3px -3px 6px rgba(255, 255, 255, 0.8),
+        3px 3px 6px rgba(0, 0, 0, 0.15);
     }
   }
   &--secondary {
@@ -21,7 +26,7 @@
     @extend %common-button-accent;
     font-size: $font-size-normal;
     &:disabled,
-    &[disabled]{
+    &[disabled] {
       background: linear-gradient(
         to right,
         lighten($gradient-start-color, 20%),
@@ -30,5 +35,4 @@
       pointer-events: none;
     }
   }
-  
 }

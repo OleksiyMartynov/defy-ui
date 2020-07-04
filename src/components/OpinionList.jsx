@@ -16,7 +16,7 @@ class OpinionList extends PureComponent {
   }
 
   render() {
-    const { debateId, opinions } = this.props;
+    const { debateId, opinions, lastItem } = this.props;
     return (
       <div>
         {opinions.data ? (
@@ -39,13 +39,15 @@ class OpinionList extends PureComponent {
                     </div>
                   ))}
                   <div className="OpinionList__opinions-container__list__end">
-                    {opinions.data.page + 1 < opinions.data.pages && (
+                    {opinions.data.page + 1 < opinions.data.pages ? (
                       <Button
                         onClick={() => this.props.fetchOpinions(debateId, true)}
                       >
                         {" "}
                         Load more
                       </Button>
+                    ) : (
+                      lastItem
                     )}
                   </div>
                 </div>
@@ -60,7 +62,9 @@ class OpinionList extends PureComponent {
   }
 }
 OpinionList.propTypes = {
+  opinions: PropTypes.object,
   debateId: PropTypes.string.isRequired,
+  lastItem: PropTypes.element.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

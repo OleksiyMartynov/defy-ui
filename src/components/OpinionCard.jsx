@@ -68,7 +68,7 @@ class OpinionCard extends React.Component {
       } else if (metaError) {
         metaSection = (
           <div className="OpinionCard__content-wrapper__error">
-            <i class="fas fa-link fa-4x"></i>
+            <i className="fas fa-link fa-4x" />
             Error loading <a href={content}>link</a> preview
           </div>
         );
@@ -81,7 +81,11 @@ class OpinionCard extends React.Component {
       >
         <div
           className={`OpinionCard__content-wrapper${
-            contentType === "vote" ? "--small" : ""
+            contentType === "created"
+              ? "--created"
+              : contentType === "vote"
+              ? "--small"
+              : ""
           }`}
         >
           <div className="OpinionCard__content-wrapper__top">
@@ -96,6 +100,16 @@ class OpinionCard extends React.Component {
             </div>
           </div>
           {metaSection}
+          {contentType === "created" ? (
+            <div className="OpinionCard__content-wrapper__loading">
+              <span>
+                <h3>
+                  <i className="fas fa-balance-scale" />
+                  &nbsp;&nbsp;Debate created
+                </h3>
+              </span>
+            </div>
+          ) : null}
         </div>
       </div>
     );

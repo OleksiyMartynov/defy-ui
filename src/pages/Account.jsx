@@ -53,6 +53,7 @@ class Account extends React.Component {
             </li>
           </ul>
           <Toggle
+            left={showWords}
             leftText="Show Words"
             leftIcon={<i className="fa fa-eye" />}
             onChange={(toggle) => this.setState({ showWords: toggle })}

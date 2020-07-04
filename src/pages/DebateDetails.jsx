@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import moment from "moment";
 import { fetchDebateDetails } from "../actions/debates";
 import { fetchCreateOpinion } from "../actions/opinions";
 import "./DebateDetails.scss";
@@ -12,11 +13,18 @@ import CreateOpinionCard from "../components/CreateOpinionCard";
 import Formatter from "../utils/Formatter";
 import DebateTime from "../components/DebateTime";
 import WinnerBadge from "../components/WinnerBadge";
+import OpinionCard from "../components/OpinionCard";
+import CountdownCounter from "../components/CountdownCounter";
+import { Link } from "react-router-dom";
+import FloatingButton from "../components/FloatingButton";
 
 class DebateDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = { showSection: false }; // 0 for pro, 1 for con
+    this.state = {
+      showSection: false, // 0 for pro, 1 for con
+      showChart: false,
+    };
     const { match, fetchDebateDetails } = this.props;
     const debateId = match.params.slug;
     // todo validate debateId
@@ -25,11 +33,14 @@ class DebateDetails extends Component {
 
   closeSections = () => {
     this.setState({ showSection: false });
+    const { match, fetchDebateDetails } = this.props;
+    const debateId = match.params.slug;
+    fetchDebateDetails(debateId);
   };
 
   render() {
     const { match, debateDetails } = this.props;
-    const { showSection } = this.state;
+    const { showSection, showChart } = this.state;
     const debateId = match.params.slug;
 
     return (
@@ -37,6 +48,14 @@ class DebateDetails extends Component {
         {debateDetails.data ? (
           <div className="DebateDetails">
             <div className="DebateDetails__head-content">
+              <div className="DebateDetails__stake">
+                <i className="fa fa-bolt" />
+                {Formatter.kFormatter(
+                  debateDetails.data.debate.stake +
+                    debateDetails.data.debate.totalPro +
+                    debateDetails.data.debate.totalCon
+                )}
+              </div>
               <div>
                 <div className="DebateDetails__title">
                   {debateDetails.data.debate.title}
@@ -48,52 +67,77 @@ class DebateDetails extends Component {
                   durationMilli={debateDetails.data.debate.duration}
                 />
               </div>
-              <div className="DebateDetails__stake">
-                <i className="fa fa-bolt" />
-                {Formatter.kFormatter(
-                  debateDetails.data.debate.stake +
-                    debateDetails.data.debate.totalPro +
-                    debateDetails.data.debate.totalCon
-                )}
+            </div>
+            <div className="DebateDetails__description">
+              <div className="DebateDetails__tags">
+                {debateDetails.data.debate.tags.map((tag) => (
+                  <div className="DebateDetails__tags__tag">
+                    <Link to={`/debates?t=${tag.name}`}>
+                      <FloatingButton onClick={this.onCreateDebate}>
+                        <i className="fas fa-hashtag" />
+                        <span>&nbsp;{tag.name}</span>
+                      </FloatingButton>
+                    </Link>
+                  </div>
+                ))}
               </div>
+
+              <br />
+              {debateDetails.data.debate.description}
+              <span className="DebateDetails__description__created">
+                Created&nbsp;
+                {moment(debateDetails.data.debate.created).format(
+                  "MMMM Do YYYY, h:mm a"
+                )}
+                &nbsp;with&nbsp;
+                <span className="DebateDetails__description__created__stake">
+                  <i className="fa fa-bolt" />
+                  {Formatter.kFormatter(debateDetails.data.debate.stake)}
+                </span>
+              </span>
             </div>
             <br />
-            todo: show tags
-            <br />
-            todo: show "creator stake"
-            <br />
-            todo: show time remaining
-            <br />
-            todo: update list after new vote
+            todo: add user's votes, and winnings sup's
             <br />
             todo: handle tie
             <br />
+            <br />
             {debateDetails.data.history.length > 0 ? (
-              <div className="DebateDetails__chart">
-                <DebateChart
-                  data={debateDetails.data.history.map((item) => ({
-                    Pro: item.totalPro,
-                    Con: item.totalCon,
-                  }))}
+              <>
+                <Toggle
+                  left={showChart}
+                  leftText="Debate History"
+                  leftIcon={<i className="fas fa-chart-area" />}
+                  onChange={(toggle) => this.setState({ showChart: toggle })}
                 />
-                <div className="DebateDetails__chart__progress">
-                  {debateDetails.data.debate.totalPro +
-                    debateDetails.data.debate.totalCon >
-                    0 && (
-                    <VerticalDebateProgress
-                      pro={debateDetails.data.debate.totalPro}
-                      total={
-                        debateDetails.data.debate.totalPro +
-                        debateDetails.data.debate.totalCon
-                      }
-                    />
-                  )}
+
+                <div
+                  className="DebateDetails__chart"
+                  style={{ minHeight: showChart ? "250px" : "0px" }}
+                >
+                  <DebateChart
+                    data={debateDetails.data.history.map((item) => ({
+                      Pro: item.totalPro,
+                      Con: item.totalCon,
+                    }))}
+                  />
+                  <div className="DebateDetails__chart__progress">
+                    {debateDetails.data.debate.totalPro +
+                      debateDetails.data.debate.totalCon >
+                      0 &&
+                      showChart && (
+                        <VerticalDebateProgress
+                          pro={debateDetails.data.debate.totalPro}
+                          total={
+                            debateDetails.data.debate.totalPro +
+                            debateDetails.data.debate.totalCon
+                          }
+                        />
+                      )}
+                  </div>
                 </div>
-              </div>
+              </>
             ) : null}
-            <div className="DebateDetails__description">
-              {debateDetails.data.debate.description}
-            </div>
             <div className="DebateDetails__opinions-container">
               <div className="DebateDetails__opinions-container__controls">
                 <div className="DebateDetails__opinions-container__controls__column">
@@ -117,7 +161,20 @@ class DebateDetails extends Component {
                     />
                   ) : null}
                 </div>
-                <div className="DebateDetails__opinions-container__controls__spacer" />
+                <div className="DebateDetails__opinions-container__controls__spacer">
+                  {!debateDetails.data.debate.finished ? (
+                    <div>
+                      <CountdownCounter
+                        format
+                        interval={1000}
+                        endTime={
+                          moment(debateDetails.data.debate.updated).unix() +
+                          debateDetails.data.debate.duration / 1000
+                        }
+                      />
+                    </div>
+                  ) : null}
+                </div>
                 <div className="DebateDetails__opinions-container__controls__column">
                   <WinnerBadge
                     heading="Con"
@@ -172,7 +229,17 @@ class DebateDetails extends Component {
                   )}
                 </div>
               </div>
-              <OpinionList debateId={debateId} />
+              <OpinionList
+                debateId={debateId}
+                lastItem={
+                  <OpinionCard
+                    content={null}
+                    contentType={"created"}
+                    created={debateDetails.data.debate.created}
+                    stake={debateDetails.data.debate.stake}
+                  />
+                }
+              />
             </div>
           </div>
         ) : (

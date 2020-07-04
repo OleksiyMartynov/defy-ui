@@ -9,7 +9,7 @@ import {
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./components/NavBar";
-import Home from "./pages/Home";
+import Home from "./pages/Debates";
 import Discover from "./pages/Discover";
 import Account from "./pages/Account";
 import AccountStats from "./components/AccountStats";
@@ -82,19 +82,19 @@ class App extends React.Component {
         <Router>
           <NavBar
             items={[
-              { text: "Debates", link: "/home", icon: "fa fa-gavel" },
+              { text: "Debates", link: "/debates", icon: "fa fa-gavel" },
               { text: "Discover", link: "/discover", icon: "fa fa-globe" },
               { text: "Account", link: "/account", icon: "fa fa-cog" },
             ]}
           />
           <div className="App__content">
             <Switch>
-              <Route exact path="/home" component={Home} />
+              <Route exact path="/debates" component={Home} />
               <Route exact path="/discover" component={Discover} />
               <Route exact path="/account" component={Account} />
               <Route path="/debate/:slug" component={DebateDetails} />
               <Route>
-                <Redirect to="/home" />
+                <Redirect to="/debates" />
               </Route>
             </Switch>
           </div>

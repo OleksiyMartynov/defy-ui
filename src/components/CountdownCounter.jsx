@@ -11,10 +11,14 @@ class CountdownCounter extends Component {
   }
 
   componentDidMount() {
+    const { interval } = this.props;
     this.doCalc();
-    this.timerId = setInterval(() => {
-      this.doCalc();
-    }, 1000 * 60);
+    this.timerId = setInterval(
+      () => {
+        this.doCalc();
+      },
+      interval ? interval : 1000 * 60
+    );
   }
 
   componentWillUnmount() {
@@ -23,14 +27,30 @@ class CountdownCounter extends Component {
 
   doCalc() {
     const { endTime } = this.state;
-    const endTimeFormatted = moment.unix(endTime).fromNow();
-    this.setState({ endTimeFormatted });
+    const endTimeFromNow = moment.unix(endTime).fromNow();
+    const currentTime = moment().unix();
+    const diffTime = endTime - currentTime;
+    const duration = moment.duration(diffTime * 1000, "milliseconds");
+    this.setState({ endTimeFromNow, duration });
+  }
+
+  formatNumber(n) {
+    return n < 10 ? "0" + n : n;
   }
 
   render() {
-    const { endTimeFormatted } = this.state;
+    const { endTimeFromNow, duration } = this.state;
+    const { format } = this.props;
 
-    return <React.Fragment>{endTimeFormatted}</React.Fragment>;
+    return (
+      <>
+        {format && duration
+          ? `${this.formatNumber(duration.hours())}:${this.formatNumber(
+              duration.minutes()
+            )}:${this.formatNumber(duration.seconds())}`
+          : endTimeFromNow}
+      </>
+    );
   }
 }
 
@@ -38,4 +58,6 @@ export default CountdownCounter;
 
 CountdownCounter.propTypes = {
   endTime: PropTypes.number.isRequired,
+  format: PropTypes.bool,
+  interval: PropTypes.number,
 };

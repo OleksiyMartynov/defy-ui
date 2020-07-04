@@ -6,14 +6,25 @@
   width: 100%;
 
   &__description {
-    margin-left: 6vw;
-    margin-right: 6vw;
+    @extend %common-container;
+    width: 100%;
+    margin-top: $space-small;
+    &__created {
+      @extend %common-label;
+      margin-top: $space-small;
+      width: 80%;
+      padding-bottom: $space-small;
+      display: inline-block;
+      &__stake {
+        @extend %common-stake-badge-small;
+      }
+    }
   }
 
   &__chart {
-    height: 30vh;
+    transition: min-height 500ms ease;
+    height: 0px;
     min-height: 250px;
-    margin-top: $space-normal;
     display: flex;
     flex-direction: row;
     &__progress {
@@ -34,6 +45,7 @@
   }
   &__stake {
     @extend %common-stake-badge;
+    margin-right: $space-small;
   }
   &__opinions-container {
     &__controls {
@@ -70,7 +82,18 @@
         }
       }
       &__spacer {
+        @extend %common-title;
         flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        div {
+          width: min-content;
+          height: 100%;
+          margin: 50px auto 0 auto;
+          font-size: 60px;
+          color: #d1d1d1;
+          text-shadow: 2px 2px 2px #dddddd;
+        }
       }
     }
     &__new-opinion-container {
@@ -84,6 +107,22 @@
           margin-left: auto;
           right: 0;
         }
+      }
+    }
+  }
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: $space-small;
+    &__tag {
+      margin-left: 7px;
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      button {
+        padding: 5px;
+        font-size: 14px;
       }
     }
   }

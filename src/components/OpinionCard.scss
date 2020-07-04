@@ -23,6 +23,15 @@ $card-image-width: 120px;
       width: fit-content;
       min-width: 200px;
     }
+    &--created {
+      @extend %common-container-small;
+      min-width: 200px;
+      width: initial;
+      height: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      transform: translateY(50px);
+    }
     &__top {
       display: flex;
       flex-direction: row;
@@ -32,14 +41,8 @@ $card-image-width: 120px;
         min-width: $card-image-width;
         max-width: $card-image-width;
         & div {
-          @extend %common-heading-banner-small;
+          @extend %common-stake-badge-small;
           margin: auto;
-          width: fit-content;
-          padding: 6px 13px;
-          border-radius: 18px;
-          text-align: center;
-          min-width: min-content;
-          white-space: nowrap;
         }
       }
       &__date {
@@ -50,6 +53,10 @@ $card-image-width: 120px;
     }
     &__loading {
       padding: $space-small;
+      & h3 {
+        margin: 0;
+        text-align: center;
+      }
     }
     &__content {
       display: flex;
