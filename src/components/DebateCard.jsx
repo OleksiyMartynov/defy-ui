@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import DebateProgress from "./DebateProgress";
 import Formatter from "../utils/Formatter";
 import DebateTime from "./DebateTime";
+import FloatingButton from "./FloatingButton";
 
 class DebateCard extends React.PureComponent {
   render() {
@@ -19,27 +20,43 @@ class DebateCard extends React.PureComponent {
       totalPro,
       totalCon,
       totalLocked,
+      tags,
     } = this.props;
     return (
       <Link to={`/debate/${id}`} className="DebateCard">
         <div className="DebateCard__heading-container">
-          <div className="DebateCard__title">{title}</div>
           <div className="DebateCard__stake">
             <i className="fa fa-bolt" />
             {Formatter.kFormatter(totalLocked)}
           </div>
+          <div>
+            <div className="DebateCard__title">{title}</div>
+            <DebateTime
+              finished={finished}
+              dateCreated={dateCreated}
+              dateUpdated={dateUpdated}
+              durationMilli={durationMilli}
+            />
+          </div>
         </div>
-        <DebateTime
-          finished={finished}
-          dateCreated={dateCreated}
-          dateUpdated={dateUpdated}
-          durationMilli={durationMilli}
-        />
+
+        <div className="DebateCard__tags">
+          {tags.map((tag) => (
+            <div className="DebateCard__tags__tag">
+              <Link to={`/debates?t=${tag.name}`}>
+                <FloatingButton onClick={this.onCreateDebate}>
+                  <i className="fas fa-hashtag" />
+                  <span>&nbsp;{tag.name}</span>
+                </FloatingButton>
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        <div className="DebateCard__description">{description}</div>
         {totalPro > 0 && (
           <DebateProgress pro={totalPro} total={totalPro + totalCon} />
         )}
-
-        <div className="DebateCard__description">{description}</div>
       </Link>
     );
   }
@@ -56,6 +73,7 @@ DebateCard.propTypes = {
   totalPro: PropTypes.number.isRequired,
   totalCon: PropTypes.number.isRequired,
   totalLocked: PropTypes.number.isRequired,
+  tags: PropTypes.array,
 };
 
 export default DebateCard;

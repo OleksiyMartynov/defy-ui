@@ -32,6 +32,7 @@ class DebateList extends React.PureComponent {
                 totalPro={debate.totalPro}
                 totalCon={debate.totalCon}
                 totalLocked={debate.totalLocked}
+                tags={debate.tags}
               />
             ))}
             {debates.data.page + 1 < debates.data.pages && (
