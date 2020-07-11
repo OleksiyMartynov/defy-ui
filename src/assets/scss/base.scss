@@ -240,6 +240,20 @@ $common-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   white-space: nowrap;
 }
 
+%common-card-creator-banner {
+  @extend %common-heading-banner-small;
+  margin-top: $space-small;
+  margin-left: -$space-small;
+  margin-right: -$space-small;
+  margin-bottom: -$space-small;
+  border-radius: $radius-small;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  text-align: center;
+  padding: $space-tiny;
+  text-transform: uppercase;
+}
+
 %common-title {
   text-shadow: 1px 1px 1px #ffffff;
   font-size: 32px;

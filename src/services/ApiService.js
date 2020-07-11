@@ -66,8 +66,10 @@ class ApiService {
     return ApiService.toDataModel(resp);
   }
 
-  async getDebateDetails(id) {
-    const resp = await fetch(`${this.url}/debates/${id}`);
+  async getDebateDetails(id, account) {
+    const resp = await fetch(
+      `${this.url}/debates/${id}?callerAddress=${account.getAddress()}`
+    );
     return ApiService.toDataModel(resp);
   }
 

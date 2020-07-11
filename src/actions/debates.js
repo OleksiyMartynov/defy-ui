@@ -77,7 +77,6 @@ export const fetchCreateDebate = (title, description, stake, tags) => async (
   dispatch(requestCreateDebate(new DataModel(null, true)));
   try {
     const { account } = getState();
-
     const acct = new Account(account.mnemonic);
     console.log({ title, description, stake, tags });
     const response = await apiService.createDebate(
@@ -105,7 +104,9 @@ export const fetchDebateDetails = (debateId) => async (
 ) => {
   dispatch(updateDebateDetails({ debateDetails: new DataModel(null, true) }));
   try {
-    const response = await apiService.getDebateDetails(debateId);
+    const { account } = getState();
+    const acct = new Account(account.mnemonic);
+    const response = await apiService.getDebateDetails(debateId, acct);
     dispatch(updateDebateDetails({ debateDetails: response }));
   } catch (ex) {
     dispatch(

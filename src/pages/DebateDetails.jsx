@@ -95,6 +95,11 @@ class DebateDetails extends Component {
                   {Formatter.kFormatter(debateDetails.data.debate.stake)}
                 </span>
               </span>
+              {debateDetails.data.debate.createdByYou && (
+                <div className="DebateDetails__description__created__creator-banner">
+                  Created by you
+                </div>
+              )}
             </div>
             <br />
             todo: add user's votes, and winnings sup's

@@ -4,35 +4,45 @@ import "./DebateProgress.scss";
 
 class DebateProgress extends React.PureComponent {
   render() {
-    const { pro, total } = this.props;
+    const { total, pro } = this.props;
     const left = Math.floor((pro / total) * 100);
     const right = 100 - left;
     const width = Math.max(left, right);
     let label = "";
+    let otherLabel = "";
     if (pro > total - pro) {
       label = "Pro";
+      otherLabel = "Con";
     } else if (pro < total - pro) {
       label = "Con";
+      otherLabel = "Pro";
     } //else tie
     return (
       <div className="DebateProgress">
-        <div
-          style={{
-            marginLeft: `${left}%`,
-            marginRight: "auto",
-          }}
-          className="DebateProgress__tooltip"
-        >
-          {`${label}\n${width}%`}
-        </div>
         <div className="DebateProgress__wrapper">
           <div
             style={{
               width: `${width}%`,
-              float: right > left ? "right" : "left",
+              ...(right > left
+                ? { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }
+                : { borderTopRightRadius: 0, borderBottomRightRadius: 0 }),
             }}
             className="DebateProgress__wrapper__bar"
-          />
+          >
+            <div className="DebateProgress__wrapper__bar__text">{`${label} ${width}%`}</div>
+          </div>
+          <div
+            className="DebateProgress__wrapper__light-bar"
+            style={{
+              ...(right > left
+                ? { borderTopRightRadius: 0, borderBottomRightRadius: 0 }
+                : { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }),
+            }}
+          >
+            <div className="DebateProgress__wrapper__light-bar__text">{`${otherLabel} ${
+              100 - width
+            }%`}</div>
+          </div>
         </div>
       </div>
     );

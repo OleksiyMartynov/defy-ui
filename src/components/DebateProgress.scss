@@ -1,37 +1,36 @@
 @import "../assets/scss/base.scss";
 .DebateProgress {
+  padding: 0px;
+  width: 100%;
+  &__wrapper {
+    @extend %common-container-small;
     padding: 0px;
     width: 100%;
-    &__wrapper {
-        @extend %common-container-small;
-        padding: 0px;
-        width: 100%;
-        height: 12px;
-        &__bar {
-            background-image: $accent-gradient;
-            height: 100%;
-            border-radius: $radius-small;
-        }
+    height: 28px;
+    display: flex;
+    &__bar {
+      @extend %common-heading-banner-small;
+      height: 100%;
+      border-radius: $radius-small;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &__text {
+        min-width: fit-content;
+      }
     }
-    
-    &__tooltip {
-        @extend %common-container;
-        margin-bottom: 12px;
-        padding: 8px 10px;
-        border-radius: $radius-tiny;
-        transform: translateX(-50%);
-        &::after {
-            content: "";
-            display: block;
-            width: 10px;
-            height: 10px;
-            position: static;
-            margin-bottom: -12px;
-            margin-left: 35%;
-            transform-origin: center;
-            transform: rotateZ(135deg);
-            background-image: linear-gradient(45deg, rgba(0,0,0,0) 50%, $bg-color-middle 50%);
-            padding-bottom: auto;
-        }
+    &__light-bar {
+      background: $background-gradient;
+      text-shadow: 1px 1px 1px rgba(255, 255, 255, 1);
+      border-radius: $radius-small;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      &__text {
+        min-width: fit-content;
+        white-space: nowrap;
+      }
     }
+  }
 }

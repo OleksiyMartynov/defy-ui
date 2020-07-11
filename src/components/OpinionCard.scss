@@ -33,17 +33,7 @@ $card-image-width: 120px;
       transform: translateY(50px);
     }
     &__creator-banner {
-      @extend %common-heading-banner-small;
-      margin-top: $space-small;
-      margin-left: -$space-small;
-      margin-right: -$space-small;
-      margin-bottom: -$space-small;
-      border-radius: $radius-small;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      text-align: center;
-      padding: $space-tiny;
-      text-transform: uppercase;
+      @extend %common-card-creator-banner;
     }
     &__top {
       display: flex;

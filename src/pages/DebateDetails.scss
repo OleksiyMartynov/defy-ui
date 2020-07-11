@@ -18,6 +18,9 @@
       &__stake {
         @extend %common-stake-badge-small;
       }
+      &__creator-banner {
+        @extend %common-card-creator-banner;
+      }
     }
   }
 
