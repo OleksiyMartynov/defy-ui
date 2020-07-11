@@ -29,7 +29,7 @@ class CountdownCounter extends Component {
     const { endTime } = this.state;
     const endTimeFromNow = moment.unix(endTime).fromNow();
     const currentTime = moment().unix();
-    const diffTime = endTime - currentTime;
+    const diffTime = Math.max(endTime - currentTime, 0);
     const duration = moment.duration(diffTime * 1000, "milliseconds");
     this.setState({ endTimeFromNow, duration });
   }

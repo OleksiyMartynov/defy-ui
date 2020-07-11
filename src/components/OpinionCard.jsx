@@ -29,7 +29,14 @@ class OpinionCard extends React.Component {
   };
 
   render() {
-    const { content, contentType, created, pro, stake } = this.props;
+    const {
+      content,
+      contentType,
+      created,
+      pro,
+      stake,
+      createdByMe,
+    } = this.props;
     const { loadingMeta, metadata, metaError } = this.state;
     let metaSection = null;
     if (content) {
@@ -110,6 +117,11 @@ class OpinionCard extends React.Component {
               </span>
             </div>
           ) : null}
+          {createdByMe && (
+            <div className="OpinionCard__content-wrapper__creator-banner">
+              Created by you
+            </div>
+          )}
         </div>
       </div>
     );
@@ -122,6 +134,7 @@ OpinionCard.propTypes = {
   created: PropTypes.string.isRequired,
   pro: PropTypes.bool.isRequired,
   stake: PropTypes.number.isRequired,
+  createdByMe: PropTypes.bool.isRequired,
 };
 
 export default OpinionCard;

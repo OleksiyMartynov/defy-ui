@@ -54,13 +54,14 @@ class ApiService {
     return ApiService.toDataModel(resp);
   }
 
-  async getOpinions(debateId, page = 0) {
+  async getOpinions(debateId, page = 0, account) {
     const resp = await fetch(
       `${this.url}/opinions` +
         `?debateId=${debateId}` +
         `&page=${page}` +
         `&pageSize=${PAGE_SIZE}` +
-        `&sortByDate=true`
+        `&sortByDate=true` +
+        `&callerAddress=${account.getAddress()}`
     );
     return ApiService.toDataModel(resp);
   }
@@ -74,7 +75,8 @@ class ApiService {
     page = 0,
     finished = false,
     filterForAddress = false,
-    sortByDate = false // if false then sort by debate stake
+    sortByDate = false, // if false then sort by debate stake
+    account
   ) {
     const resp = await fetch(
       `${this.url}/debates` +
@@ -84,7 +86,8 @@ class ApiService {
         `${
           filterForAddress ? `&filterCreatorAddress=${filterForAddress}` : ""
         }` +
-        `&${sortByDate ? "sortByDate=true" : "sortBySize=true"}`
+        `&${sortByDate ? "sortByDate=true" : "sortBySize=true"}` +
+        `&callerAddress=${account.getAddress()}`
     );
     return ApiService.toDataModel(resp);
   }

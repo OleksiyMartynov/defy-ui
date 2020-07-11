@@ -38,18 +38,20 @@ export const fetchDebates = (loadNextPage, filterReset = false) => async (
   getState,
   { apiService }
 ) => {
-  const { debateList } = getState();
+  const { debateList, account } = getState();
   let nextPage = 0;
   if (loadNextPage) {
     nextPage = debateList.data.page + 1;
   }
   dispatch(updateDebates(new DataModel(debateList.data, true)));
   try {
+    const acct = new Account(account.mnemonic);
     const response = await apiService.getDebates(
       nextPage,
       !debateList.filter.active,
       debateList.filter.sortByAccount,
-      !debateList.filter.sortByStake
+      !debateList.filter.sortByStake,
+      acct
     );
     if (debateList.data && !filterReset) {
       response.data.debates = [

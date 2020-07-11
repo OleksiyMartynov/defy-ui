@@ -21,6 +21,8 @@ class DebateCard extends React.PureComponent {
       totalCon,
       totalLocked,
       tags,
+      createdByMe,
+      opinionsByMe,
     } = this.props;
     return (
       <Link to={`/debate/${id}`} className="DebateCard">
@@ -57,6 +59,11 @@ class DebateCard extends React.PureComponent {
         {totalPro > 0 && (
           <DebateProgress pro={totalPro} total={totalPro + totalCon} />
         )}
+        {createdByMe && (
+          // <div className="OpinionCard__content-wrapper__creator-banner">
+          <div>Created by you</div>
+        )}
+        <div>{opinionsByMe} opinions by me</div>
       </Link>
     );
   }
@@ -74,6 +81,8 @@ DebateCard.propTypes = {
   totalCon: PropTypes.number.isRequired,
   totalLocked: PropTypes.number.isRequired,
   tags: PropTypes.array,
+  createdByMe: PropTypes.bool.isRequired,
+  opinionsByMe: PropTypes.number.isRequired,
 };
 
 export default DebateCard;

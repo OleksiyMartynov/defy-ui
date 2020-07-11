@@ -35,6 +35,7 @@ class OpinionList extends PureComponent {
                         created={opinion.created}
                         pro={opinion.pro}
                         stake={opinion.stake}
+                        createdByMe={opinion.createdByYou}
                       />
                     </div>
                   ))}

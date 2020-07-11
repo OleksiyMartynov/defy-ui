@@ -55,14 +55,15 @@ export const fetchOpinions = (debateId, loadNextPage) => async (
   getState,
   { apiService }
 ) => {
-  const { opinionList } = getState();
+  const { opinionList, account } = getState();
   let nextPage = 0;
   if (loadNextPage) {
     nextPage = opinionList.data.page + 1;
   }
   dispatch(updateOpinions(new DataModel(opinionList.data, true)));
   try {
-    const response = await apiService.getOpinions(debateId, nextPage);
+    const acct = new Account(account.mnemonic);
+    const response = await apiService.getOpinions(debateId, nextPage, acct);
     if (opinionList.data) {
       response.data.opinions = loadNextPage
         ? [...opinionList.data.opinions, ...response.data.opinions]
