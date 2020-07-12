@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./DebateCard.scss";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import DebateProgress from "./DebateProgress";
 import Formatter from "../utils/Formatter";
 import DebateTime from "./DebateTime";
@@ -23,7 +24,41 @@ class DebateCard extends React.PureComponent {
       tags,
       createdByMe,
       opinionsByMe,
+      totalOpinions,
     } = this.props;
+
+    const infoBarItems = [];
+    if (createdByMe) {
+      infoBarItems.push({
+        iconClass: "fas fa-user-edit",
+        value: "Created",
+      });
+    }
+
+    infoBarItems.push({
+      iconClass: "fas fa-vote-yea",
+      value: opinionsByMe,
+    });
+
+    infoBarItems.push({
+      iconClass: "fas fa-comments",
+      value: totalOpinions,
+    });
+
+    infoBarItems.push({
+      iconClass: "fas fa-balance-scale",
+      value: `${Formatter.kFormatter(totalPro)}/${Formatter.kFormatter(
+        totalCon
+      )}`,
+    });
+
+    infoBarItems.push({
+      iconClass: "fas fa-clock",
+      value: Formatter.countDownFormat(
+        moment(dateUpdated).unix() + durationMilli / 1000
+      ),
+    });
+
     return (
       <Link to={`/debate/${id}`} className="DebateCard">
         <div className="DebateCard__heading-container">
@@ -40,7 +75,10 @@ class DebateCard extends React.PureComponent {
               durationMilli={durationMilli}
             />
           </div>
+          <i className="DebateCard__chevron fas fa-chevron-right fa-2x" />
         </div>
+
+        <div className="DebateCard__divider" />
 
         <div className="DebateCard__tags">
           {tags.map((tag) => (
@@ -59,11 +97,14 @@ class DebateCard extends React.PureComponent {
         {totalPro > 0 && (
           <DebateProgress pro={totalPro} total={totalPro + totalCon} />
         )}
-        {createdByMe && (
-          // <div className="OpinionCard__content-wrapper__creator-banner">
-          <div>Created by you</div>
-        )}
-        <div>{opinionsByMe} opinions by me</div>
+        <div className="DebateCard__divider" />
+        <div className="DebateCard__info-bar">
+          {infoBarItems.map((item) => (
+            <div className="DebateCard__info-bar__item">
+              <i className={item.iconClass} /> {item.text} {item.value}
+            </div>
+          ))}
+        </div>
       </Link>
     );
   }
@@ -83,6 +124,7 @@ DebateCard.propTypes = {
   tags: PropTypes.array,
   createdByMe: PropTypes.bool.isRequired,
   opinionsByMe: PropTypes.number.isRequired,
+  totalOpinions: PropTypes.number.isRequired,
 };
 
 export default DebateCard;

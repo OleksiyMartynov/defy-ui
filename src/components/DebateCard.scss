@@ -20,6 +20,24 @@
     @extend %common-stake-badge;
     margin-right: $space-small;
   }
+  &__divider {
+    @extend %common-divider;
+    margin-top: $space-small;
+    margin-bottom: $space-small;
+    margin-left: -$space-small;
+    margin-right: -$space-small;
+  }
+  &__chevron {
+    flex-grow: 1;
+    text-align: right;
+  }
+  &__info-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    &__item {
+    }
+  }
   &:hover {
     cursor: pointer;
     box-shadow: -6px -6px 12px rgba(255, 255, 255, 0.8),

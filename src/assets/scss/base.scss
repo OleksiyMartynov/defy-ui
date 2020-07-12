@@ -228,6 +228,7 @@ $common-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   @extend %common-heading-banner-normal;
   border-radius: $radius-normal;
   padding: 10px;
+  white-space: nowrap;
 }
 
 %common-stake-badge-small {

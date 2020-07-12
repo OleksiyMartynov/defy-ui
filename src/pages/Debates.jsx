@@ -64,9 +64,6 @@ class Home extends React.Component {
           todo: add information tool tip
           <br />
           todo: add tag/title search
-          <br />
-          todo: add total opinions, con/pro ratio, time remaining to bottom of
-          card
           <DebateList />
         </div>
       </div>

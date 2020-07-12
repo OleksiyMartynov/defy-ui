@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export default class Formatter {
   static kFormatter(num) {
     return Math.abs(num) > 999
@@ -14,5 +16,18 @@ export default class Formatter {
 
   static addCommas(intNum) {
     return `${intNum}`.replace(/(\d)(?=(\d{3})+$)/g, "$1,");
+  }
+
+  static countDownFormat(endTime) {
+    const currentTime = moment().unix();
+    const diffTime = Math.max(endTime - currentTime, 0);
+    const duration = moment.duration(diffTime * 1000, "milliseconds");
+    return `${this.zeroPad(duration.hours())}:${this.zeroPad(
+      duration.minutes()
+    )}:${this.zeroPad(duration.seconds())}`;
+  }
+
+  static zeroPad(n) {
+    return n < 10 ? "0" + n : n;
   }
 }

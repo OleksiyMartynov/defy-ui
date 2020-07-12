@@ -35,6 +35,7 @@ class DebateList extends React.PureComponent {
                 tags={debate.tags}
                 createdByMe={debate.createdByYou}
                 opinionsByMe={debate.opinionsByYou}
+                totalOpinions={debate.totalOpinions}
               />
             ))}
             {debates.data.page + 1 < debates.data.pages && (
