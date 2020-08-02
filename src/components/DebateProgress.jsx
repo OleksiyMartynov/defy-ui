@@ -23,9 +23,8 @@ class DebateProgress extends React.PureComponent {
           <div
             style={{
               width: `${width}%`,
-              ...(right > left
-                ? { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }
-                : { borderTopRightRadius: 0, borderBottomRightRadius: 0 }),
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
             }}
             className="DebateProgress__wrapper__bar"
           >
@@ -34,9 +33,8 @@ class DebateProgress extends React.PureComponent {
           <div
             className="DebateProgress__wrapper__light-bar"
             style={{
-              ...(right > left
-                ? { borderTopRightRadius: 0, borderBottomRightRadius: 0 }
-                : { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }),
+              borderTopLeftRadius: 0,
+              borderBottomLeftRadius: 0,
             }}
           >
             <div className="DebateProgress__wrapper__light-bar__text">{`${otherLabel} ${

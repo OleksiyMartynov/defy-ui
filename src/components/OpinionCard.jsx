@@ -44,7 +44,11 @@ class OpinionCard extends React.Component {
         metaSection = (
           <div className="OpinionCard__content-wrapper__loading">
             <i className="fa fa-spinner fa-4x" aria-hidden="true" />
-            Loading <a href={content}>link</a> preview
+            Loading{" "}
+            <a href={content} target="_blank" rel="noopener noreferrer">
+              link
+            </a>{" "}
+            preview
           </div>
         );
       } else if (metadata) {
@@ -76,7 +80,11 @@ class OpinionCard extends React.Component {
         metaSection = (
           <div className="OpinionCard__content-wrapper__error">
             <i className="fas fa-link fa-4x" />
-            Error loading <a href={content}>link</a> preview
+            Error loading{" "}
+            <a href={content} target="_blank" rel="noopener noreferrer">
+              link
+            </a>{" "}
+            preview
           </div>
         );
       }

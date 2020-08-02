@@ -26,10 +26,10 @@
       transform: scale(0.8);
     }
     &--leader {
-      color: rgb(255, 150, 89);
+      color: rgb(255, 251, 202);
     }
     &--not-leader {
-      color: rgba(255, 255, 255, 1);
+      color: rgb(217, 246, 255);
     }
     span:first-of-type {
       font-size: $font-size-xl;
@@ -40,5 +40,8 @@
       font-size: $font-size-large;
       color: white;
     }
+  }
+  &__amount {
+    margin-bottom: $space-small;
   }
 }

@@ -22,16 +22,19 @@ export default class WinnerBadge extends PureComponent {
         <br />
         {ongoing ? (
           <i
-            className={`${winner ? "fas fa-fire-alt" : "fas fa-dumpster-fire"}`}
+            className={`${
+              winner ? "fas fa-sun" : "fas fa-cloud-showers-heavy"
+            }`}
           />
         ) : (
-          <i className={`${winner ? "fa fa-trophy" : "fas fa-poo"}`} />
+          <i className={`${winner ? "fa fa-trophy" : ""}`} />
         )}
 
-        <div>
+        <div className="WinnerBadge__amount">
           <i className="fa fa-bolt" />
           {Formatter.kFormatter(amount)}
         </div>
+        {this.props.children}
       </span>
     );
   }

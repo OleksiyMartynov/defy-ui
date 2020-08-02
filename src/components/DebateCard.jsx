@@ -52,12 +52,21 @@ class DebateCard extends React.PureComponent {
       )}`,
     });
 
-    infoBarItems.push({
-      iconClass: "fas fa-clock",
-      value: Formatter.countDownFormat(
-        moment(dateUpdated).unix() + durationMilli / 1000
-      ),
-    });
+    if (moment(dateUpdated).unix() + durationMilli / 1000 < moment().unix()) {
+      infoBarItems.push({
+        iconClass: "fas fa-stopwatch",
+        value: moment(dateUpdated)
+          .add(durationMilli, "ms")
+          .from(dateCreated, true),
+      });
+    } else {
+      infoBarItems.push({
+        iconClass: "fas fa-clock",
+        value: Formatter.countDownFormat(
+          moment(dateUpdated).unix() + durationMilli / 1000
+        ),
+      });
+    }
 
     return (
       <Link to={`/debate/${id}`} className="DebateCard">

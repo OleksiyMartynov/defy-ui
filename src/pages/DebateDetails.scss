@@ -4,16 +4,20 @@
   @extend %fade-in;
   // @extend %common-container;
   width: 100%;
-
+  &__divider {
+    @extend %common-divider;
+    margin-top: $space-small;
+    margin-bottom: $space-small;
+    margin-left: -$space-small;
+    margin-right: -$space-small;
+  }
   &__description {
     @extend %common-container;
     width: 100%;
     margin-top: $space-small;
     &__created {
       @extend %common-label;
-      margin-top: $space-small;
       width: 80%;
-      padding-bottom: $space-small;
       display: inline-block;
       &__stake {
         @extend %common-stake-badge-small;
@@ -23,7 +27,27 @@
       }
     }
   }
-
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+    &__count-down {
+      font-size: 30px;
+      line-height: 30px;
+      color: #d1d1d1;
+      text-shadow: 1px 1px 1px #dddddd;
+      text-align: center;
+      padding-bottom: $space-small;
+      &--winning {
+        @extend %common-heading;
+        font-weight: 500;
+        font-style: normal;
+        color: $font-color;
+        text-shadow: none;
+      }
+    }
+  }
   &__chart {
     transition: min-height 500ms ease;
     height: 0px;
@@ -55,8 +79,7 @@
       z-index: 2;
       position: relative;
       margin-bottom: -30px;
-      padding-top: $space-normal;
-      padding-bottom: $space-small;
+      padding-top: $space-small;
       display: flex;
       justify-content: space-evenly;
       &__column {
@@ -65,6 +88,10 @@
         align-items: center;
         justify-content: flex-end;
         flex-direction: column;
+        .Toggle {
+          box-shadow: -4px -4px 8px rgba(0, 0, 0, 0.15),
+            4px 4px 8px rgba(0, 0, 0, 0.15);
+        }
         &__emoji {
           @extend %common-heading-banner-normal;
           border-radius: $radius-normal;
@@ -89,13 +116,42 @@
         flex-grow: 1;
         align-items: center;
         justify-content: center;
-        div {
-          width: min-content;
-          height: 100%;
-          margin: 50px auto 0 auto;
-          font-size: 60px;
-          color: #d1d1d1;
-          text-shadow: 2px 2px 2px #dddddd;
+        text-align: center;
+
+        span {
+          white-space: nowrap;
+        }
+
+        &__results {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          &__result-heading {
+            @extend %common-heading;
+            text-shadow: none;
+            margin-bottom: $space-small;
+          }
+          &__result-title {
+            color: #d1d1d1;
+            font-size: 20px;
+            line-height: 22px !important;
+          }
+        }
+        &--winnings {
+          @extend %common-heading;
+          font-weight: 500;
+          font-style: normal;
+          color: $font-color;
+          text-shadow: none;
+        }
+        &--losses {
+          @extend %common-heading;
+          background-image: $accent-gradient-red;
+          font-weight: 500;
+          font-style: normal;
+          color: $font-color;
+          text-shadow: none;
         }
       }
     }

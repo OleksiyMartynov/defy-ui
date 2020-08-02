@@ -13,6 +13,7 @@ $accent-gradient: linear-gradient(
   $gradient-start-color,
   $gradient-end-color 40%
 );
+$accent-gradient-red: linear-gradient(to right, #ec4747, #c22525 40%);
 $font-size-small: 12px;
 $font-size-normal: 16px;
 $font-size-large: 24px;
@@ -145,6 +146,7 @@ $common-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border-radius: $radius-large;
   font-weight: 300;
   font-style: normal;
+  font-size: $font-size-normal;
   transition: all 200ms ease-in-out;
   background-color: transparent;
   background-image: none;

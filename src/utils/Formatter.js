@@ -28,6 +28,6 @@ export default class Formatter {
   }
 
   static zeroPad(n) {
-    return n < 10 ? "0" + n : n;
+    return n < 10 ? `0${n}` : n;
   }
 }
