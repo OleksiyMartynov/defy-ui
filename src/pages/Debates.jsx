@@ -56,14 +56,15 @@ class Home extends React.Component {
               itemSelectedListener={this.itemSelectedListener}
             />
           </div>
-          todo: add filter option for user. "created by me", "participated by
-          me"
-          <br />
-          todo: update nav
-          <br />
-          todo: add information tool tip
+          todo: add filter option for user. "debate created by me", "Voted"
           <br />
           todo: add tag/title search
+          <br />
+          todo: user history
+          <br />
+          todo: deposits
+          <br />
+          todo: withdrawals
           <DebateList />
         </div>
       </div>

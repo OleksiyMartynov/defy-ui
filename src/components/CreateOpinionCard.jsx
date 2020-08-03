@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import Toggle from "./Toggle";
 import Button from "./Button";
 import { fetchCreateOpinion } from "../actions/opinions";
+import Tooltip from "./Tooltip";
 
 class CreateOpinionCard extends Component {
   constructor(props) {
@@ -87,11 +88,12 @@ class CreateOpinionCard extends Component {
   render() {
     const { pro, minOpinionStake, minVoteStake } = this.props;
     const { stake, showLink, link, loading, error } = this.state;
+    const side = pro ? " Pro" : " Con";
     return (
       <div className="CreateOpinionCard">
         <div className="CreateOpinionCard__title">
           Support
-          {pro ? " Pro" : " Con"}
+          {side}
         </div>
         <Toggle
           left={!showLink}
@@ -100,9 +102,17 @@ class CreateOpinionCard extends Component {
           onChange={this.onActiveToggled}
         />
         <div className="CreateOpinionCard__label">
-          Stake (min
-          {showLink ? minOpinionStake : minVoteStake}
-          sat):
+          <Tooltip
+            text={
+              showLink
+                ? "Sets minimum stake for next evidence item and will be added to total"
+                : `Will be added to total of ${side} side of debate`
+            }
+          >
+            Stake (min
+            {showLink ? minOpinionStake : minVoteStake}
+            sat):
+          </Tooltip>
         </div>
         <div className="CreateOpinionCard__input-wrapper">
           <input
@@ -116,7 +126,13 @@ class CreateOpinionCard extends Component {
         </div>
         {showLink && (
           <div>
-            <div className="CreateOpinionCard__label">Link to evidence:</div>
+            <div className="CreateOpinionCard__label">
+              <Tooltip
+                text={`Link to material supporting ${side} side of the debate`}
+              >
+                Link to evidence:
+              </Tooltip>
+            </div>
             <div className="CreateOpinionCard__input-wrapper">
               <input
                 autoComplete="off"

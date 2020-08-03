@@ -1,0 +1,30 @@
+.Tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  &:hover &__text {
+    visibility: visible;
+  }
+  &__text {
+    visibility: hidden;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.74);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    transform: translate(5%, -30%);
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      margin-top: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent rgba(0, 0, 0, 0.74) transparent transparent;
+    }
+  }
+}

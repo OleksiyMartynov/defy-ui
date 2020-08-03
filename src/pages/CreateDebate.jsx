@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import Button from "../components/Button";
 import { fetchCreateDebate } from "../actions/debates";
 import { closeCreateDebateDialog } from "../actions/ui";
+import Tooltip from "../components/Tooltip";
 
 class CreateDebate extends React.PureComponent {
   constructor(props) {
@@ -116,7 +117,7 @@ class CreateDebate extends React.PureComponent {
               <ul>
                 <li>
                   Debate results are concluded after 24hrs of inactivity (no new
-                  opinions)
+                  evidence)
                 </li>
                 <li>
                   Stake amount will be returned to you after debate conclusion
@@ -130,7 +131,11 @@ class CreateDebate extends React.PureComponent {
           </div>
           <br />
 
-          <div className="CreateDebate__label">Title:</div>
+          <div className="CreateDebate__label">
+            <Tooltip text="Title should capture users's attention">
+              Title:
+            </Tooltip>
+          </div>
           <div className="CreateDebate__input-wrapper">
             <input
               autoComplete="off"
@@ -142,7 +147,11 @@ class CreateDebate extends React.PureComponent {
             />
           </div>
 
-          <div className="CreateDebate__label">Stake:</div>
+          <div className="CreateDebate__label">
+            <Tooltip text="High starting stake signals importance and increases visibility">
+              Stake (100 min):
+            </Tooltip>
+          </div>
           <div className="CreateDebate__input-wrapper">
             <input
               autoComplete="off"
@@ -154,7 +163,7 @@ class CreateDebate extends React.PureComponent {
             />
           </div>
           <div className="CreateDebate__label">
-            Tags:
+            <Tooltip text="Help users find your debate">Tags:</Tooltip>
             {tags.map((t) => (
               <span key={t} className="CreateDebate__label__tag">
                 {t}
@@ -181,7 +190,11 @@ class CreateDebate extends React.PureComponent {
             <div className="CreateDebate__content__error">{tagError}</div>
           )}
 
-          <div className="CreateDebate__label">Description:</div>
+          <div className="CreateDebate__label">
+            <Tooltip text="Helps users understand the debate topic">
+              Description:
+            </Tooltip>
+          </div>
           <div className="CreateDebate__input-wrapper">
             <textarea
               autoComplete="off"
