@@ -62,9 +62,9 @@ class Home extends React.Component {
           <br />
           todo: user history
           <br />
-          todo: deposits
+          todo: deposits page
           <br />
-          todo: withdrawals
+          todo: withdrawals page
           <DebateList />
         </div>
       </div>
