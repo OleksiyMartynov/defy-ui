@@ -8,7 +8,7 @@ import DebateList from "../components/DebateList";
 import { openCreateDebateDialog } from "../actions/ui";
 import { fetchDebatesWithFilter } from "../actions/debates";
 import DebateFilter from "../models/DebateFilter";
-import AccountModel from "../models/Account";
+// import AccountModel from "../models/Account";
 import Button from "../components/Button";
 
 class Home extends React.Component {
@@ -38,8 +38,15 @@ class Home extends React.Component {
     this.setState({ selectedIndex: index });
   };
 
+  handleKeyDown = (event) => {
+    const { showActive, value, selectedIndex } = this.state;
+    if (event.key === "Enter") {
+      this.doSearch(showActive, selectedIndex === 0, false, value);
+    }
+  };
+
   doSearch(showActive, byStake, address, searchText) {
-    const { fetchDebatesWithFilter, account } = this.props;
+    const { fetchDebatesWithFilter } = this.props; //account object is also in props
     // const accountObject = new AccountModel(account.mnemonic);
     fetchDebatesWithFilter(
       new DebateFilter(showActive, byStake, address, searchText)
@@ -50,6 +57,8 @@ class Home extends React.Component {
     const { showActive, value, selectedIndex } = this.state;
     return (
       <div className="Home">
+        <br />
+        todo: tag search function when clicking tag
         <br />
         todo: user history
         <br />
@@ -64,6 +73,7 @@ class Home extends React.Component {
                 type="text"
                 value={value}
                 onChange={this.handleChange}
+                onKeyPress={this.handleKeyDown}
                 placeholder="Search"
               />
               <Button

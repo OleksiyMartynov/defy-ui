@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "../components/Button";
 import "./Discover.scss";
 
 class Discover extends React.Component {
