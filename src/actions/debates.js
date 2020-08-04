@@ -51,6 +51,7 @@ export const fetchDebates = (loadNextPage, filterReset = false) => async (
       !debateList.filter.active,
       debateList.filter.sortByAccount,
       !debateList.filter.sortByStake,
+      debateList.filter.searchText,
       acct
     );
     if (debateList.data && !filterReset) {
