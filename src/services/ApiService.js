@@ -79,6 +79,7 @@ class ApiService {
     filterForAddress = false,
     sortByDate = false, // if false then sort by debate stake
     searchText = false,
+    tag = false,
     account
   ) {
     const resp = await fetch(
@@ -91,7 +92,8 @@ class ApiService {
         }` +
         `&${sortByDate ? "sortByDate=true" : "sortBySize=true"}` +
         `&callerAddress=${account.getAddress()}` +
-        `${searchText ? `&searchText=${searchText}` : ""}`
+        `${searchText ? `&searchText=${searchText}` : ""}` +
+        `${tag ? `&tag=${tag}` : ""}`
     );
     return ApiService.toDataModel(resp);
   }

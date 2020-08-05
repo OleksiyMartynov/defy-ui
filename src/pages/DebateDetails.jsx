@@ -152,7 +152,7 @@ class DebateDetails extends Component {
               <div className="DebateDetails__tags">
                 {debateDetails.data.debate.tags.map((tag) => (
                   <div className="DebateDetails__tags__tag">
-                    <Link to={`/debates?t=${tag.name}`}>
+                    <Link to={`/debates/${tag.name}`}>
                       <FloatingButton onClick={this.onCreateDebate}>
                         <i className="fas fa-hashtag" />
                         <span>&nbsp;{tag.name}</span>

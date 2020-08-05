@@ -90,9 +90,9 @@ class DebateCard extends React.PureComponent {
         <div className="DebateCard__divider" />
 
         <div className="DebateCard__tags">
-          {tags.map((tag) => (
-            <div className="DebateCard__tags__tag">
-              <Link to={`/debates?t=${tag.name}`}>
+          {tags.map((tag, index) => (
+            <div key={index} className="DebateCard__tags__tag">
+              <Link to={`/debates/${tag.name}`}>
                 <FloatingButton onClick={this.onCreateDebate}>
                   <i className="fas fa-hashtag" />
                   <span>&nbsp;{tag.name}</span>

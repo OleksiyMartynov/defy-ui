@@ -89,7 +89,7 @@ class App extends React.Component {
           />
           <div className="App__content">
             <Switch>
-              <Route exact path="/debates" component={Home} />
+              <Route exact path="/debates/:tag?" component={Home} />
               <Route exact path="/discover" component={Discover} />
               <Route exact path="/account" component={Account} />
               <Route path="/debate/:slug" component={DebateDetails} />

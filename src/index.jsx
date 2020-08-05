@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
-import "font-awesome/css/font-awesome.min.css";
 import { compose, createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
@@ -31,9 +30,9 @@ const store = createStore(rootReducer, {}, enhancer);
 // }
 
 ReactDOM.render(
-    <Provider store={store}>
-      <App id="app" />
-    </Provider>,
+  <Provider store={store}>
+    <App id="app" />
+  </Provider>,
   document.getElementById("root")
 );
 

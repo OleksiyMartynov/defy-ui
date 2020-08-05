@@ -18,7 +18,7 @@ class DebateList extends React.PureComponent {
         debates.data.debates &&
         debates.data.debates.length > 0 ? (
           <>
-            {debates.data.debates.map((debate) => (
+            {debates.data.debates.map((debate, index) => (
               <DebateCard
                 key={debate["_id"]}
                 id={debate["_id"]}

@@ -14,8 +14,10 @@ import Button from "../components/Button";
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showActive: true, value: "", selectedIndex: 0 };
-    this.doSearch(true, true, false, false);
+    const { match } = props;
+    const tag = match.params.tag;
+    this.state = { showActive: true, value: "", selectedIndex: 0, tag };
+    this.doSearch(true, true, false, false, tag);
   }
 
   handleChange = (event) => {
@@ -29,36 +31,55 @@ class Home extends React.Component {
   onActiveToggled = (finished) => {
     this.setState({ showActive: finished });
     const { value, selectedIndex } = this.state;
-    this.doSearch(finished, selectedIndex === 0, false, value);
+    const { match } = this.props;
+    const tag = match.params.tag;
+    this.doSearch(finished, selectedIndex === 0, false, value, tag);
   };
 
   itemSelectedListener = (index) => {
     const { showActive, value } = this.state;
-    this.doSearch(showActive, index === 0, false, value);
+    const { match } = this.props;
+    const tag = match.params.tag;
+    this.doSearch(showActive, index === 0, false, value, tag);
     this.setState({ selectedIndex: index });
   };
 
+  componentDidUpdate() {
+    if (this.state.tag !== this.props.match.params.tag) {
+      const { showActive, value, selectedIndex } = this.state;
+      const { match } = this.props;
+      const tag = match.params.tag;
+      this.doSearch(showActive, selectedIndex === 0, false, value, tag);
+    }
+  }
+
   handleKeyDown = (event) => {
-    const { showActive, value, selectedIndex } = this.state;
     if (event.key === "Enter") {
-      this.doSearch(showActive, selectedIndex === 0, false, value);
+      const { showActive, value, selectedIndex } = this.state;
+      const { match } = this.props;
+      const tag = match.params.tag;
+      this.doSearch(showActive, selectedIndex === 0, false, value, tag);
     }
   };
 
-  doSearch(showActive, byStake, address, searchText) {
+  doSearch(showActive, byStake, address, searchText, tag) {
     const { fetchDebatesWithFilter } = this.props; //account object is also in props
     // const accountObject = new AccountModel(account.mnemonic);
+    this.setState({ tag });
     fetchDebatesWithFilter(
-      new DebateFilter(showActive, byStake, address, searchText)
+      new DebateFilter(showActive, byStake, address, searchText, tag)
     );
   }
 
+  removeTag = () => {
+    this.props.history.push("/debates");
+  };
+
   render() {
-    const { showActive, value, selectedIndex } = this.state;
+    const { showActive, value, selectedIndex, tag } = this.state;
+
     return (
       <div className="Home">
-        <br />
-        todo: tag search function when clicking tag
         <br />
         todo: user history
         <br />
@@ -66,7 +87,15 @@ class Home extends React.Component {
         <br />
         todo: withdrawals page
         <div className="Home__content">
-          <span className="Home__content__heading">Debates</span>
+          <div className="Home__content__heading">
+            <div className="Home__content__heading__text">Debates</div>
+            {tag && (
+              <div className="Home__content__heading__tag">
+                #{tag}
+                <i className="fa fa-times" onClick={this.removeTag} />
+              </div>
+            )}
+          </div>
           <div className="Home__content__controls">
             <div className="Home__content__controls__search-wrapper">
               <input
