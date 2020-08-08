@@ -80,12 +80,6 @@ class Home extends React.Component {
 
     return (
       <div className="Home">
-        <br />
-        todo: user history
-        <br />
-        todo: deposits page
-        <br />
-        todo: withdrawals page
         <div className="Home__content">
           <div className="Home__content__heading">
             <div className="Home__content__heading__text">Debates</div>

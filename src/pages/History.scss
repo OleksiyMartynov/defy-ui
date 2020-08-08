@@ -1,0 +1,57 @@
+@import "../assets/scss/base.scss";
+
+.History {
+  @extend %fade-in;
+  display: flex;
+  flex-direction: column;
+  a {
+    text-decoration: none;
+    display: block;
+    max-width: 420px;
+    width: 100%;
+    margin-top: $space-normal;
+  }
+  &__heading {
+    @extend %common-heading;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__item {
+    @extend %common-container;
+    max-width: 420px;
+    width: 100%;
+    &__info {
+      display: flex;
+      font-size: $font-size-xl;
+      align-items: center;
+    }
+    &__date {
+      @extend %common-card-creator-banner;
+    }
+    &__amount {
+      & div {
+        @extend %common-stake-badge-small;
+        margin: auto;
+        font-size: $font-size-large;
+      }
+    }
+    &__text {
+      flex-grow: 1;
+      margin-left: $space-small;
+      @extend %common-title;
+    }
+    &:hover {
+      cursor: pointer;
+      box-shadow: -6px -6px 12px rgba(255, 255, 255, 0.8),
+        6px 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    &:active {
+      transform: scale(0.998);
+      box-shadow: 0px -1px 3px rgb(255, 255, 255),
+        0px 1px 3px rgba(0, 0, 0, 0.15);
+    }
+  }
+}

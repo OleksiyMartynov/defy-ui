@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Debates";
-import Discover from "./pages/Discover";
+import Discover from "./pages/History";
 import Account from "./pages/Account";
 import AccountStats from "./components/AccountStats";
 import { createAccount, fetchAccountInfo } from "./actions/account";
@@ -82,15 +82,19 @@ class App extends React.Component {
         <Router>
           <NavBar
             items={[
-              { text: "Debates", link: "/debates", icon: "fa fa-gavel" },
-              { text: "Discover", link: "/discover", icon: "fa fa-globe" },
+              {
+                text: "Debates",
+                link: "/debates",
+                icon: "fas fa-balance-scale",
+              },
+              { text: "History", link: "/history", icon: "fas fa-history" },
               { text: "Account", link: "/account", icon: "fa fa-cog" },
             ]}
           />
           <div className="App__content">
             <Switch>
               <Route exact path="/debates/:tag?" component={Home} />
-              <Route exact path="/discover" component={Discover} />
+              <Route exact path="/history" component={Discover} />
               <Route exact path="/account" component={Account} />
               <Route path="/debate/:slug" component={DebateDetails} />
               <Route>

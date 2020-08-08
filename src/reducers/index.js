@@ -7,6 +7,7 @@ import ui from "./ui";
 import debateList from "./debateList";
 import createDebate from "./createDebate";
 import createOpinion from "./createOpinion";
+import history from "./history";
 
 const rootReducer = combineReducers({
   account,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   accountInfo,
   debateList,
   createDebate,
+  history,
 });
 
 export default rootReducer;

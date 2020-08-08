@@ -13,10 +13,33 @@ class ApiService {
     return ApiService.toDataModel(resp);
   }
 
-  // async getHistory(page = 0, account) {
-  //   // todo
-  //   this.url;
-  // }
+  async getHistory(page = 0, account) {
+    const stringBody = JSON.stringify({
+      page,
+      pageSize: PAGE_SIZE,
+    });
+    const s = await account.sign(stringBody);
+    const resp = await fetch(
+      `${this.url}/accounts/history` +
+        `?page=${page}` +
+        `&pageSize=${PAGE_SIZE}` +
+        `&sortByDate=true`,
+      {
+        body: JSON.stringify({
+          page,
+          pageSize: PAGE_SIZE,
+          signature: s.signature,
+          message: s.message,
+          address: account.getAddress(),
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      }
+    );
+    return ApiService.toDataModel(resp);
+  }
 
   // async createAccountDeposit(amount, account) {
   //   this.url;
