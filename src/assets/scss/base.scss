@@ -88,6 +88,13 @@ $common-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 }
 
+%common-page {
+  margin: 0 auto;
+  max-width: 60%;
+  min-width: 420px;
+  height: 100vh;
+}
+
 %common-content {
   padding: $space-normal $space-normal;
   width: 100%;
@@ -108,7 +115,14 @@ $common-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transition: all 200ms $common-timing-function;
   box-shadow: $box-shadow-small;
 }
-
+%common-accent-container {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.089);
+  font-size: 24px;
+  color: #f2f2f2;
+  background-image: $accent-gradient;
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.1);
+}
 %common-container {
   width: min-content;
   padding: $space-small;

@@ -8,11 +8,6 @@ import {
 } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import NavBar from "./components/NavBar";
-import Home from "./pages/Debates";
-import Discover from "./pages/History";
-import Account from "./pages/Account";
-import AccountStats from "./components/AccountStats";
 import { createAccount, fetchAccountInfo } from "./actions/account";
 import {
   closeDepositDialog,
@@ -24,6 +19,7 @@ import Withdraw from "./pages/Withdraw";
 import Deposit from "./pages/Deposit";
 import CreateDebate from "./pages/CreateDebate";
 import DebateDetails from "./pages/DebateDetails";
+import Home from "./pages/Home";
 
 class App extends React.Component {
   constructor(props) {
@@ -78,31 +74,12 @@ class App extends React.Component {
     console.log("App.render()");
     const { ui } = this.props;
     return (
-      <div className="App">
+      <div>
         <Router>
-          <NavBar
-            items={[
-              {
-                text: "Debates",
-                link: "/debates",
-                icon: "fas fa-balance-scale",
-              },
-              { text: "History", link: "/history", icon: "fas fa-history" },
-              { text: "Account", link: "/account", icon: "fa fa-cog" },
-            ]}
-          />
-          <div className="App__content">
-            <Switch>
-              <Route exact path="/debates/:tag?" component={Home} />
-              <Route exact path="/history" component={Discover} />
-              <Route exact path="/account" component={Account} />
-              <Route path="/debate/:slug" component={DebateDetails} />
-              <Route>
-                <Redirect to="/debates" />
-              </Route>
-            </Switch>
-          </div>
-          <AccountStats />
+          <Switch>
+            <Route exact path="/debate/:slug" component={DebateDetails} />
+            <Route path="/" component={Home} />
+          </Switch>
         </Router>
         {this.buildDialog(ui)}
       </div>

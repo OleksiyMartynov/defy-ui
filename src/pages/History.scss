@@ -7,7 +7,7 @@
   a {
     text-decoration: none;
     display: block;
-    max-width: 420px;
+    max-width: 460px;
     width: 100%;
     margin-top: $space-normal;
   }
@@ -21,7 +21,7 @@
   }
   &__item {
     @extend %common-container;
-    max-width: 420px;
+    max-width: 460px;
     width: 100%;
     &__info {
       display: flex;
@@ -32,6 +32,7 @@
       @extend %common-card-creator-banner;
     }
     &__amount {
+      margin-left: $space-small;
       & div {
         @extend %common-stake-badge-small;
         margin: auto;

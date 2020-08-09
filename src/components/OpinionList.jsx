@@ -20,7 +20,7 @@ class OpinionList extends PureComponent {
     return (
       <div>
         {opinions.data ? (
-          <div className="DebateDetails">
+          <div className="OpinionList">
             <div className="OpinionList__opinions-container">
               {opinions.data && (
                 <div className="OpinionList__opinions-container__list">

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./DebateCard.scss";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import moment from "moment";
 import DebateProgress from "./DebateProgress";
 import Formatter from "../utils/Formatter";
@@ -69,8 +69,13 @@ class DebateCard extends React.PureComponent {
     }
 
     return (
-      <Link to={`/debate/${id}`} className="DebateCard">
-        <div className="DebateCard__heading-container">
+      <NavLink exact to={`/debate/${id}`} className="DebateCard">
+        <div
+          className="DebateCard__heading-container"
+          onClick={() => {
+            this.setState({ redirect: `/debate/${id}` });
+          }}
+        >
           <div className="DebateCard__stake">
             <i className="fa fa-bolt" />
             {Formatter.kFormatter(totalLocked)}
@@ -114,7 +119,7 @@ class DebateCard extends React.PureComponent {
             </div>
           ))}
         </div>
-      </Link>
+      </NavLink>
     );
   }
 }

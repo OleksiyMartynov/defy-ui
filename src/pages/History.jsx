@@ -86,14 +86,18 @@ class History extends React.Component {
                             </>
                           )}
                         </div>
-
-                        <div className="History__item__text">{text}</div>
                         <div className="History__item__amount">
                           <div>
                             <i className="fa fa-bolt" />
                             {Formatter.kFormatter(item.amount)}
                           </div>
                         </div>
+                        <div className="History__item__text">{text}</div>
+
+                        <i
+                          style={{ fontSize: "25px" }}
+                          className="fas fa-chevron-right fa-2x"
+                        />
                       </div>
                       <div className="History__item__date">
                         {moment(item.timestamp).format("MMMM Do YYYY, h:mm a")}

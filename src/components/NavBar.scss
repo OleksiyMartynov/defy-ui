@@ -1,13 +1,10 @@
 @import "../assets/scss/base.scss";
 
 .NavBar {
+  @extend %common-accent-container;
   height: 100vh;
-  background-image: $accent-gradient;
-  color: #f2f2f2;
   margin: $space-normal $space-small;
   border-radius: 15px;
-  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
-    inset -4px -4px 8px rgba(255, 255, 255, 0.1);
   &__header {
     padding-top: $space-normal;
     display: flex;
@@ -21,9 +18,6 @@
       }
     }
     &__heading {
-      color: white;
-      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.089);
-      font-size: 24px;
       @include mobile {
         display: none;
       }

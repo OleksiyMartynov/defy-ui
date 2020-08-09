@@ -11,7 +11,7 @@ import DebateFilter from "../models/DebateFilter";
 // import AccountModel from "../models/Account";
 import Button from "../components/Button";
 
-class Home extends React.Component {
+class Debates extends React.Component {
   constructor(props) {
     super(props);
     const { match } = props;
@@ -79,19 +79,19 @@ class Home extends React.Component {
     const { showActive, value, selectedIndex, tag } = this.state;
 
     return (
-      <div className="Home">
-        <div className="Home__content">
-          <div className="Home__content__heading">
-            <div className="Home__content__heading__text">Debates</div>
+      <div className="Debates">
+        <div className="Debates__content">
+          <div className="Debates__content__heading">
+            <div className="Debates__content__heading__text">Debates</div>
             {tag && (
-              <div className="Home__content__heading__tag">
+              <div className="Debates__content__heading__tag">
                 #{tag}
                 <i className="fa fa-times" onClick={this.removeTag} />
               </div>
             )}
           </div>
-          <div className="Home__content__controls">
-            <div className="Home__content__controls__search-wrapper">
+          <div className="Debates__content__controls">
+            <div className="Debates__content__controls__search-wrapper">
               <input
                 type="text"
                 value={value}
@@ -128,7 +128,7 @@ class Home extends React.Component {
     );
   }
 }
-Home.propTypes = {
+Debates.propTypes = {
   openCreateDebateDialog: PropTypes.func.isRequired,
 };
 
@@ -142,4 +142,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchDebatesWithFilter(newFilter)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Debates);
