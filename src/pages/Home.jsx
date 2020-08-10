@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import AccountStats from "../components/AccountStats";
 import Debates from "./Debates";
