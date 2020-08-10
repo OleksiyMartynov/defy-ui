@@ -1,6 +1,11 @@
 import React from "react";
 import "./App.scss";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { createAccount, fetchAccountInfo } from "./actions/account";
@@ -14,7 +19,11 @@ import Withdraw from "./pages/Withdraw";
 import Deposit from "./pages/Deposit";
 import CreateDebate from "./pages/CreateDebate";
 import DebateDetails from "./pages/DebateDetails";
-import Home from "./pages/Home";
+import NavBar from "./components/NavBar";
+import AccountStats from "./components/AccountStats";
+import Debates from "./pages/Debates";
+import Discover from "./pages/History";
+import Account from "./pages/Account";
 
 class App extends React.Component {
   constructor(props) {
@@ -73,7 +82,33 @@ class App extends React.Component {
         <Router>
           <Switch>
             <Route exact path="/debate/:slug" component={DebateDetails} />
-            <Route path="/" component={Home} />
+            <Route path="/">
+              <div className="Home">
+                <NavBar
+                  items={[
+                    {
+                      text: "Debates",
+                      link: "/debates",
+                      icon: "fas fa-balance-scale",
+                    },
+                    {
+                      text: "History",
+                      link: "/history",
+                      icon: "fas fa-history",
+                    },
+                    { text: "Account", link: "/account", icon: "fa fa-cog" },
+                  ]}
+                />
+                <div className="Home__content">
+                  <Route path="/debates/:tag?" component={Debates} />
+                  <Route exact path="/history" component={Discover} />
+                  <Route exact path="/account" component={Account} />
+                  {/* <Redirect to="/404" /> */}
+                  {/* <Route component={Debates} /> */}
+                </div>
+                <AccountStats />
+              </div>
+            </Route>
           </Switch>
         </Router>
         {this.buildDialog(ui)}
