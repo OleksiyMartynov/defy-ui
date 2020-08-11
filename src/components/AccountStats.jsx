@@ -35,7 +35,9 @@ class AccountStats extends React.Component {
             <div className="AccountStats__title">Funds</div>
             <div className="AccountStats__total">
               <i className="fa fa-bolt" />
-              {Formatter.addCommas(account.data.balance)}
+              {Formatter.addCommas(
+                account.data.balance + account.data.lockedBalance
+              )}
             </div>
 
             <div className="AccountStats__numbers-row">
@@ -46,9 +48,7 @@ class AccountStats extends React.Component {
             </div>
             <div className="AccountStats__numbers-row">
               <div className="AccountStats__numbers-row__number">
-                {Formatter.addCommas(
-                  account.data.balance - account.data.lockedBalance
-                )}
+                {Formatter.addCommas(account.data.balance)}
               </div>
               <div className="AccountStats__numbers-row__number">
                 {Formatter.addCommas(account.data.lockedBalance)}
