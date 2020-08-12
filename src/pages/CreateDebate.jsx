@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import { fetchCreateDebate } from "../actions/debates";
 import { closeCreateDebateDialog } from "../actions/ui";
 import Tooltip from "../components/Tooltip";
+import { Redirect } from "react-router-dom";
 
 class CreateDebate extends React.PureComponent {
   constructor(props) {
@@ -48,6 +49,7 @@ class CreateDebate extends React.PureComponent {
           loading: false,
         });
       } else {
+        this.setState({ redirect: `/debate/${resp.data.debate._id}` });
         this.props.closeCreateDebateDialog();
       }
     }
@@ -103,7 +105,11 @@ class CreateDebate extends React.PureComponent {
       tagError,
       error,
       loading,
+      redirect,
     } = this.state;
+    if (redirect) {
+      return <Redirect to={redirect} />;
+    }
     return (
       <div className="CreateDebate">
         <div className="CreateDebate__content">

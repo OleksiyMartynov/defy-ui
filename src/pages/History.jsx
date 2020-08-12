@@ -37,6 +37,14 @@ class History extends React.Component {
                     text = "Funds withdrawn";
                     iconClass = "fas fa-wallet";
                     break;
+                  case "withdrawal_created":
+                    text = "Pending withdrawal";
+                    iconClass = "fas fa-hourglass-half";
+                    break;
+                  case "withdrawal_failed":
+                    text = "Failed withdrawal";
+                    iconClass = "fas fa-exclamation-triangle";
+                    break;
                   case "debate_created":
                     text = "Created debate";
                     link = `/debate/${item?.schemaId?._id}`;

@@ -8,6 +8,8 @@ import debateList from "./debateList";
 import createDebate from "./createDebate";
 import createOpinion from "./createOpinion";
 import history from "./history";
+import depositInvoice from "./depositInvoice";
+import withdrawalInvoice from "./withdrawalInvoice";
 
 const rootReducer = combineReducers({
   account,
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
   debateList,
   createDebate,
   history,
+  depositInvoice,
+  withdrawalInvoice,
 });
 
 export default rootReducer;

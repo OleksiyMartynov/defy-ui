@@ -41,13 +41,46 @@ class ApiService {
     return ApiService.toDataModel(resp);
   }
 
-  // async createAccountDeposit(amount, account) {
-  //   this.url;
-  // }
+  async createDeposit(account) {
+    const payload = "deposit";
+    const stringBody = JSON.stringify({
+      payload,
+    });
+    const s = await account.sign(stringBody);
+    const resp = await fetch(`${this.url}/payment/deposit`, {
+      body: JSON.stringify({
+        payload,
+        signature: s.signature,
+        message: s.message,
+        address: account.getAddress(),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+    return ApiService.toDataModel(resp);
+  }
 
-  // async createAccountWithdrawal(amount, account) {
-  //   this.url;
-  // }
+  async createWithdrawal(invoice, account) {
+    const stringBody = JSON.stringify({
+      invoice,
+    });
+    const s = await account.sign(stringBody);
+    const resp = await fetch(`${this.url}/payment/withdraw`, {
+      body: JSON.stringify({
+        invoice,
+        signature: s.signature,
+        message: s.message,
+        address: account.getAddress(),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+    return ApiService.toDataModel(resp);
+  }
 
   async createOpinion(debateId, content, contentType, stake, pro, account) {
     const stringBody = JSON.stringify({
