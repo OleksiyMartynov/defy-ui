@@ -1,29 +1,82 @@
 import React from "react";
 import "./Deposit.scss";
-import { fetchDepositInvoice } from "../actions/payment";
 import { connect } from "react-redux";
+import moment from "moment";
 import QRCode from "qrcode.react";
+import { fetchDepositInvoice, fetchInvoiceInfo } from "../actions/payment";
+import { closeDepositDialog } from "../actions/ui";
+import { fetchAccountInfo } from "../actions/account";
+import CountdownCounter from "../components/CountdownCounter";
+
+let pollerId;
 
 class Deposit extends React.Component {
   constructor(props) {
     super(props);
+    this.getInvoice();
+  }
+
+  componentWillUnmount() {
+    clearInterval(pollerId);
+  }
+
+  async getInvoice() {
     const { fetchDepositInvoice } = this.props;
-    fetchDepositInvoice();
+    const result = await fetchDepositInvoice();
+    if (result?.data?.invoice?.data) {
+      this.startPoller(result.data.invoice.data);
+    }
+  }
+
+  startPoller(invoice) {
+    const {
+      fetchInvoiceInfo,
+      closeDepositDialog,
+      fetchAccountInfo,
+    } = this.props;
+    pollerId = setInterval(async () => {
+      const result = await fetchInvoiceInfo(invoice);
+      if (result?.data?.invoice?.status === "paid") {
+        closeDepositDialog();
+        fetchAccountInfo();
+      }
+    }, 10 * 1000);
   }
 
   render() {
     const { depositInvoice } = this.props;
     return (
       <div className="Deposit">
-        Deposit
-        <br />
-        {depositInvoice.loading && <div>loading</div>}
-        {depositInvoice.error && <div>error</div>}
-        {depositInvoice.data && (
-          <div>
-            <QRCode value={depositInvoice.data.invoice.data} />
-          </div>
-        )}
+        <div className="Deposit__content">
+          <div className="Deposit__heading">Deposit Funds</div>
+          {depositInvoice.loading && <div>Loading</div>}
+          {depositInvoice.error && <div>Error making deposit</div>}
+          {depositInvoice.data && (
+            <>
+              <div className="Deposit__banner">
+                <div className="Deposit__banner__inner">
+                  <QRCode
+                    renderAs="svg"
+                    style={{ width: "100%", height: "auto" }}
+                    value={depositInvoice.data.invoice.data}
+                  />
+                </div>
+              </div>
+              <div className="Deposit__expiry">
+                <CountdownCounter
+                  format
+                  interval={1000}
+                  endTime={moment(
+                    depositInvoice.data.invoice.expiryTimestamp
+                  ).unix()}
+                />
+              </div>
+              <div className="Deposit__spinner">
+                <i className="fas fa-spinner fa-4x" aria-hidden="true" />
+              </div>
+            </>
+          )}
+        </div>
       </div>
     );
   }
@@ -31,8 +84,12 @@ class Deposit extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchDepositInvoice: () => dispatch(fetchDepositInvoice()),
+  fetchInvoiceInfo: (invoice) => dispatch(fetchInvoiceInfo(invoice)),
+  closeDepositDialog: () => dispatch(closeDepositDialog()),
+  fetchAccountInfo: () => dispatch(fetchAccountInfo()),
 });
 const mapStateToProps = (state) => ({
   depositInvoice: state.depositInvoice,
+  fetchInvoiceInfo: state.fetchInvoiceInfo,
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Deposit);

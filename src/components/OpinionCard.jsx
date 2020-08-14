@@ -43,7 +43,7 @@ class OpinionCard extends React.Component {
       if (loadingMeta) {
         metaSection = (
           <div className="OpinionCard__content-wrapper__loading">
-            <i className="fa fa-spinner fa-4x" aria-hidden="true" />
+            <i className="fas fa-spinner fa-4x" aria-hidden="true" />
             Loading{" "}
             <a href={content} target="_blank" rel="noopener noreferrer">
               link

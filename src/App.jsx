@@ -1,6 +1,11 @@
 import React from "react";
 import "./App.scss";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { createAccount, fetchAccountInfo } from "./actions/account";
@@ -69,6 +74,32 @@ class App extends React.Component {
     return null;
   };
 
+  wrapInNavigation = (Comp, params) => {
+    return (
+      <div className="Home">
+        <NavBar
+          items={[
+            {
+              text: "Debates",
+              link: "/debates",
+              icon: "fas fa-balance-scale",
+            },
+            {
+              text: "History",
+              link: "/history",
+              icon: "fas fa-history",
+            },
+            { text: "Account", link: "/account", icon: "fa fa-cog" },
+          ]}
+        />
+        <div className="Home__content">
+          <Comp {...params} />
+        </div>
+        <AccountStats />
+      </div>
+    );
+  };
+
   render() {
     console.log("App.render()");
     const { ui } = this.props;
@@ -76,37 +107,30 @@ class App extends React.Component {
       <div>
         <Router>
           <Switch>
-            <Route exact path="/debate/:slug" component={DebateDetails} />
-            <Route path="/">
-              <div className="Home">
-                <NavBar
-                  items={[
-                    {
-                      text: "Debates",
-                      link: "/debates",
-                      icon: "fas fa-balance-scale",
-                    },
-                    {
-                      text: "History",
-                      link: "/history",
-                      icon: "fas fa-history",
-                    },
-                    { text: "Account", link: "/account", icon: "fa fa-cog" },
-                  ]}
-                />
-                <div className="Home__content">
-                  <Route path="/debates/:tag?" component={Debates} />
-                  <Route exact path="/history" component={Discover} />
-                  <Route exact path="/account" component={Account} />
-                  {/* <Redirect to="/404" /> */}
-                  {/* <Route component={Debates} /> */}
-                </div>
-                <AccountStats />
-              </div>
-            </Route>
+            <Route
+              strict
+              exact
+              path="/debate/:slug"
+              component={DebateDetails}
+            />
+            <Route
+              path="/debates/:tag?"
+              render={(params) => this.wrapInNavigation(Debates, params)}
+            />
+            <Route
+              exact
+              path="/history"
+              render={(params) => this.wrapInNavigation(Discover, params)}
+            />
+            <Route
+              exact
+              path="/account"
+              render={(params) => this.wrapInNavigation(Account, params)}
+            />
+            <Redirect to="/debates" />
           </Switch>
+          {this.buildDialog(ui)}
         </Router>
-        {this.buildDialog(ui)}
       </div>
     );
   }

@@ -221,7 +221,7 @@ class CreateDebate extends React.PureComponent {
           <Button disabled={loading} accent onClick={this.onCreateClicked}>
             {loading ? (
               <>
-                <i className="fa fa-spinner" aria-hidden="true" />
+                <i className="fas fa-spinner" aria-hidden="true" />
                 <span>&nbsp;Creating</span>
               </>
             ) : (

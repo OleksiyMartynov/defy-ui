@@ -10,6 +10,7 @@ import createOpinion from "./createOpinion";
 import history from "./history";
 import depositInvoice from "./depositInvoice";
 import withdrawalInvoice from "./withdrawalInvoice";
+import invoiceInfo from "./invoiceInfo";
 
 const rootReducer = combineReducers({
   account,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   history,
   depositInvoice,
   withdrawalInvoice,
+  invoiceInfo,
 });
 
 export default rootReducer;

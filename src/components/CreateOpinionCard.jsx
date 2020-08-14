@@ -154,7 +154,7 @@ class CreateOpinionCard extends Component {
         >
           {loading ? (
             <>
-              <i className="fa fa-spinner" aria-hidden="true" />
+              <i className="fas fa-spinner" aria-hidden="true" />
               <span>&nbsp;Creating</span>
             </>
           ) : (

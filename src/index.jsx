@@ -14,7 +14,11 @@ const initServices = () => ({
   apiService: new ApiService(process.env.REACT_APP_API_URL),
 });
 
-const enhancer = compose(
+const composeEnhancers =
+  (typeof window !== "undefined" &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+const enhancer = composeEnhancers(
   persistState(["account"], { key: "state" }),
   applyMiddleware(thunkMiddleware.withExtraArgument(initServices()))
 );

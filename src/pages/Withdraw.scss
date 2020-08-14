@@ -1,3 +1,49 @@
+@import "../assets/scss/base.scss";
 .Withdraw {
-    
+  width: 100%;
+  z-index: 9999999;
+  align-items: center;
+  &__content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &__error {
+      @extend %common-subtitle;
+      color: #ff0000;
+      margin-bottom: $space-normal;
+    }
+  }
+  &__heading {
+    @extend %common-title;
+    text-align: center;
+    margin-bottom: $space-normal;
+  }
+  &__banner {
+    @extend %common-container;
+    margin-bottom: $space-normal;
+    width: 100%;
+    min-width: 400px;
+    &__inner {
+      @extend %common-container-inverse;
+      width: 100%;
+    }
+  }
+  &__expiry {
+    text-align: center;
+    @extend %common-heading;
+    margin-bottom: $space-normal;
+  }
+  &__button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__input-wrapper {
+    @extend %common-input-wrapper;
+    margin-bottom: $space-normal;
+    min-height: 200px;
+  }
 }

@@ -1,7 +1,10 @@
 import React from "react";
 import "./Withdraw.scss";
-import { fetchWithdrawalInvoice } from "../actions/payment";
 import { connect } from "react-redux";
+import { fetchWithdrawalInvoice } from "../actions/payment";
+import { closeWithdrawalDialog } from "../actions/ui";
+import { fetchAccountInfo } from "../actions/account";
+import Button from "../components/Button";
 
 class Withdraw extends React.Component {
   constructor(props) {
@@ -11,35 +14,68 @@ class Withdraw extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { fetchWithdrawalInvoice } = this.props;
-    console.log(this.state.invoice);
-    fetchWithdrawalInvoice(this.state.invoice);
-    // this.setState({ invoice: "" });
+    const {
+      fetchWithdrawalInvoice,
+      fetchAccountInfo,
+      closeWithdrawalDialog,
+    } = this.props;
+    const result = await fetchWithdrawalInvoice(this.state.invoice);
+    if (result?.data?.invoice?.status === "paid") {
+      closeWithdrawalDialog();
+      fetchAccountInfo();
+    }
   };
 
   render() {
     const { withdrawalInvoice } = this.props;
     return (
       <div className="Withdraw">
-        Withdraw
-        <br />
-        <form onSubmit={this.handleSubmit}>
-          <span className="formtext">&#x3C;Form /&#x3E;</span>
-          <input
-            type="text"
-            value={this.state.invoice}
-            onChange={(event) => this.setState({ invoice: event.target.value })}
-            placeholder="Enter Lightning invoice"
-            required
-          />
-          <button type="submit">Withdraw</button>
-        </form>
-        <br />
-        {withdrawalInvoice.loading && <div>loading</div>}
-        {withdrawalInvoice.error && <div>error</div>}
-        {withdrawalInvoice.data && (
-          <div>{JSON.stringify(withdrawalInvoice.data)}</div>
-        )}
+        <div className="Withdraw__content">
+          <div className="Withdraw__heading">Withdraw Funds</div>
+          <form onSubmit={this.handleSubmit}>
+            <div className="Withdraw__input-wrapper">
+              <textarea
+                disabled={withdrawalInvoice.loading}
+                type="text"
+                value={this.state.invoice}
+                onChange={(event) =>
+                  this.setState({ invoice: event.target.value })
+                }
+                placeholder="Enter Lightning invoice"
+                required
+              />
+            </div>
+            {withdrawalInvoice.error && (
+              <div className="Withdraw__content__error">
+                Error: {withdrawalInvoice.error.message}
+              </div>
+            )}
+            <div className="Withdraw__button-wrapper">
+              {!withdrawalInvoice.data ? (
+                <Button
+                  loading={withdrawalInvoice.loading}
+                  disabled={withdrawalInvoice.loading}
+                  type="primary"
+                  accent
+                >
+                  {withdrawalInvoice.loading ? (
+                    <>
+                      <i className="fas fa-spinner" aria-hidden="true" />
+                      &nbsp; Processing
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-wallet" />
+                      &nbsp; Withdraw
+                    </>
+                  )}
+                </Button>
+              ) : (
+                <div>Success withdrawing</div>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
@@ -48,6 +84,8 @@ class Withdraw extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   fetchWithdrawalInvoice: (invoice) =>
     dispatch(fetchWithdrawalInvoice(invoice)),
+  closeWithdrawalDialog: () => dispatch(closeWithdrawalDialog()),
+  fetchAccountInfo: () => dispatch(fetchAccountInfo()),
 });
 const mapStateToProps = (state) => ({
   withdrawalInvoice: state.withdrawalInvoice,

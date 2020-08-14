@@ -82,10 +82,11 @@ class History extends React.Component {
                 }
                 return (
                   <Link
+                    key={i}
                     to={link}
                     style={{ pointerEvents: link ? "auto" : "none" }}
                   >
-                    <div className="History__item" key={i}>
+                    <div className="History__item">
                       <div className="History__item__info">
                         <div>
                           {iconClass && (

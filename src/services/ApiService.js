@@ -82,6 +82,26 @@ class ApiService {
     return ApiService.toDataModel(resp);
   }
 
+  async getInvoice(invoice, account) {
+    const stringBody = JSON.stringify({
+      invoice,
+    });
+    const s = await account.sign(stringBody);
+    const resp = await fetch(`${this.url}/payment/getInvoice`, {
+      body: JSON.stringify({
+        invoice,
+        signature: s.signature,
+        message: s.message,
+        address: account.getAddress(),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+    return ApiService.toDataModel(resp);
+  }
+
   async createOpinion(debateId, content, contentType, stake, pro, account) {
     const stringBody = JSON.stringify({
       debateId,
