@@ -1,33 +1,35 @@
 @import "../assets/scss/base.scss";
-.OpinionList{
-    &__opinions-container {
-        &__list {
-          &__item {
-            @extend %fade-in;
-            @extend %double-dashed-lines;
-            &:first-child {
-              padding-top: $space-normal;
-            }
-            z-index: 1;
-            padding-top: $space-small;
-            padding-bottom: $space-small;
-            position: relative;
-          }
-          &__end{
-              height: 100px;
-              z-index: 0;
-              margin: 0 9.9% 10% 9.9%;
-              border: dashed 2px $font-color-light;
-              border-top: none;
-              border-radius: $radius-normal;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              transform: translateY(-20%);
-              button{
-                  margin-bottom: -100px;
-              }
-          }
+.OpinionList {
+  &__opinions-container {
+    &__list {
+      &__item {
+        @extend %fade-in;
+        @extend %double-dashed-lines;
+        &:first-child {
+          padding-top: $space-normal;
+        }
+        z-index: 1;
+        padding-top: $space-small;
+        padding-bottom: $space-small;
+        position: relative;
+      }
+      &__end {
+        height: 100px;
+        z-index: 0;
+        margin: 0 9.9% 10% 9.9%;
+        border: dashed 2px $font-color-light;
+        border-top: none;
+        border-radius: $radius-normal;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(-20%);
+        z-index: -1;
+        position: relative;
+        button {
+          margin-bottom: -100px;
         }
       }
+    }
+  }
 }
