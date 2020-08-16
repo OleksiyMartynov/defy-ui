@@ -24,6 +24,7 @@ import AccountStats from "./components/AccountStats";
 import Debates from "./pages/Debates";
 import Discover from "./pages/History";
 import Account from "./pages/Account";
+import Toast from "./components/Toast";
 
 class App extends React.Component {
   constructor(props) {
@@ -130,6 +131,7 @@ class App extends React.Component {
             <Redirect to="/debates" />
           </Switch>
           {this.buildDialog(ui)}
+          <Toast />
         </Router>
       </div>
     );

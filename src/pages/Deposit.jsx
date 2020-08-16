@@ -5,7 +5,7 @@ import moment from "moment";
 import QRCode from "qrcode.react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { fetchDepositInvoice, fetchInvoiceInfo } from "../actions/payment";
-import { closeDepositDialog } from "../actions/ui";
+import { closeDepositDialog, toggleToast } from "../actions/ui";
 import { fetchAccountInfo } from "../actions/account";
 import CountdownCounter from "../components/CountdownCounter";
 import Button from "../components/Button";
@@ -30,17 +30,24 @@ class Deposit extends React.Component {
     }
   }
 
+  onCopy = (text) => {
+    const { toggleToast } = this.props;
+    toggleToast("Text coppied");
+  };
+
   startPoller(invoice) {
     const {
       fetchInvoiceInfo,
       closeDepositDialog,
       fetchAccountInfo,
+      toggleToast,
     } = this.props;
     pollerId = setInterval(async () => {
       const result = await fetchInvoiceInfo(invoice);
       if (result?.data?.invoice?.status === "paid") {
         closeDepositDialog();
         fetchAccountInfo();
+        toggleToast("Deposit successful");
       }
     }, 10 * 1000);
   }
@@ -70,7 +77,10 @@ class Deposit extends React.Component {
                   type="text"
                   value={depositInvoice.data.invoice.data}
                 />
-                <CopyToClipboard text={depositInvoice.data.invoice.data}>
+                <CopyToClipboard
+                  text={depositInvoice.data.invoice.data}
+                  onCopy={this.onCopy}
+                >
                   <Button secondary onClick={() => {}}>
                     <i className="far fa-clipboard" aria-hidden="true"></i>
                   </Button>
@@ -101,6 +111,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchInvoiceInfo: (invoice) => dispatch(fetchInvoiceInfo(invoice)),
   closeDepositDialog: () => dispatch(closeDepositDialog()),
   fetchAccountInfo: () => dispatch(fetchAccountInfo()),
+  toggleToast: (text) => dispatch(toggleToast(text)),
 });
 const mapStateToProps = (state) => ({
   depositInvoice: state.depositInvoice,

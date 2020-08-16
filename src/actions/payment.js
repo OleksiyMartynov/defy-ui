@@ -53,7 +53,6 @@ export const fetchWithdrawalInvoice = (invoice) => async (
   try {
     const { account } = getState();
     const acct = new Account(account.mnemonic);
-    console.log(invoice);
     const response = await apiService.createWithdrawal(invoice, acct);
     dispatch(updateWithdrawalInvoice(response));
     return response;

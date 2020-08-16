@@ -2,11 +2,12 @@ import React from "react";
 import "./CreateDebate.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 import Button from "../components/Button";
 import { fetchCreateDebate } from "../actions/debates";
-import { closeCreateDebateDialog } from "../actions/ui";
+import { closeCreateDebateDialog, toggleToast } from "../actions/ui";
+import { fetchAccountInfo } from "../actions/account";
 import Tooltip from "../components/Tooltip";
-import { Redirect } from "react-router-dom";
 
 class CreateDebate extends React.PureComponent {
   constructor(props) {
@@ -30,6 +31,11 @@ class CreateDebate extends React.PureComponent {
 
   onCreateClicked = async () => {
     const { title, description, stake, tags } = this.state;
+    const {
+      closeCreateDebateDialog,
+      toggleToast,
+      fetchAccountInfo,
+    } = this.props;
     if (this.isFormValid()) {
       this.setState({
         loading: true,
@@ -50,7 +56,9 @@ class CreateDebate extends React.PureComponent {
         });
       } else {
         this.setState({ redirect: `/debate/${resp.data.debate._id}` });
-        this.props.closeCreateDebateDialog();
+        closeCreateDebateDialog();
+        fetchAccountInfo();
+        toggleToast("Debate created");
       }
     }
   };
@@ -249,7 +257,9 @@ CreateDebate.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   fetchCreateDebate: (title, description, stake, tags) =>
     dispatch(fetchCreateDebate(title, description, stake, tags)),
+  fetchAccountInfo: () => dispatch(fetchAccountInfo()),
   closeCreateDebateDialog: () => dispatch(closeCreateDebateDialog()),
+  toggleToast: (text) => dispatch(toggleToast(text)),
 });
 
 const mapStateToProps = (state) => ({

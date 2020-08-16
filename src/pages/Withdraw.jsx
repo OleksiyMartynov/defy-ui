@@ -2,7 +2,7 @@ import React from "react";
 import "./Withdraw.scss";
 import { connect } from "react-redux";
 import { fetchWithdrawalInvoice } from "../actions/payment";
-import { closeWithdrawalDialog } from "../actions/ui";
+import { closeWithdrawalDialog, toggleToast } from "../actions/ui";
 import { fetchAccountInfo } from "../actions/account";
 import Button from "../components/Button";
 
@@ -18,11 +18,13 @@ class Withdraw extends React.Component {
       fetchWithdrawalInvoice,
       fetchAccountInfo,
       closeWithdrawalDialog,
+      toggleToast,
     } = this.props;
     const result = await fetchWithdrawalInvoice(this.state.invoice);
     if (result?.data?.invoice?.status === "paid") {
       closeWithdrawalDialog();
       fetchAccountInfo();
+      toggleToast("Withdrawal successful");
     }
   };
 
@@ -86,6 +88,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchWithdrawalInvoice(invoice)),
   closeWithdrawalDialog: () => dispatch(closeWithdrawalDialog()),
   fetchAccountInfo: () => dispatch(fetchAccountInfo()),
+  toggleToast: (text) => dispatch(toggleToast(text)),
 });
 const mapStateToProps = (state) => ({
   withdrawalInvoice: state.withdrawalInvoice,

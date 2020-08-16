@@ -3,8 +3,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
+import { Link } from "react-router-dom";
 import { fetchDebateDetails } from "../actions/debates";
 import { fetchCreateOpinion } from "../actions/opinions";
+import { toggleToast } from "../actions/ui";
+import { fetchAccountInfo } from "../actions/account";
 import "./DebateDetails.scss";
 import DebateChart from "../components/DebateChart";
 import VerticalDebateProgress from "../components/VerticalDebateProgress";
@@ -16,7 +19,6 @@ import DebateTime from "../components/DebateTime";
 import WinnerBadge from "../components/WinnerBadge";
 import OpinionCard from "../components/OpinionCard";
 import CountdownCounter from "../components/CountdownCounter";
-import { Link } from "react-router-dom";
 import FloatingButton from "../components/FloatingButton";
 import TitleBar from "../components/TitleBar";
 
@@ -49,9 +51,16 @@ class DebateDetails extends Component {
 
   closeSections = () => {
     this.setState({ showSection: false });
-    const { match, fetchDebateDetails } = this.props;
+    const {
+      match,
+      fetchDebateDetails,
+      fetchAccountInfo,
+      toggleToast,
+    } = this.props;
     const debateId = match.params.slug;
     fetchDebateDetails(debateId);
+    fetchAccountInfo();
+    toggleToast("Stake locked");
   };
 
   createWinningsSection = (totalPro, totalCon, userPro, userCon, finished) => {
@@ -397,6 +406,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchDebateDetails: (debateId) => dispatch(fetchDebateDetails(debateId)),
   fetchCreateOpinion: (debateId, content, contentType, stake, pro) =>
     dispatch(fetchCreateOpinion(debateId, content, contentType, stake, pro)),
+  fetchAccountInfo: () => dispatch(fetchAccountInfo()),
+  toggleToast: (text) => dispatch(toggleToast(text)),
 });
 const mapStateToProps = (state) => ({
   debateDetails: state.debates.debateDetails,
