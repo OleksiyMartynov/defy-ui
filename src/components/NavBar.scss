@@ -3,8 +3,7 @@
 .NavBar {
   @extend %common-accent-container;
   height: 100vh;
-  margin: $space-normal $space-small;
-  border-radius: 15px;
+  margin: 0 $space-small;
   &__header {
     padding-top: $space-normal;
     display: flex;

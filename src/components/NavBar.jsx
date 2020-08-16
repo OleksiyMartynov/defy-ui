@@ -10,7 +10,7 @@ class NavBar extends React.PureComponent {
       <div className="NavBar">
         <div className="NavBar__header">
           <img src={Logo} alt="app logo" />
-          <span className="NavBar__header__heading">Defy.fyi</span>
+          <span className="NavBar__header__heading">defy.fyi</span>
           <span className="NavBar__header__subheading">
             Put your ₿ where your mouth is
           </span>

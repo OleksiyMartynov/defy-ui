@@ -3,10 +3,12 @@ import "./Deposit.scss";
 import { connect } from "react-redux";
 import moment from "moment";
 import QRCode from "qrcode.react";
+import CopyToClipboard from "react-copy-to-clipboard";
 import { fetchDepositInvoice, fetchInvoiceInfo } from "../actions/payment";
 import { closeDepositDialog } from "../actions/ui";
 import { fetchAccountInfo } from "../actions/account";
 import CountdownCounter from "../components/CountdownCounter";
+import Button from "../components/Button";
 
 let pollerId;
 
@@ -61,6 +63,18 @@ class Deposit extends React.Component {
                     value={depositInvoice.data.invoice.data}
                   />
                 </div>
+              </div>
+              <div className="Deposit__invoice">
+                <input
+                  disabled
+                  type="text"
+                  value={depositInvoice.data.invoice.data}
+                />
+                <CopyToClipboard text={depositInvoice.data.invoice.data}>
+                  <Button secondary onClick={() => {}}>
+                    <i className="far fa-clipboard" aria-hidden="true"></i>
+                  </Button>
+                </CopyToClipboard>
               </div>
               <div className="Deposit__expiry">
                 <CountdownCounter
