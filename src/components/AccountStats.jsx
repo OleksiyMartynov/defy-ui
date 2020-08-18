@@ -11,6 +11,7 @@ import {
 import FloatingButton from "./FloatingButton";
 import Formatter from "../utils/Formatter";
 import { Loader } from "./Loader";
+import Dropdown from "./Dropdown";
 
 class AccountStats extends React.Component {
   onDeposit = () => {
@@ -23,6 +24,23 @@ class AccountStats extends React.Component {
 
   onCreateDebate = () => {
     this.props.openCreateDebateDialog();
+  };
+
+  itemSelectedListener = (item) => {
+    console.log(item);
+    switch (item) {
+      case 0: {
+        this.onDeposit();
+        break;
+      }
+      case 1: {
+        this.onWithdrawal();
+        break;
+      }
+      default: {
+        this.onCreateDebate();
+      }
+    }
   };
 
   render() {
@@ -59,7 +77,25 @@ class AccountStats extends React.Component {
           </div>
         )}
         <div className="AccountStats__divider" />
-        <div className="AccountStats__rows-wrapper">
+        <div className="AccountStats__rows-wrapper AccountStats__buttons-layout">
+          <div className="AccountStats__buttons-layout__dropdown">
+            <Dropdown
+              items={[
+                { style: "fas fa-piggy-bank", text: "Deposit" },
+                { style: "fas fa-wallet", text: "Withdraw" },
+                { style: "fa fa-plus-circle", text: "New Debate" },
+              ]}
+              itemSelectedListener={this.itemSelectedListener}
+              customButtonLayout={<i className="fas fa-ellipsis-v" />}
+              customRender={(item) => (
+                <div className="AccountStats__buttons-layout__dropdown__item">
+                  <i className={item.style} />
+                  {item.text}
+                </div>
+              )}
+            />
+          </div>
+
           <div className="AccountStats__numbers-row">
             <Button onClick={this.onDeposit}>
               <i className="fas fa-piggy-bank" />

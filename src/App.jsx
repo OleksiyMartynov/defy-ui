@@ -74,7 +74,7 @@ class App extends React.Component {
 
   wrapInNavigation = (Comp, params) => {
     return (
-      <div className="Home">
+      <div className="App">
         <Helmet>
           <title>Defy.fyi : Put your ₿ where your mouth is</title>
           <meta name="description" content="Debate hot topics and win sats" />
@@ -94,7 +94,7 @@ class App extends React.Component {
             { text: "Account", link: "/account", icon: "fa fa-cog" },
           ]}
         />
-        <div className="Home__content">
+        <div className="App__content">
           <Comp {...params} />
         </div>
         <AccountStats />

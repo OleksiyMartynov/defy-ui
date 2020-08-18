@@ -23,25 +23,31 @@ class Dropdown extends React.Component {
 
   render() {
     const { open, selectedIndex } = this.state;
-    const { items } = this.props;
+    const { items, customButtonLayout, customRender } = this.props;
     const content = items.map((item, index) => (
       <div
         key={index}
         onClick={() => this.onItemClick(index)}
         className={
-          selectedIndex === index
+          customRender
+            ? ""
+            : selectedIndex === index
             ? "Dropdown__content__item--selected"
             : "Dropdown__content__item"
         }
       >
-        {item}
+        {customRender ? customRender(item) : item}
       </div>
     ));
     return (
       <div className="Dropdown">
         <Button selected={open} onClick={this.handleToggleChange}>
-          {items[selectedIndex]}
-          <i className={`fa fa-chevron-down${open ? " selected" : ""}`} />
+          {customButtonLayout || (
+            <>
+              {items[selectedIndex]}
+              <i className={`fa fa-chevron-down${open ? " selected" : ""}`} />
+            </>
+          )}
           {open && <div className="Dropdown__content">{content}</div>}
         </Button>
       </div>
@@ -51,5 +57,7 @@ class Dropdown extends React.Component {
 Dropdown.propTypes = {
   items: PropTypes.array.isRequired,
   itemSelectedListener: PropTypes.func.isRequired,
+  customButtonLayout: PropTypes.element,
+  customRender: PropTypes.func,
 };
 export default Dropdown;

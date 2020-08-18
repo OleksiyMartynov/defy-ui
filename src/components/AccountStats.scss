@@ -1,8 +1,9 @@
 @import "../assets/scss/base.scss";
 .AccountStats {
   @extend %common-container;
-  padding: 14px 0px;
-  margin: $space-normal $space-small;
+  position: absolute;
+  right: $space-normal;
+  max-width: $stats-width;
   border-radius: $radius-small;
   height: fit-content;
   text-align: center;
@@ -19,9 +20,43 @@
     font-style: normal;
     padding: $space-tiny $space-small $space-tiny $space-small;
     white-space: nowrap;
+    @include mobile {
+    }
+  }
+  &__buttons-layout {
+    &__dropdown {
+      display: none;
+    }
+    @include mobile {
+      &__dropdown {
+        display: inline-block;
+        width: 40px;
+        button {
+          min-width: 40px !important;
+          width: 40px;
+          font-size: 25px;
+          text-align: center !important;
+          padding: 16px;
+        }
+        &__item {
+          margin: 0px 9px 3px 3px;
+          font-size: $font-size-normal;
+          & i {
+            text-align: start !important;
+            width: initial !important;
+            margin-right: 5px;
+          }
+        }
+      }
+      .AccountStats__numbers-row {
+        display: none;
+      }
+    }
   }
   &__rows-wrapper {
     @include mobile {
+      width: 100%;
+      max-width: 80%;
       flex-grow: 1;
     }
   }
@@ -44,11 +79,14 @@
       text-align: center !important;
       @include mobile {
         height: 50px;
-
-        margin: 6px $space-tiny;
+        margin: 6px auto;
         & > i {
           font-size: $font-size-large;
-          margin-right: $space-small;
+          margin-right: 0;
+        }
+        & > span {
+          display: none;
+          margin-right: 0;
         }
       }
     }
@@ -65,8 +103,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    border-radius: 0;
     margin: 0;
     padding: 0;
     width: 100%;
+    max-width: 100vw;
+    top: 0;
+    right: 0;
   }
 }

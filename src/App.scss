@@ -1,51 +1,20 @@
 @import "./assets/scss/base.scss";
-.Home {
+
+.App {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   font-weight: normal;
   display: flex;
   flex-direction: row;
-  padding: 0 6vw;
-  @media only screen and (max-width: 768px) {
-    padding: 0 3vw;
-  }
+
   &__content {
     @extend %common-content;
     overflow-y: auto;
-  }
-  &__dialog {
-    @extend %fade-in;
-    background-color: $bg-color-middle;
-    position: absolute;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    &__nav {
-      padding: 10px 15px 0 0;
-      right: 0;
-      position: absolute;
+    padding-left: $nav-width + $space-normal + $space-normal;
+    padding-right: $stats-width + $space-normal + $space-normal;
+    @include mobile {
+      padding: 130px $space-normal;
     }
-    &__content {
-      @extend %common-content;
-      overflow-y: auto;
-    }
-  }
-
-  @include mobile {
-    flex-direction: column-reverse;
-  }
-}
-.App {
-  height: 100vh;
-  width: 100vw;
-  font-weight: normal;
-  display: flex;
-  flex-direction: row;
-  padding: 0 6vw;
-  @media only screen and (max-width: 768px) {
-    padding: 0 3vw;
   }
   &__dialog {
     @extend %fade-in;

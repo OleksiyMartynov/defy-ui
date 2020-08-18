@@ -9,6 +9,7 @@
     @extend %common-container;
     margin-top: $space-normal;
     width: 100%;
+    max-width: 1000px;
     &__title {
       @extend %common-title;
     }
