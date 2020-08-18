@@ -6,6 +6,8 @@
   // width: 100%;
   overflow-y: scroll;
   padding-top: $space-normal;
+  &__nav-share {
+  }
   &__content {
     @extend %common-page;
   }

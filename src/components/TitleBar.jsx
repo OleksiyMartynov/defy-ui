@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./TitleBar.scss";
 import { withRouter } from "react-router-dom";
 
-const TitleBar = ({ title, history, show = false }) => {
+const TitleBar = ({ title, history, show = false, extra }) => {
   const goBack = () => {
     history.goBack();
   };
@@ -18,7 +18,7 @@ const TitleBar = ({ title, history, show = false }) => {
             />
           </button>
           <div className="TitleBar__wrapper__content__title">{title}</div>
-          <div></div>
+          <div>{extra}</div>
         </div>
       </div>
     </div>
@@ -27,6 +27,7 @@ const TitleBar = ({ title, history, show = false }) => {
 
 TitleBar.propTypes = {
   title: PropTypes.string.isRequired,
+  extra: PropTypes.element,
 };
 
 export default withRouter(TitleBar);

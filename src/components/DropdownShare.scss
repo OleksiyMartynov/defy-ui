@@ -1,0 +1,45 @@
+@import "./../assets/scss/base.scss";
+.DropdownShare {
+  width: 50px;
+  height: 50px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &__dropdown {
+    display: none;
+    position: absolute;
+    transform: translate(36%, 80%);
+    bottom: 0;
+    &__content {
+      @extend %common-container-small;
+      @extend %fade-in;
+      text-align: start;
+      padding: 10px 0;
+      white-space: nowrap;
+      border-top-left-radius: 0px;
+      &__item {
+        font-size: $font-size-normal;
+        padding: 7px 10px;
+        &:hover {
+          background: #cacaca;
+          color: white;
+          background-color: none;
+        }
+      }
+    }
+  }
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &:hover > &__dropdown {
+    display: inline-block;
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}

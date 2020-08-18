@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import Formatter from "../utils/Formatter";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import { Loader } from "../components/Loader";
 
 class History extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class History extends React.Component {
     return (
       <div className="History">
         <span className="History__heading">History</span>
-        {history.loading && <div>loading</div>}
+        {history.loading && <Loader />}
         {history.error && <div>error</div>}
         {history.data && (
           <>

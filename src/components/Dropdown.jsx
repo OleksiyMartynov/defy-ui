@@ -23,8 +23,7 @@ class Dropdown extends React.Component {
 
   render() {
     const { open, selectedIndex } = this.state;
-    const {items} = this.props;
-    //const items = ["Newest", "Oldest", "Stake"];
+    const { items } = this.props;
     const content = items.map((item, index) => (
       <div
         key={index}
@@ -51,6 +50,6 @@ class Dropdown extends React.Component {
 }
 Dropdown.propTypes = {
   items: PropTypes.array.isRequired,
-  itemSelectedListener: PropTypes.func.isRequired
+  itemSelectedListener: PropTypes.func.isRequired,
 };
 export default Dropdown;

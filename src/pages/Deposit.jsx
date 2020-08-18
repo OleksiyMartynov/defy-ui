@@ -9,6 +9,7 @@ import { closeDepositDialog, toggleToast } from "../actions/ui";
 import { fetchAccountInfo } from "../actions/account";
 import CountdownCounter from "../components/CountdownCounter";
 import Button from "../components/Button";
+import { Loader } from "../components/Loader";
 
 let pollerId;
 
@@ -58,7 +59,7 @@ class Deposit extends React.Component {
       <div className="Deposit">
         <div className="Deposit__content">
           <div className="Deposit__heading">Deposit Funds</div>
-          {depositInvoice.loading && <div>Loading</div>}
+          {depositInvoice.loading && <Loader />}
           {depositInvoice.error && <div>Error making deposit</div>}
           {depositInvoice.data && (
             <>

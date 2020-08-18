@@ -21,6 +21,9 @@ import OpinionCard from "../components/OpinionCard";
 import CountdownCounter from "../components/CountdownCounter";
 import FloatingButton from "../components/FloatingButton";
 import TitleBar from "../components/TitleBar";
+import DropdownShare from "../components/DropdownShare";
+import { Helmet } from "react-helmet";
+import { Loader } from "../components/Loader";
 
 class DebateDetails extends Component {
   constructor(props) {
@@ -155,9 +158,28 @@ class DebateDetails extends Component {
       <div className="DebateDetails" ref={this.paneDidMount}>
         {debateDetails.data ? (
           <>
+            <Helmet>
+              <title>Defy.fyi : {debateDetails.data.debate.title}</title>
+              <meta
+                name="description"
+                content="Debate hot topics and win sats"
+              />
+              <meta
+                name="keywords"
+                content={debateDetails.data.debate.tags
+                  .map((tag) => tag.name)
+                  .join(", ")}
+              />
+            </Helmet>
             <TitleBar
               title={debateDetails.data.debate.title}
               show={showTitleBar}
+              extra={
+                <DropdownShare
+                  mobileTitle={debateDetails.data.debate.title}
+                  mobileDescription="Put your ₿ where your mouth is."
+                />
+              }
             />
             <div className="DebateDetails__content">
               <div className="DebateDetails__head-content">
@@ -392,7 +414,7 @@ class DebateDetails extends Component {
             </div>
           </>
         ) : (
-          "loading"
+          <Loader />
         )}
       </div>
     );

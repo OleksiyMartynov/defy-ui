@@ -52,6 +52,13 @@ export const fetchAccountInfo = () => async (
   { apiService }
 ) => {
   const { account, accountInfo } = getState();
+  if (!account || !account.mnemonic) {
+    dispatch(createAccount());
+    dispatch(
+      updateAccountInfo(new DataModel({ balance: 0, lockedBalance: 0 }, false))
+    );
+    return;
+  }
   try {
     const acct = new Account(account.mnemonic);
     dispatch(updateAccountInfo(new DataModel(account.data, true)));

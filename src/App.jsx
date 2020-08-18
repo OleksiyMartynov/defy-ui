@@ -25,15 +25,12 @@ import Debates from "./pages/Debates";
 import Discover from "./pages/History";
 import Account from "./pages/Account";
 import Toast from "./components/Toast";
+import { Helmet } from "react-helmet";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    if (!props.account) {
-      props.createAccount();
-    } else {
-      props.fetchAccountInfo();
-    }
+    props.fetchAccountInfo();
   }
 
   buildDialog = (ui) => {
@@ -78,6 +75,10 @@ class App extends React.Component {
   wrapInNavigation = (Comp, params) => {
     return (
       <div className="Home">
+        <Helmet>
+          <title>Defy.fyi : Put your ₿ where your mouth is</title>
+          <meta name="description" content="Debate hot topics and win sats" />
+        </Helmet>
         <NavBar
           items={[
             {

@@ -5,6 +5,7 @@ import { fetchOpinions, fetchCreateOpinion } from "../actions/opinions";
 import "./OpinionList.scss";
 import Button from "../components/Button";
 import OpinionCard from "../components/OpinionCard";
+import { Loader } from "./Loader";
 
 class OpinionList extends PureComponent {
   constructor(props) {
@@ -56,7 +57,7 @@ class OpinionList extends PureComponent {
             </div>
           </div>
         ) : (
-          "loading"
+          <Loader />
         )}
       </div>
     );

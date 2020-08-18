@@ -10,6 +10,7 @@ import {
 } from "../actions/ui";
 import FloatingButton from "./FloatingButton";
 import Formatter from "../utils/Formatter";
+import { Loader } from "./Loader";
 
 class AccountStats extends React.Component {
   onDeposit = () => {
@@ -26,10 +27,11 @@ class AccountStats extends React.Component {
 
   render() {
     const { account } = this.props;
+    console.log(account);
     return (
       <div className="AccountStats">
         {account.loading ? (
-          "loading"
+          <Loader />
         ) : (
           <div className="AccountStats__rows-wrapper">
             <div className="AccountStats__title">Funds</div>
