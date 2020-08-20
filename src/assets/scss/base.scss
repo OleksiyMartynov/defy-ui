@@ -92,9 +92,13 @@ $common-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 %common-page {
   margin: 0 auto;
-  max-width: 60%;
+  max-width: 900px;
   min-width: 420px;
   height: 100vh;
+  @include mobile {
+    padding: $space-tiny $space-small 0 $space-small;
+    min-width: 100%;
+  }
 }
 
 %common-content {
@@ -219,6 +223,9 @@ $common-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   background-clip: text;
   -webkit-text-fill-color: transparent;
   position: relative;
+  @include mobile {
+    font-size: 32px;
+  }
 }
 %common-subheading {
   background-image: $accent-gradient;
@@ -228,6 +235,9 @@ $common-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  @include mobile {
+    font-size: 14px;
+  }
 }
 
 %common-heading-banner-normal {
@@ -278,11 +288,17 @@ $common-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-size: 32px;
   color: $font-color;
   margin-bottom: $space-tiny;
+  @include mobile {
+    font-size: 22px;
+  }
 }
 %common-subtitle {
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
   font-size: $font-size-normal;
   color: $font-color;
+  @include mobile {
+    font-size: 14px;
+  }
 }
 %common-label {
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);

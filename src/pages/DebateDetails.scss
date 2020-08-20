@@ -22,9 +22,18 @@
     @extend %common-container;
     width: 100%;
     margin-top: $space-small;
+    tr {
+      border-top: 1px solid #c6cbd1;
+    }
+
+    th,
+    td {
+      padding: 6px 13px;
+      border: 1px solid #dfe2e5;
+    }
+
     &__created {
       @extend %common-label;
-      width: 80%;
       display: inline-block;
       &__stake {
         @extend %common-stake-badge-small;
@@ -39,6 +48,7 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 10px;
+    z-index: 1;
     &__count-down {
       font-size: 30px;
       line-height: 30px;
@@ -61,10 +71,16 @@
     min-height: 250px;
     display: flex;
     flex-direction: row;
+    &__graph {
+    }
     &__progress {
+      width: 100px;
       padding-top: 4px;
       padding-bottom: 50px;
       transform: translateX(0px);
+      @include mobile {
+        // display: none;
+      }
     }
   }
   &__head-content {
@@ -107,15 +123,25 @@
       padding-top: $space-small;
       display: flex;
       justify-content: space-evenly;
+      flex-wrap: wrap;
       &__column {
         min-width: 20%;
         display: flex;
         align-items: center;
         justify-content: flex-end;
         flex-direction: column;
+        @include mobile {
+          flex-grow: 1;
+        }
         .Toggle {
           box-shadow: -4px -4px 8px rgba(0, 0, 0, 0.15),
             4px 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        &--left {
+          align-items: flex-start;
+        }
+        &--right {
+          align-items: flex-end;
         }
         &__emoji {
           @extend %common-heading-banner-normal;
@@ -142,20 +168,27 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-
+        margin-bottom: $space-normal;
+        @include mobile {
+          flex-grow: 1;
+          width: 100%;
+          order: -1;
+          justify-content: space-between;
+        }
         span {
           white-space: nowrap;
         }
 
         &__results {
+          // @extend %common-container;
+          width: initial;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           &__result-heading {
-            @extend %common-heading;
+            @extend %common-title;
             text-shadow: none;
-            margin-bottom: $space-small;
           }
           &__result-title {
             color: #d1d1d1;
@@ -184,6 +217,8 @@
       @extend %double-dashed-lines;
       padding-top: $space-normal;
       padding-bottom: $space-small;
+      z-index: 1;
+      position: relative;
       &__card-wrapper {
         width: 70%;
         &--right {

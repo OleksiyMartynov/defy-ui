@@ -27,7 +27,7 @@ export default class WinnerBadge extends PureComponent {
             }`}
           />
         ) : (
-          <i className={`${winner ? "fa fa-trophy" : ""}`} />
+          <i className={`${winner ? "fa fa-trophy" : "far fa-frown"}`} />
         )}
 
         <div className="WinnerBadge__amount">

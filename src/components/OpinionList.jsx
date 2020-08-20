@@ -42,14 +42,22 @@ class OpinionList extends PureComponent {
                   ))}
                   <div className="OpinionList__opinions-container__list__end">
                     {opinions.data.page + 1 < opinions.data.pages ? (
-                      <Button
-                        onClick={() => this.props.fetchOpinions(debateId, true)}
-                      >
-                        {" "}
-                        Load more
-                      </Button>
+                      <>
+                        <div className="OpinionList__opinions-container__list__end__patch" />
+                        <Button
+                          onClick={() =>
+                            this.props.fetchOpinions(debateId, true)
+                          }
+                        >
+                          {" "}
+                          Load more
+                        </Button>
+                      </>
                     ) : (
-                      lastItem
+                      <>
+                        <div className="OpinionList__opinions-container__list__end__patch" />
+                        {lastItem}
+                      </>
                     )}
                   </div>
                 </div>

@@ -14,12 +14,15 @@
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
+    "react-markdown": "^4.3.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-syntax-highlighter": "^13.5.0",
     "redux": "^4.0.5",
     "redux-localstorage": "^0.4.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "remark-toc": "^7.0.0"
   },
   "scripts": {
     "start-debug-browser": "/Applications/Brave\\ Browser.app/Contents/MacOS/Brave\\ Browser --remote-debugging-port=9222  http://localhost:3000",

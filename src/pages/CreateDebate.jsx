@@ -125,8 +125,16 @@ class CreateDebate extends React.PureComponent {
           <div className="CreateDebate__banner">
             <div className="CreateDebate__banner__inner">
               <p>
-                Create debate topic by locking up stake then providing a
-                detailed description and title.
+                Create debate topic by locking up stake then providing a title
+                and description of the debate. Description text supports&nbsp;
+                <a
+                  href="https://guides.github.com/features/mastering-markdown/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  &nbsp;markdown
+                </a>
+                .
               </p>
               <ul>
                 <li>

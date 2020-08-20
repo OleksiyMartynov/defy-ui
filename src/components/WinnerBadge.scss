@@ -7,6 +7,9 @@
     padding: $space-small;
     font-size: $font-size-xl;
     text-align: center;
+    @include mobile {
+      font-size: 28px;
+    }
     &--winner {
       color: gold;
       border-color: gold;
@@ -22,8 +25,8 @@
       }
     }
     &--loser {
-      color: #854545;
-      transform: scale(0.8);
+      // color: #854545;
+      // transform: scale(0.8);
     }
     &--leader {
       color: rgb(255, 251, 202);
@@ -35,10 +38,16 @@
       font-size: $font-size-xl;
       color: white;
       text-transform: uppercase;
+      @include mobile {
+        font-size: 28px;
+      }
     }
     div:first-of-type {
       font-size: $font-size-large;
       color: white;
+      @include mobile {
+        font-size: 28px;
+      }
     }
   }
   &__amount {

@@ -1,7 +1,9 @@
 @import "../assets/scss/base.scss";
 .OpinionList {
   &__opinions-container {
+    padding-bottom: $space-normal;
     &__list {
+      min-height: 300px;
       &__item {
         @extend %fade-in;
         @extend %double-dashed-lines;
@@ -21,11 +23,20 @@
         border-top: none;
         border-radius: $radius-normal;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         transform: translateY(-20%);
-        z-index: -1;
+        z-index: 0;
         position: relative;
+        &__patch {
+          width: 100%;
+          min-height: 30px;
+          background-color: $bg-color-middle;
+          transform: translateY(90%);
+          z-index: 2;
+          display: none;
+        }
         button {
           margin-bottom: -100px;
         }

@@ -4,6 +4,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import ReactMarkdown from "react-markdown";
+
+import CodeBlock from "../components/CodeBlock";
 import { fetchDebateDetails } from "../actions/debates";
 import { fetchCreateOpinion } from "../actions/opinions";
 import { toggleToast } from "../actions/ui";
@@ -22,7 +26,6 @@ import CountdownCounter from "../components/CountdownCounter";
 import FloatingButton from "../components/FloatingButton";
 import TitleBar from "../components/TitleBar";
 import DropdownShare from "../components/DropdownShare";
-import { Helmet } from "react-helmet";
 import { Loader } from "../components/Loader";
 
 class DebateDetails extends Component {
@@ -134,22 +137,15 @@ class DebateDetails extends Component {
     let winningPercent = 0.0;
     if (debateDetails.data) {
       const total =
-        debateDetails.data.callerTotals.totalPro +
-        debateDetails.data.callerTotals.totalCon;
-      const percentPro = debateDetails.data.callerTotals.totalPro / total;
-      const percentCon = debateDetails.data.callerTotals.totalCon / total;
-      if (
-        debateDetails.data.callerTotals.totalPro >
-        debateDetails.data.callerTotals.totalCon
-      ) {
+        debateDetails.data.debate.totalPro + debateDetails.data.debate.totalCon;
+      const percentPro = debateDetails.data.debate.totalPro / total;
+      const percentCon = debateDetails.data.debate.totalCon / total;
+      if (percentPro > percentCon) {
         winningText = "PRO";
         winningPercent = percentPro - percentCon;
-      } else if (
-        debateDetails.data.callerTotals.totalPro <
-        debateDetails.data.callerTotals.totalCon
-      ) {
+      } else if (percentPro < percentCon) {
         winningText = "CON";
-        winningPercent = percentPro - percentCon;
+        winningPercent = percentCon - percentPro;
       } else {
         winningText = "TIE";
       }
@@ -212,22 +208,24 @@ class DebateDetails extends Component {
                   )}
                 </div>
               </div>
+              <div className="DebateDetails__tags">
+                {debateDetails.data.debate.tags.map((tag) => (
+                  <div className="DebateDetails__tags__tag">
+                    <Link to={`/debates/${tag.name}`}>
+                      <FloatingButton onClick={this.onCreateDebate}>
+                        <i className="fas fa-hashtag" />
+                        <span>&nbsp;{tag.name}</span>
+                      </FloatingButton>
+                    </Link>
+                  </div>
+                ))}
+              </div>
               <div className="DebateDetails__description">
-                <div className="DebateDetails__tags">
-                  {debateDetails.data.debate.tags.map((tag) => (
-                    <div className="DebateDetails__tags__tag">
-                      <Link to={`/debates/${tag.name}`}>
-                        <FloatingButton onClick={this.onCreateDebate}>
-                          <i className="fas fa-hashtag" />
-                          <span>&nbsp;{tag.name}</span>
-                        </FloatingButton>
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-
-                <br />
-                {debateDetails.data.debate.description}
+                <ReactMarkdown
+                  source={debateDetails.data.debate.description}
+                  renderers={{ code: CodeBlock }}
+                  plugins={[require("remark-toc")]}
+                />
 
                 <div className="DebateDetails__divider" />
                 <span className="DebateDetails__description__created">
@@ -313,7 +311,7 @@ class DebateDetails extends Component {
               ) : null}
               <div className="DebateDetails__opinions-container">
                 <div className="DebateDetails__opinions-container__controls">
-                  <div className="DebateDetails__opinions-container__controls__column">
+                  <div className="DebateDetails__opinions-container__controls__column DebateDetails__opinions-container__controls__column--left">
                     <WinnerBadge
                       heading="Pro"
                       ongoing={!debateDetails.data.debate.finished}
@@ -344,7 +342,7 @@ class DebateDetails extends Component {
                       debateDetails.data.debate.finished
                     )}
                   </div>
-                  <div className="DebateDetails__opinions-container__controls__column">
+                  <div className="DebateDetails__opinions-container__controls__column DebateDetails__opinions-container__controls__column--right">
                     <WinnerBadge
                       heading="Con"
                       ongoing={!debateDetails.data.debate.finished}

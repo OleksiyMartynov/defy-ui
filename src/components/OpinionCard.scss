@@ -15,6 +15,7 @@ $card-image-width: 120px;
     }
   }
   &__content-wrapper {
+    max-width: 550px;
     z-index: 1;
     @extend %common-container-small;
     width: 70%;
@@ -56,6 +57,12 @@ $card-image-width: 120px;
     }
     &__loading {
       padding: $space-small;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      & i {
+        margin-right: $space-small;
+      }
       & h3 {
         margin: 0;
         text-align: center;
@@ -76,10 +83,21 @@ $card-image-width: 120px;
         i {
           font-size: 60px;
         }
+        @include mobile {
+          width: 100%;
+          min-width: 100%;
+          max-width: 100%;
+          margin-top: $space-small;
+        }
       }
       &__details {
         width: 80%;
         padding-left: $space-small;
+        @include mobile {
+          width: 100%;
+          padding-left: 0;
+          margin-top: $space-small;
+        }
         &__title {
           @extend %common-title;
           font-size: $font-size-large;
@@ -96,11 +114,24 @@ $card-image-width: 120px;
           @extend %common-label;
           margin-top: $space-tiny;
           text-decoration: inherit;
+          overflow-wrap: anywhere;
         }
+      }
+      @include mobile {
+        flex-direction: column;
       }
     }
     &__error {
       padding: $space-small;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      & i {
+        margin-right: $space-small;
+      }
+    }
+    @include mobile {
+      width: 85%;
     }
   }
 }

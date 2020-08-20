@@ -22,8 +22,12 @@
       justify-content: space-between;
       align-items: center;
       height: min-content;
-      padding: $space-tiny 0;
+      padding-top: $space-tiny;
+      padding-bottom: $space-tiny;
       &__title {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
       button {
         width: 50px;

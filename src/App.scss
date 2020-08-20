@@ -13,11 +13,12 @@
     padding-left: $nav-width + $space-normal + $space-normal;
     padding-right: $stats-width + $space-normal + $space-normal;
     @include mobile {
-      padding: 130px $space-normal;
+      padding: 130px $space-small;
     }
   }
   &__dialog {
     @extend %fade-in;
+    @extend %common-page;
     background-color: $bg-color-middle;
     position: absolute;
     z-index: 999;
