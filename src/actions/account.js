@@ -51,7 +51,7 @@ export const fetchAccountInfo = () => async (
   getState,
   { apiService }
 ) => {
-  const { account, accountInfo } = getState();
+  const { account } = getState();
   if (!account || !account.mnemonic) {
     dispatch(createAccount());
     dispatch(
@@ -66,7 +66,7 @@ export const fetchAccountInfo = () => async (
     dispatch(updateAccountInfo(response));
   } catch (ex) {
     dispatch(
-      updateAccountInfo(new DataModel(accountInfo.data, false, 0, ex.message))
+      updateAccountInfo(new DataModel(account.data, false, 0, ex.message))
     );
   }
 };

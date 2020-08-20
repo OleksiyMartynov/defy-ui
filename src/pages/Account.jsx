@@ -33,10 +33,6 @@ class Account extends React.Component {
   render() {
     const { showWords, newSeed, newSeedValid } = this.state;
     const { account } = this.props;
-    console.log(account);
-    const accountObject = new AccountModel(account.mnemonic);
-    console.log(accountObject);
-    console.log(accountObject.getAddress());
     return (
       <div className="Account">
         <span className="Account__heading">Account</span>

@@ -14,13 +14,11 @@ class DropdownShare extends React.PureComponent {
   mobileShare = () => {
     const { mobileTitle, mobileDescription } = this.props;
     if (navigator.share) {
-      navigator
-        .share({
-          text: mobileTitle,
-          title: mobileDescription,
-          url: window.location,
-        })
-        .then(() => console.log("Share complete"));
+      navigator.share({
+        text: mobileTitle,
+        title: mobileDescription,
+        url: window.location,
+      });
     }
   };
 

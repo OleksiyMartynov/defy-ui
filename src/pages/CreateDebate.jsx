@@ -40,7 +40,6 @@ class CreateDebate extends React.PureComponent {
       this.setState({
         loading: true,
       });
-      console.log({ title, description, stake, tags });
       const resp = await this.props.fetchCreateDebate(
         title,
         description,

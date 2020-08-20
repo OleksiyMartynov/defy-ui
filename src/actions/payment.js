@@ -74,7 +74,6 @@ export const fetchInvoiceInfo = (invoice) => async (
   try {
     const { account } = getState();
     const acct = new Account(account.mnemonic);
-    console.log(invoice);
     const response = await apiService.getInvoice(invoice, acct);
     dispatch(updateInvoiceInfo(response));
     return response;

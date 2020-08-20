@@ -21,7 +21,7 @@ class History extends React.Component {
       <div className="History">
         <span className="History__heading">History</span>
         {history.loading && <Loader />}
-        {history.error && <div>error</div>}
+        {history.error && <div>Error loading history from server</div>}
         {history.data && (
           <>
             <div className="History__list">

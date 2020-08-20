@@ -27,7 +27,6 @@ class AccountStats extends React.Component {
   };
 
   itemSelectedListener = (item) => {
-    console.log(item);
     switch (item) {
       case 0: {
         this.onDeposit();
@@ -45,12 +44,13 @@ class AccountStats extends React.Component {
 
   render() {
     const { account } = this.props;
-    console.log(account);
     return (
       <div className="AccountStats">
-        {account.loading ? (
-          <Loader />
-        ) : (
+        {account.error !== null && (
+          <div>Unable to load balance from server</div>
+        )}
+        {account.loading && <Loader />}
+        {account.data && (
           <div className="AccountStats__rows-wrapper">
             <div className="AccountStats__title">Funds</div>
             <div className="AccountStats__total">

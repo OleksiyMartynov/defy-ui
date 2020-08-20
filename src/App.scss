@@ -16,9 +16,7 @@
       padding: 130px $space-small;
     }
   }
-  &__dialog {
-    @extend %fade-in;
-    @extend %common-page;
+  &__dialog-wrapper {
     background-color: $bg-color-middle;
     position: absolute;
     z-index: 999;
@@ -26,13 +24,18 @@
     left: 0;
     right: 0;
     bottom: 0;
+    overflow-y: auto;
+  }
+  &__dialog {
+    @extend %fade-in;
+    @extend %common-page;
     &__nav {
       padding: 10px 15px 0 0;
       right: 0;
       position: absolute;
     }
     &__content {
-      @extend %common-content;
+      // @extend %common-content;
       overflow-y: auto;
     }
   }

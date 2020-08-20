@@ -57,14 +57,16 @@ class App extends React.Component {
         dialogData.content = CreateDebate;
       }
       return (
-        <div className="App__dialog">
-          <div className="App__dialog__nav">
-            <Button accent onClick={dialogData.onClose}>
-              <i className="fa fa-times" />
-            </Button>
-          </div>
-          <div className="App__dialog__content">
-            <dialogData.content />
+        <div className="App__dialog-wrapper">
+          <div className="App__dialog">
+            <div className="App__dialog__nav">
+              <Button accent onClick={dialogData.onClose}>
+                <i className="fa fa-times" />
+              </Button>
+            </div>
+            <div className="App__dialog__content">
+              <dialogData.content />
+            </div>
           </div>
         </div>
       );
@@ -103,6 +105,7 @@ class App extends React.Component {
   };
 
   render() {
+    // eslint-disable-next-line no-console
     console.log("App.render()");
     const { ui } = this.props;
     return (

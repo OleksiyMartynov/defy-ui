@@ -11,7 +11,6 @@ import { fetchDebates } from "../actions/debates";
 class DebateList extends React.PureComponent {
   render() {
     const { debates } = this.props;
-    console.log(debates);
     return (
       <div className="DebateList">
         {debates.data &&
