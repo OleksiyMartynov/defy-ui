@@ -92,11 +92,13 @@ $common-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 %common-page {
   margin: 0 auto;
+  padding-top: $space-normal;
+  padding-bottom: $space-normal;
   max-width: 900px;
   min-width: 420px;
   height: 100vh;
   @include mobile {
-    padding: $space-tiny $space-small 0 $space-small;
+    padding: $space-normal $space-small 0 $space-small;
     min-width: 100%;
   }
 }

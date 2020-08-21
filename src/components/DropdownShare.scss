@@ -10,7 +10,7 @@
   &__dropdown {
     display: none;
     position: absolute;
-    transform: translate(36%, 80%);
+    transform: translate(-36%, 80%);
     bottom: 0;
     &__content {
       @extend %common-container-small;
@@ -18,7 +18,7 @@
       text-align: start;
       padding: 10px 0;
       white-space: nowrap;
-      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
       &__item {
         font-size: $font-size-normal;
         padding: 7px 10px;

@@ -30,9 +30,12 @@
     @extend %fade-in;
     @extend %common-page;
     &__nav {
-      padding: 10px 15px 0 0;
+      padding: 0 15px 0 0;
       right: 0;
       position: absolute;
+      @include mobile {
+        padding-top: 0;
+      }
     }
     &__content {
       // @extend %common-content;

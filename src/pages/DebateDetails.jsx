@@ -412,7 +412,11 @@ class DebateDetails extends Component {
             </div>
           </>
         ) : (
-          <Loader />
+          <>
+            <br />
+            <br />
+            <Loader />
+          </>
         )}
       </div>
     );

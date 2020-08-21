@@ -8,12 +8,12 @@ export const WITHDRAWAL_INVOICE_UPDATED = "WITHDRAWAL_INVOICE_UPDATED";
 
 export const REQUEST_INVOICE_INFO_UPDATED = "REQUEST_INVOICE_INFO_UPDATED";
 
-const updateDepositInvoice = ReduxUtils.createAction(
+export const updateDepositInvoice = ReduxUtils.createAction(
   DEPOSIT_INVOICE_UPDATED,
   "depositInvoice"
 );
 
-const updateWithdrawalInvoice = ReduxUtils.createAction(
+export const updateWithdrawalInvoice = ReduxUtils.createAction(
   WITHDRAWAL_INVOICE_UPDATED,
   "withdrawalInvoice"
 );

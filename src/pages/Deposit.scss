@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-bottom: 30px;
     &__error {
       @extend %common-subtitle;
       color: #ff0000;
@@ -28,6 +29,12 @@
     &__inner {
       @extend %common-container-inverse;
       width: 100%;
+    }
+    @include mobile {
+      min-width: initial;
+      width: initial;
+      margin-left: $space-small;
+      margin-right: $space-small;
     }
   }
   &__expiry {

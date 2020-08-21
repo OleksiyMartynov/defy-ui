@@ -15,6 +15,9 @@
       color: #ff0000;
       margin-bottom: $space-normal;
     }
+    & form {
+      padding-bottom: 30px;
+    }
   }
   &__heading {
     @extend %common-title;
