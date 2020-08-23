@@ -27,6 +27,7 @@ import FloatingButton from "../components/FloatingButton";
 import TitleBar from "../components/TitleBar";
 import DropdownShare from "../components/DropdownShare";
 import { Loader } from "../components/Loader";
+import Tooltip from "../components/Tooltip";
 
 class DebateDetails extends Component {
   constructor(props) {
@@ -69,7 +70,14 @@ class DebateDetails extends Component {
     toggleToast("Stake locked");
   };
 
-  createWinningsSection = (totalPro, totalCon, userPro, userCon, finished) => {
+  createWinningsSection = (
+    totalPro,
+    totalCon,
+    userPro,
+    userCon,
+    finished,
+    percent
+  ) => {
     let winnings = 0;
     let losses = 0;
     let stakeBack = 0;
@@ -111,10 +119,15 @@ class DebateDetails extends Component {
           {finished ? "" : "Potential "}Winnigs / Losses
         </div>
         <div>
-          <span className="DebateDetails__opinions-container__controls__spacer DebateDetails__opinions-container__controls__spacer--winnings">
-            <i className="fa fa-bolt" />
-            {winnings}
-          </span>
+          <Tooltip
+            text={`${percent}% was deducted to fund platform development and maintenance`}
+          >
+            <span className="DebateDetails__opinions-container__controls__spacer DebateDetails__opinions-container__controls__spacer--winnings">
+              <i className="fa fa-bolt" />
+              {winnings}
+            </span>
+          </Tooltip>
+
           {" / "}
           <span className="DebateDetails__opinions-container__controls__spacer DebateDetails__opinions-container__controls__spacer--losses">
             <i className="fa fa-bolt" />
@@ -339,7 +352,8 @@ class DebateDetails extends Component {
                       debateDetails.data.debate.totalCon,
                       debateDetails.data.callerTotals.totalPro,
                       debateDetails.data.callerTotals.totalCon,
-                      debateDetails.data.debate.finished
+                      debateDetails.data.debate.finished,
+                      100 * debateDetails.data.rules.winnerFee
                     )}
                   </div>
                   <div className="DebateDetails__opinions-container__controls__column DebateDetails__opinions-container__controls__column--right">
