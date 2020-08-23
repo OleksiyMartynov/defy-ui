@@ -17,7 +17,10 @@ const receiveCreateOpinion = (response) => ({
   createOpinion: response,
 });
 
-const updateOpinions = ReduxUtils.createAction(OPINIONS_UPDATED, "opinions");
+export const updateOpinions = ReduxUtils.createAction(
+  OPINIONS_UPDATED,
+  "opinions"
+);
 
 export const fetchCreateOpinion = (
   debateId,

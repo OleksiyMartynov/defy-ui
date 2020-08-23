@@ -1,6 +1,7 @@
 import DataModel from "../models/DataModel";
 import Account from "../models/Account";
 import ReduxUtils from "../utils/ReduxUtils";
+import { updateOpinions } from "../actions/opinions";
 
 export const CREATE_DEBATE = "CREATE_DEBATE";
 export const CREATE_DEBATE_FINISHED = "CREATE_DEBATE_FINISHED";
@@ -44,6 +45,7 @@ export const fetchDebates = (loadNextPage, filterReset = false) => async (
     nextPage = debateList.data.page + 1;
   }
   dispatch(updateDebates(new DataModel(debateList.data, true)));
+  dispatch(updateOpinions(new DataModel(null, true)));
   try {
     const acct = new Account(account.mnemonic);
     const response = await apiService.getDebates(

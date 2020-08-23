@@ -24,6 +24,9 @@ class OpinionCard extends React.Component {
         loadingMeta: false,
       });
     } else {
+      if (!metaRes.metadata.title) {
+        metaRes.metadata.title = metaRes.metadata.url;
+      }
       this.setState({ metadata: metaRes.metadata, loadingMeta: false });
     }
   };

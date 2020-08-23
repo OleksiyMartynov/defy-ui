@@ -103,6 +103,8 @@ $card-image-width: 120px;
           font-size: $font-size-large;
           text-decoration: inherit;
           animation: color 1s ease;
+          word-wrap: normal;
+          overflow: hidden;
           &:hover {
             color: darken($color: #000000, $amount: 0.1);
           }
