@@ -1,7 +1,7 @@
 import DataModel from "../models/DataModel";
 import Account from "../models/Account";
 import ReduxUtils from "../utils/ReduxUtils";
-import { updateOpinions } from "../actions/opinions";
+import { updateOpinions } from "./opinions";
 
 export const CREATE_DEBATE = "CREATE_DEBATE";
 export const CREATE_DEBATE_FINISHED = "CREATE_DEBATE_FINISHED";
