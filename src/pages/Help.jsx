@@ -41,8 +41,8 @@ const CONTENT = [
         Everyone loves Bitcoin! But due to its monetary policy the base-layer is
         not optimal for micro-payments. You would&apos;nt go to a central bank
         to pay for a coffee, would you? So we chose to use Lightning Network, a
-        second layer network on top of Bitcoin, in order to leverage it&apos;s
-        properties:
+        second layer network on top of Bitcoin. If Bitcoin is a central bank,
+        Lightning is Visa. Lightning Network has the following properties:
         <ul>
           <li>Near-zero percent transaction fees</li>
           <li>Near-zero second transaction times</li>
