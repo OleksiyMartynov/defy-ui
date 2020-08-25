@@ -116,11 +116,12 @@ class DebateDetails extends Component {
           {userCon}
         </div>
         <div className="DebateDetails__opinions-container__controls__spacer__results__result-title">
-          {finished ? "" : "Potential "}Winnigs / Losses
+          {finished ? "" : "Potential "}
+          Winnigs / Losses
         </div>
         <div>
           <Tooltip
-            text={`${percent}% was deducted to fund platform development and maintenance`}
+            text={`${percent}% will be deducted to fund platform development and maintenance`}
           >
             <span className="DebateDetails__opinions-container__controls__spacer DebateDetails__opinions-container__controls__spacer--winnings">
               <i className="fa fa-bolt" />
@@ -168,7 +169,7 @@ class DebateDetails extends Component {
         {debateDetails.data ? (
           <>
             <Helmet>
-              <title>Defy.fyi : {debateDetails.data.debate.title}</title>
+              <title>Defy.fyi :{debateDetails.data.debate.title}</title>
               <meta
                 name="description"
                 content="Debate hot topics and win sats"
@@ -227,7 +228,10 @@ class DebateDetails extends Component {
                     <Link to={`/debates/${tag.name}`}>
                       <FloatingButton onClick={this.onCreateDebate}>
                         <i className="fas fa-hashtag" />
-                        <span>&nbsp;{tag.name}</span>
+                        <span>
+                          &nbsp;
+                          {tag.name}
+                        </span>
                       </FloatingButton>
                     </Link>
                   </div>
@@ -416,7 +420,7 @@ class DebateDetails extends Component {
                   lastItem={
                     <OpinionCard
                       content={null}
-                      contentType={"created"}
+                      contentType="created"
                       created={debateDetails.data.debate.created}
                       stake={debateDetails.data.debate.stake}
                     />

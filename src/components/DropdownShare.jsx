@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 class DropdownShare extends React.PureComponent {
   onCopy = (text) => {
     const { toggleToast } = this.props;
-    toggleToast("Text coppied");
+    toggleToast("Link coppied");
   };
 
   mobileShare = () => {

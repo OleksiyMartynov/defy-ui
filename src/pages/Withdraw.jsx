@@ -41,6 +41,12 @@ class Withdraw extends React.Component {
         <div className="Withdraw__content">
           <div className="Withdraw__heading">Withdraw Funds</div>
           <form onSubmit={this.handleSubmit}>
+            <span>
+              Generate an invoice in your Lightning wallet in order to withdraw
+              funds
+            </span>
+            <br />
+            <br />
             <div className="Withdraw__input-wrapper">
               <textarea
                 disabled={withdrawalInvoice.loading}

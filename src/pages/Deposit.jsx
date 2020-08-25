@@ -50,7 +50,7 @@ class Deposit extends React.Component {
         fetchAccountInfo();
         toggleToast("Deposit successful");
       }
-    }, 10 * 1000);
+    }, 5 * 1000);
   }
 
   render() {
@@ -63,6 +63,11 @@ class Deposit extends React.Component {
           {depositInvoice.error && <div>Error making deposit</div>}
           {depositInvoice.data && (
             <>
+              <span>
+                Scan or copy the lightning invoice below into your Lightning
+                wallet in order to deposit funds
+              </span>
+              <br />
               <div className="Deposit__banner">
                 <div className="Deposit__banner__inner">
                   <QRCode

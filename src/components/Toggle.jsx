@@ -1,7 +1,8 @@
 import React from "react";
 import "./Toggle.scss";
-import Button from "./Button";
 import PropTypes from "prop-types";
+import Button from "./Button";
+
 class Toggle extends React.Component {
   constructor(props) {
     super(props);
@@ -10,27 +11,31 @@ class Toggle extends React.Component {
 
   handleToggleChange = () => {
     const left = !this.state.left;
-    this.props.onChange(left)
+    this.props.onChange(left);
     this.setState({
       left,
     });
   };
 
   UNSAFE_componentWillReceiveProps = (newProps) => {
-    this.setState({left: newProps.left});
-  } 
+    this.setState({ left: newProps.left });
+  };
 
   render() {
     const { left } = this.state;
-    const { leftText, rightText, leftIcon, rightIcon } = this.props;
+    const { leftText, rightText, leftIcon, rightIcon, isFlat } = this.props;
     return (
-      <div className="Toggle">
+      <div className={`Toggle${isFlat ? " Toggle--flat" : ""}`}>
         <Button secondary selected={left} onClick={this.handleToggleChange}>
-            {leftIcon}&nbsp;{leftText}
+          {leftIcon}
+          &nbsp;
+          {leftText}
         </Button>
         {rightText && (
           <Button secondary selected={!left} onClick={this.handleToggleChange}>
-            {rightIcon}&nbsp;{rightText}
+            {rightIcon}
+            &nbsp;
+            {rightText}
           </Button>
         )}
       </div>
@@ -42,6 +47,10 @@ Toggle.propTypes = {
   leftIcon: PropTypes.element,
   rightText: PropTypes.string,
   rightIcon: PropTypes.element,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  isFlat: PropTypes.func,
+};
+Toggle.defaultProps = {
+  isFlat: false,
 };
 export default Toggle;

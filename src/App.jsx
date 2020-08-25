@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Helmet } from "react-helmet";
 import { createAccount, fetchAccountInfo } from "./actions/account";
 import {
   closeDepositDialog,
@@ -24,8 +25,8 @@ import AccountStats from "./components/AccountStats";
 import Debates from "./pages/Debates";
 import Discover from "./pages/History";
 import Account from "./pages/Account";
+import Help from "./pages/Help";
 import Toast from "./components/Toast";
-import { Helmet } from "react-helmet";
 
 class App extends React.Component {
   constructor(props) {
@@ -94,6 +95,7 @@ class App extends React.Component {
               icon: "fas fa-history",
             },
             { text: "Account", link: "/account", icon: "fa fa-cog" },
+            { text: "Help", link: "/help", icon: "far fa-question-circle" },
           ]}
         />
         <div className="App__content">
@@ -131,6 +133,11 @@ class App extends React.Component {
               exact
               path="/account"
               render={(params) => this.wrapInNavigation(Account, params)}
+            />
+            <Route
+              exact
+              path="/help"
+              render={(params) => this.wrapInNavigation(Help, params)}
             />
             <Redirect to="/debates" />
           </Switch>

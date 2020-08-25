@@ -1,0 +1,36 @@
+@import "../assets/scss/base.scss";
+
+.Help {
+  @extend %fade-in;
+  &__heading {
+    @extend %common-heading;
+  }
+  &__section {
+    @extend %common-container;
+    margin-top: $space-normal;
+    width: 100%;
+    max-width: 1000px;
+    &__title {
+      @extend %common-title;
+    }
+    &__item{
+        & button{
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            & i {
+                margin-left: 5px;
+            }
+        }
+        &__description{
+            max-height: fit-content;
+            transition: all 500ms ease;
+            padding-left: 30px;
+            max-width: 700px;
+        }
+        & span, ul{
+          @extend %fade-in;
+        }
+    }
+  }
+}
