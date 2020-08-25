@@ -6,6 +6,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  font-size: $font-size-large!important;
   cursor: pointer;
   &__dropdown {
     display: none;

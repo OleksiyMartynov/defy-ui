@@ -6,6 +6,7 @@ import Toggle from "./Toggle";
 import Button from "./Button";
 import { fetchCreateOpinion } from "../actions/opinions";
 import Tooltip from "./Tooltip";
+import Formatter from "../utils/Formatter";
 
 class CreateOpinionCard extends Component {
   constructor(props) {
@@ -21,6 +22,32 @@ class CreateOpinionCard extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+    if (event.target.name === "link" && this.isValidLink(event.target.value)) {
+      this.getMeta(event.target.value);
+    } else if (
+      event.target.name === "link" &&
+      !this.isValidLink(event.target.value)
+    ) {
+      this.setState({ metadata: null, loadingMeta: false });
+    }
+  };
+
+  getMeta = async (url) => {
+    const res = await fetch(
+      `${process.env.REACT_APP_API_URL}/meta?url=${encodeURI(url)}`
+    );
+    const metaRes = await res.json();
+    if (metaRes.error) {
+      this.setState({
+        metaError: "Failed loading link preview",
+        loadingMeta: false,
+      });
+    } else {
+      if (!metaRes.metadata.title) {
+        metaRes.metadata.title = metaRes.metadata.url;
+      }
+      this.setState({ metadata: metaRes.metadata, loadingMeta: false });
+    }
   };
 
   onCreateClicked = async () => {
@@ -87,7 +114,7 @@ class CreateOpinionCard extends Component {
 
   render() {
     const { pro, minOpinionStake, minVoteStake } = this.props;
-    const { stake, showLink, link, loading, error } = this.state;
+    const { stake, showLink, link, loading, error, metadata } = this.state;
     const side = pro ? " Pro" : " Con";
     return (
       <div className="CreateOpinionCard">
@@ -143,6 +170,38 @@ class CreateOpinionCard extends Component {
                 onChange={this.handleChange}
               />
             </div>
+            {metadata && (
+              <>
+                <div className="CreateOpinionCard__preview__divider" />
+                <div className="CreateOpinionCard__preview__content-wrapper__content">
+                  <div className="CreateOpinionCard__preview__content-wrapper__content__image">
+                    {metadata.image ? (
+                      <img src={metadata.image} alt="Article preview" />
+                    ) : (
+                      <i className="far fa-newspaper" />
+                    )}
+                  </div>
+                  <div className="CreateOpinionCard__preview__content-wrapper__content__details">
+                    <a
+                      href={metadata.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div className="CreateOpinionCard__preview__content-wrapper__content__details__title">
+                        {metadata.title}
+                      </div>
+                    </a>
+                    <div className="CreateOpinionCard__preview__content-wrapper__content__details__description">
+                      {metadata.description}
+                    </div>
+                    <div className="CreateOpinionCard__preview__content-wrapper__content__details__domain">
+                      {Formatter.getBaseUrl(metadata.url)}
+                    </div>
+                  </div>
+                </div>
+                <div className="CreateOpinionCard__preview__divider" />
+              </>
+            )}
           </div>
         )}
         <div className="CreateOpinionCard__error">{error}</div>

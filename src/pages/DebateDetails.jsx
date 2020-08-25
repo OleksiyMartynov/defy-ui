@@ -221,6 +221,10 @@ class DebateDetails extends Component {
                       debateDetails.data.debate.totalCon
                   )}
                 </div>
+                <DropdownShare
+                  mobileTitle={debateDetails.data.debate.title}
+                  mobileDescription="Put your ₿ where your mouth is."
+                />
               </div>
               <div className="DebateDetails__tags">
                 {debateDetails.data.debate.tags.map((tag) => (
