@@ -45,9 +45,9 @@ const CONTENT = [
         Lightning is Visa. Lightning Network has the following properties:
         <ul>
           <li>Near-zero percent transaction fees</li>
-          <li>Near-zero second transaction times</li>
+          <li>Instant transaction times</li>
           <li>Easy and simple to use wallets</li>
-          <li>Options for anonymous transactions</li>
+          <li>Anonymous transactions</li>
         </ul>
       </span>
     ),
@@ -93,9 +93,9 @@ const CONTENT = [
       <span>
         For any ongoing debate users can vote for a side by locking up a any
         amount. Votes on the winning majority stake side will receive the
-        initial stake and a weighted fraction of the losing side stake. Votes on
-        the losing minority side will lose all of their stake to the winning
-        side.
+        initial stake in addition to weighted fraction of the losing side stake.
+        Votes on the losing minority side will lose all of their stake to the
+        winning side.
       </span>
     ),
   },
@@ -109,9 +109,9 @@ const CONTENT = [
         even a facebook post. Same rules apply to evidence and votes. For any
         ongoing debate users can provide evidence for a debate side by locking
         up a any amount. Evidence on the winning majority stake side will
-        receive the initial stake and a weighted fraction of the losing side
-        stake. Evidence on the losing minority side will lose all of their stake
-        to the winning side.
+        receive the initial stake in addition to weighted fraction of the losing
+        side stake. Evidence on the losing minority side will lose all of their
+        stake to the winning side.
       </span>
     ),
   },
@@ -120,7 +120,7 @@ const CONTENT = [
     detailHeight: "40px",
     detail: () => (
       <span>
-        You can lose the funds that you have staked in a debate and those funds
+        You can lose the funds that you have staked in a debate if those funds
         are in the minority side.
       </span>
     ),
