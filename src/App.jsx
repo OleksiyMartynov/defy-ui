@@ -14,11 +14,13 @@ import {
   closeDepositDialog,
   closeWithdrawalDialog,
   closeCreateDebateDialog,
+  closeWelcomeDialog,
 } from "./actions/ui";
 import Button from "./components/Button";
 import Withdraw from "./pages/Withdraw";
 import Deposit from "./pages/Deposit";
 import CreateDebate from "./pages/CreateDebate";
+import Welcome from "./pages/Welcome";
 import DebateDetails from "./pages/DebateDetails";
 import NavBar from "./components/NavBar";
 import AccountStats from "./components/AccountStats";
@@ -39,13 +41,15 @@ class App extends React.Component {
       showDepositDialog,
       showWithdrawalDialog,
       showCreateDebateDialog,
+      showWelcomeDialog
     } = ui;
     const {
       closeDepositDialog,
       closeWithdrawalDialog,
       closeCreateDebateDialog,
+      closeWelcomeDialog,
     } = this.props;
-    if (showWithdrawalDialog || showCreateDebateDialog || showDepositDialog) {
+    if (showWithdrawalDialog || showCreateDebateDialog || showDepositDialog || showWelcomeDialog) {
       const dialogData = {};
       if (showDepositDialog) {
         dialogData.onClose = closeDepositDialog;
@@ -53,9 +57,12 @@ class App extends React.Component {
       } else if (showWithdrawalDialog) {
         dialogData.onClose = closeWithdrawalDialog;
         dialogData.content = Withdraw;
-      } else {
+      } else if (showCreateDebateDialog) {
         dialogData.onClose = closeCreateDebateDialog;
         dialogData.content = CreateDebate;
+      } else {
+        dialogData.onClose = closeWelcomeDialog;
+        dialogData.content = Welcome;
       }
       return (
         <div className="App__dialog-wrapper">
@@ -161,6 +168,7 @@ const mapDispatchToProps = (dispatch) => ({
   closeDepositDialog: () => dispatch(closeDepositDialog()),
   closeWithdrawalDialog: () => dispatch(closeWithdrawalDialog()),
   closeCreateDebateDialog: () => dispatch(closeCreateDebateDialog()),
+  closeWelcomeDialog: () => dispatch(closeWelcomeDialog()),
 });
 const mapStateToProps = (state) => ({
   account: state.account,

@@ -1,0 +1,45 @@
+@import "../assets/scss/base.scss";
+.Welcome {
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: $space-normal;
+  &__content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &__error {
+      @extend %common-subtitle;
+      color: #ff0000;
+    }
+  }
+  &__heading {
+    @extend %common-title;
+    text-align: center;
+    margin-bottom: $space-normal;
+  }
+  &__words-container {
+    @include inline-animation(300ms) {
+      from {
+        height: 0px;
+      }
+      to {
+        height: 130px;
+      }
+    }
+    margin-top: $space-normal;
+    & > textarea {
+      @extend %common-input;
+      white-space: normal;
+      width: 100%;
+      height: 130px;
+      font-size: $font-size-large;
+      font-weight: 400;
+    }
+  }
+}

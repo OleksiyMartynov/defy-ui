@@ -1,6 +1,7 @@
 import Account from "../models/Account";
 import DataModel from "../models/DataModel";
 import ReduxUtils from "../utils/ReduxUtils";
+import {openWelcomeDialog} from "../actions/ui";
 
 /**
  * action types
@@ -57,6 +58,7 @@ export const fetchAccountInfo = () => async (
     dispatch(
       updateAccountInfo(new DataModel({ balance: 0, lockedBalance: 0 }, false))
     );
+    dispatch(openWelcomeDialog());
     account = getState().account;
   }
   try {

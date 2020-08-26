@@ -7,6 +7,9 @@ export const CLOSE_WITHDRAWAL_DIALOG = "CLOSE_WITHDRAWAL_DIALOG";
 export const OPEN_CREATE_DEBATE_DIALOG = "OPEN_CREATE_DEBATE_DIALOG";
 export const CLOSE_CREATE_DEBATE_DIALOG = "CLOSE_CREATE_DEBATE_DIALOG";
 
+export const OPEN_WELCOME_DIALOG = "OPEN_WELCOME_DIALOG";
+export const CLOSE_WELCOME_DIALOG = "CLOSE_WELCOME_DIALOG";
+
 export const SHOW_TOAST = "HIDE_TOAST";
 export const HIDE_TOAST = "SHOW_TOAST";
 
@@ -24,6 +27,9 @@ export const openCreateDebateDialog = () => ({
 export const closeCreateDebateDialog = () => ({
   type: CLOSE_CREATE_DEBATE_DIALOG,
 });
+
+export const openWelcomeDialog = () => ({ type: OPEN_WELCOME_DIALOG });
+export const closeWelcomeDialog = () => ({ type: CLOSE_WELCOME_DIALOG });
 
 export const showToast = (text) => ({
   type: SHOW_TOAST,

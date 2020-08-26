@@ -5,6 +5,8 @@ import {
   CLOSE_WITHDRAWAL_DIALOG,
   OPEN_CREATE_DEBATE_DIALOG,
   CLOSE_CREATE_DEBATE_DIALOG,
+  OPEN_WELCOME_DIALOG,
+  CLOSE_WELCOME_DIALOG,
   SHOW_TOAST,
   HIDE_TOAST,
 } from "../actions/ui";
@@ -13,6 +15,7 @@ const initialState = {
   showDepositDialog: false,
   showWithdrawalDialog: false,
   showCreateDebateDialog: false,
+  showWelcomeDialog: false,
   showToast: { show: false, text: false },
 };
 
@@ -30,6 +33,10 @@ const ui = (previousState = initialState, action) => {
       return { ...previousState, showCreateDebateDialog: true };
     case CLOSE_CREATE_DEBATE_DIALOG:
       return { ...previousState, showCreateDebateDialog: false };
+    case OPEN_WELCOME_DIALOG:
+      return { ...previousState, showWelcomeDialog: true };
+    case CLOSE_WELCOME_DIALOG:
+      return { ...previousState, showWelcomeDialog: false };
     case SHOW_TOAST:
       return {
         ...previousState,
