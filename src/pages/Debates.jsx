@@ -20,13 +20,14 @@ class Debates extends React.Component {
     this.doSearch(true, true, false, false, tag);
   }
 
-  handleChange = (event) => {
-    this.setState({ value: event.target.value });
-  };
-
-  onCreateDebate = () => {
-    this.props.openCreateDebateDialog();
-  };
+  componentDidUpdate() {
+    if (this.state.tag !== this.props.match.params.tag) {
+      const { showActive, value, selectedIndex } = this.state;
+      const { match } = this.props;
+      const tag = match.params.tag;
+      this.doSearch(showActive, selectedIndex === 0, false, value, tag);
+    }
+  }
 
   onActiveToggled = (finished) => {
     this.setState({ showActive: finished });
@@ -44,14 +45,19 @@ class Debates extends React.Component {
     this.setState({ selectedIndex: index });
   };
 
-  componentDidUpdate() {
-    if (this.state.tag !== this.props.match.params.tag) {
+  onCreateDebate = () => {
+    this.props.openCreateDebateDialog();
+  };
+
+  handleChange = (event) => {
+    this.setState({ value: event.target.value });
+    if (event.target.value === "") {
       const { showActive, value, selectedIndex } = this.state;
       const { match } = this.props;
       const tag = match.params.tag;
-      this.doSearch(showActive, selectedIndex === 0, false, value, tag);
+      this.doSearch(showActive, selectedIndex === 0, false, "", tag);
     }
-  }
+  };
 
   handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -62,6 +68,10 @@ class Debates extends React.Component {
     }
   };
 
+  removeTag = () => {
+    this.props.history.push("/debates");
+  };
+
   doSearch(showActive, byStake, address, searchText, tag) {
     const { fetchDebatesWithFilter } = this.props; //account object is also in props
     // const accountObject = new AccountModel(account.mnemonic);
@@ -70,10 +80,6 @@ class Debates extends React.Component {
       new DebateFilter(showActive, byStake, address, searchText, tag)
     );
   }
-
-  removeTag = () => {
-    this.props.history.push("/debates");
-  };
 
   render() {
     const { showActive, value, selectedIndex, tag } = this.state;
