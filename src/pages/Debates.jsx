@@ -52,7 +52,7 @@ class Debates extends React.Component {
   handleChange = (event) => {
     this.setState({ value: event.target.value });
     if (event.target.value === "") {
-      const { showActive, value, selectedIndex } = this.state;
+      const { showActive, selectedIndex } = this.state;
       const { match } = this.props;
       const tag = match.params.tag;
       this.doSearch(showActive, selectedIndex === 0, false, "", tag);
