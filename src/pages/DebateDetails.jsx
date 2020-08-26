@@ -9,7 +9,6 @@ import ReactMarkdown from "react-markdown";
 
 import CodeBlock from "../components/CodeBlock";
 import { fetchDebateDetails } from "../actions/debates";
-import { fetchCreateOpinion } from "../actions/opinions";
 import { toggleToast } from "../actions/ui";
 import { fetchAccountInfo } from "../actions/account";
 import "./DebateDetails.scss";
@@ -450,8 +449,6 @@ DebateDetails.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchDebateDetails: (debateId) => dispatch(fetchDebateDetails(debateId)),
-  fetchCreateOpinion: (debateId, content, contentType, stake, pro) =>
-    dispatch(fetchCreateOpinion(debateId, content, contentType, stake, pro)),
   fetchAccountInfo: () => dispatch(fetchAccountInfo()),
   toggleToast: (text) => dispatch(toggleToast(text)),
 });

@@ -115,7 +115,7 @@ class CreateDebate extends React.PureComponent {
       redirect,
     } = this.state;
     if (redirect) {
-      return <Redirect to={redirect} />;
+      return <Redirect push to={redirect} />;
     }
     return (
       <div className="CreateDebate">

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchOpinions, fetchCreateOpinion } from "../actions/opinions";
+import { fetchOpinions } from "../actions/opinions";
 import "./OpinionList.scss";
 import Button from "../components/Button";
 import OpinionCard from "../components/OpinionCard";
@@ -80,8 +80,6 @@ OpinionList.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   fetchOpinions: (debateId, loadNextPage) =>
     dispatch(fetchOpinions(debateId, loadNextPage)),
-  fetchCreateOpinion: (debateId, content, contentType, stake, pro) =>
-    dispatch(fetchCreateOpinion(debateId, content, contentType, stake, pro)),
 });
 const mapStateToProps = (state) => ({
   opinions: state.opinionList,

@@ -31,7 +31,7 @@ export const fetchCreateOpinion = (
 ) => async (dispatch, getState, { apiService }) => {
   dispatch(requestCreateOpinion(new DataModel(null, true)));
   try {
-    const { account } = getState();
+    const { opinionList, account } = getState();
 
     const acct = new Account(account.mnemonic);
     const response = await apiService.createOpinion(
@@ -42,6 +42,14 @@ export const fetchCreateOpinion = (
       pro,
       acct
     );
+    if (!response.error && opinionList.data) {
+      response.data.opinions = [
+        response.data.opinion,
+        ...opinionList.data.opinions,
+      ];
+      delete response.data.opinion;
+      dispatch(updateOpinions(response));
+    }
     dispatch(receiveCreateOpinion(response));
     return response;
   } catch (ex) {
