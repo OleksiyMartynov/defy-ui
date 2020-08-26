@@ -168,7 +168,7 @@ class DebateDetails extends Component {
         {debateDetails.data ? (
           <>
             <Helmet>
-              <title>Defy.fyi :{debateDetails.data.debate.title}</title>
+              <title>Defy.fyi : {debateDetails.data.debate.title}</title>
               <meta
                 name="description"
                 content="Debate hot topics and win sats"
