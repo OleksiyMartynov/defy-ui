@@ -9,7 +9,7 @@ import {
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { createAccount, fetchAccountInfo } from "./actions/account";
+import { fetchAccountInfo } from "./actions/account";
 import {
   closeDepositDialog,
   closeWithdrawalDialog,
@@ -151,14 +151,12 @@ class App extends React.Component {
 App.propTypes = {
   account: PropTypes.object.isRequired,
   ui: PropTypes.object.isRequired,
-  createAccount: PropTypes.func.isRequired,
   fetchAccountInfo: PropTypes.func.isRequired,
   closeDepositDialog: PropTypes.func.isRequired,
   closeWithdrawalDialog: PropTypes.func.isRequired,
   closeCreateDebateDialog: PropTypes.func.isRequired,
 };
 const mapDispatchToProps = (dispatch) => ({
-  createAccount: (account) => dispatch(createAccount(account)),
   fetchAccountInfo: () => dispatch(fetchAccountInfo()),
   closeDepositDialog: () => dispatch(closeDepositDialog()),
   closeWithdrawalDialog: () => dispatch(closeWithdrawalDialog()),

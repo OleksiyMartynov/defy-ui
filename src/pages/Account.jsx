@@ -43,7 +43,7 @@ class Account extends React.Component {
             <li>Save it somewhere safe (not on this device)!</li>
             <li>Do not share it with anyone.</li>
             <li>
-              <b>Do not lose it.</b>
+              <b>Do not lose it. </b>
               If you lose your words list and your browser cookies, you&apos;ve
               lost your funds.
             </li>

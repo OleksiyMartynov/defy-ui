@@ -51,13 +51,13 @@ export const fetchAccountInfo = () => async (
   getState,
   { apiService }
 ) => {
-  const { account } = getState();
+  let { account } = getState();
   if (!account || !account.mnemonic) {
     dispatch(createAccount());
     dispatch(
       updateAccountInfo(new DataModel({ balance: 0, lockedBalance: 0 }, false))
     );
-    return;
+    account = getState().account;
   }
   try {
     const acct = new Account(account.mnemonic);
