@@ -20,7 +20,7 @@ class Welcome extends Component {
           <div className="Welcome__heading">Welcome!</div>
           <ol>
             <li>
-              Back up your seed prase! This list of words is your account
+              Back up your seed phrase! This list of words is your account
               backup. Save it somewhere safe (not on this device)! Do not share
               it with anyone. Do not lose it. If you lose your words list and
               your browser cookies, you've lost your funds.
