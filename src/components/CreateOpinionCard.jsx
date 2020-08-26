@@ -11,7 +11,13 @@ import Formatter from "../utils/Formatter";
 class CreateOpinionCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { stake: "", link: "", showLink: false, loading: false };
+    this.state = {
+      stake: "",
+      link: "",
+      showLink: false,
+      loading: false,
+      infoOpen: false,
+    };
   }
 
   onActiveToggled = (showLink) => {
@@ -114,7 +120,15 @@ class CreateOpinionCard extends Component {
 
   render() {
     const { pro, minOpinionStake, minVoteStake } = this.props;
-    const { stake, showLink, link, loading, error, metadata } = this.state;
+    const {
+      stake,
+      showLink,
+      link,
+      loading,
+      error,
+      metadata,
+      infoOpen,
+    } = this.state;
     const side = pro ? " Pro" : " Con";
     return (
       <div className="CreateOpinionCard">
@@ -122,18 +136,81 @@ class CreateOpinionCard extends Component {
           Support
           {side}
         </div>
-        <Toggle
-          left={!showLink}
-          leftText="Vote"
-          rightText="Evidence"
-          onChange={this.onActiveToggled}
-        />
+        <div className="CreateOpinionCard__buttons-layout">
+          <Toggle
+            left={!showLink}
+            leftText="Vote"
+            rightText="Evidence"
+            onChange={this.onActiveToggled}
+          />
+          &nbsp;&nbsp;
+          <Toggle
+            isFlat
+            left={infoOpen}
+            leftText="Info"
+            leftIcon={<i className="fas fa-chevron-down" />}
+            onChange={(toggle) => {
+              this.setState({ infoOpen: toggle });
+            }}
+          />
+        </div>
+
+        <div
+          className="CreateOpinionCard__info"
+          style={{ minHeight: infoOpen ? "100px" : "0px" }}
+        >
+          {infoOpen && (
+            <div className="CreateOpinionCard__info__content">
+              {showLink ? (
+                <ul>
+                  <li>
+                    New evidence will extend debate duration by <b>24 hours</b>
+                  </li>
+                  <li>Not all links render with a preview</li>
+                  <li>
+                    Stake amount sets the minimum for next new evidence item
+                  </li>
+                  <li>
+                    Evidence stake amount increases the total stake for this
+                    side of the debate
+                  </li>
+                  <li>
+                    You can lose your stake if this side ends up in minority at
+                    debate completion
+                  </li>
+                  <li>
+                    You can win part of the minority stake proportionally to
+                    your stake out of the total winning side stake
+                  </li>
+                </ul>
+              ) : (
+                <ul>
+                  <li>
+                    New vote <b>does not</b> extend the debate duration
+                  </li>
+                  <li>
+                    Vote stake amount increases the total stake for this side of
+                    the debate
+                  </li>
+                  <li>
+                    You can lose your stake if this side ends up in minority at
+                    debate completion
+                  </li>
+                  <li>
+                    You can win part of the minority stake proportionally to
+                    your stake out of the total winning side stake
+                  </li>
+                </ul>
+              )}
+            </div>
+          )}
+        </div>
         <div className="CreateOpinionCard__label">
           <Tooltip
             text={
               showLink
-                ? "Sets minimum stake for next evidence item and will be added to total"
-                : `Will be added to total of ${side} side of debate`
+                ? "Extends debate duration by 24hr, sets the minimum stake for next evidence item and is added to total until debate completion"
+                : `Will be added to total of ${side} side of debate until debate completion`
             }
           >
             Stake (min

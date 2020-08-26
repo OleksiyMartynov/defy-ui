@@ -1,7 +1,7 @@
 import Account from "../models/Account";
 import DataModel from "../models/DataModel";
 import ReduxUtils from "../utils/ReduxUtils";
-import {openWelcomeDialog} from "../actions/ui";
+import { openWelcomeDialog } from "./ui";
 
 /**
  * action types

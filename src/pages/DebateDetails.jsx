@@ -124,7 +124,7 @@ class DebateDetails extends Component {
           >
             <span className="DebateDetails__opinions-container__controls__spacer DebateDetails__opinions-container__controls__spacer--winnings">
               <i className="fa fa-bolt" />
-              {winnings}
+              {Math.round(winnings)}
             </span>
           </Tooltip>
 

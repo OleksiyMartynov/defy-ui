@@ -137,9 +137,14 @@ class CreateDebate extends React.PureComponent {
               </p>
               <ul>
                 <li>
+                  Please choose a debate topic that can only have two outcomes,
+                  that is <b>for</b> or <b>against</b>, <b>pro</b> or <b>con</b>
+                </li>
+                <li>
                   Debate results are concluded after 24hrs of inactivity (no new
                   evidence)
                 </li>
+                <li>Title should briefly describe the essence of the debate</li>
                 <li>
                   Stake amount will be returned to you after debate conclusion
                 </li>

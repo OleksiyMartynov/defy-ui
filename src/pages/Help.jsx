@@ -87,6 +87,16 @@ const CONTENT = [
     ),
   },
   {
+    title: "How is debate duration set?",
+    detailHeight: "80px",
+    detail: () => (
+      <span>
+        Debate ends 24 hours after it is created unless new evidence is added,
+        which would extend the debate duration by another 24 hours.
+      </span>
+    ),
+  },
+  {
     title: "What is a vote in a debate?",
     detailHeight: "70px",
     detail: () => (
@@ -111,7 +121,8 @@ const CONTENT = [
         up a any amount. Evidence on the winning majority stake side will
         receive the initial stake in addition to weighted fraction of the losing
         side stake. Evidence on the losing minority side will lose all of their
-        stake to the winning side.
+        stake to the winning side. New evidence will extend debate duration by
+        24 hours.
       </span>
     ),
   },
