@@ -30,4 +30,36 @@ export default class Formatter {
   static zeroPad(n) {
     return n < 10 ? `0${n}` : n;
   }
+
+  static isValidLink(text) {
+    const expression = /[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi;
+    const regex = new RegExp(expression);
+    return text.match(regex);
+  }
+
+  static isTweetLink(text) {
+    if (!this.isValidLink(text)) {
+      return false;
+    }
+    const parser = document.createElement("a");
+    parser.href = text;
+    const parts = parser.pathname.split("/");
+    if (parser.hostname === "twitter.com" && parts?.[2] === "status") {
+      return parts[3];
+    }
+    return false;
+  }
+
+  static getLinkHostName(text) {
+    const parser = document.createElement("a");
+    parser.href = text;
+    return `${parser.protocol  }//${  parser.host}`;
+  }
+
+  static convertUnicode(input) {
+    return input.replace(/\\u(\w\w\w\w)/g, (a, b) => {
+      const charcode = parseInt(b, 16);
+      return String.fromCharCode(charcode);
+    });
+  }
 }

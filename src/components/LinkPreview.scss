@@ -1,0 +1,132 @@
+@import "../assets/scss/base.scss";
+
+.LinkPreview {
+    &__tweet{
+        width: 100%;
+        & div{
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    &__preview{
+        &__content-wrapper {
+          max-width: 550px;
+          z-index: 1;
+          @extend %common-container-small;
+          width: 70%;
+          &--small {
+            @extend %common-container-small;
+            width: fit-content;
+            min-width: 200px;
+          }
+          &--created {
+            @extend %common-container-small;
+            min-width: 200px;
+            width: initial;
+            height: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            transform: translateY(50px);
+          }
+          &__creator-banner {
+            @extend %common-card-creator-banner;
+          }
+          &__top {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            &__stake {
+              width: 20%;
+              & div {
+                @extend %common-stake-badge-small;
+                margin: auto;
+              }
+            }
+            &__date {
+              @extend %common-label;
+              width: 80%;
+              margin-left: $space-small;
+            }
+          }
+          &__loading {
+            padding: $space-small;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            & i {
+              margin-right: $space-small;
+            }
+            & h3 {
+              margin: 0;
+              text-align: center;
+            }
+          }
+          &__content {
+            display: flex;
+            align-items: center;
+            &__image {
+              width: 20%;
+              height: auto;
+              text-align: center;
+              img {
+                width: 100%;
+              }
+              i {
+                font-size: 60px;
+              }
+              @include mobile {
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                margin-top: $space-small;
+              }
+            }
+            &__details {
+              width: 80%;
+              padding-left: $space-small;
+              @include mobile {
+                width: 100%;
+                padding-left: 0;
+                margin-top: $space-small;
+              }
+              &__title {
+                @extend %common-title;
+                font-size: $font-size-large;
+                text-decoration: inherit;
+                animation: color 1s ease;
+                word-wrap: normal;
+                overflow: hidden;
+                &:hover {
+                  color: darken($color: #000000, $amount: 0.1);
+                }
+              }
+              &__description {
+                @extend %common-text;
+              }
+              &__domain {
+                @extend %common-label;
+                margin-top: $space-tiny;
+                text-decoration: inherit;
+                overflow-wrap: anywhere;
+              }
+            }
+            @include mobile {
+              flex-direction: column;
+            }
+          }
+          &__error {
+            padding: $space-small;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            & i {
+              margin-right: $space-small;
+            }
+          }
+          @include mobile {
+            width: 85%;
+          }
+        }
+      }
+}

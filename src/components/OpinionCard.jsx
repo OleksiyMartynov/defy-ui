@@ -3,34 +3,9 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import Formatter from "../utils/Formatter";
 import "./OpinionCard.scss";
+import LinkPreview from "./LinkPreview";
 
-class OpinionCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { loadingMeta: true };
-    if (props.content) {
-      this.getMeta(props.content);
-    }
-  }
-
-  getMeta = async (url) => {
-    const res = await fetch(
-      `${process.env.REACT_APP_API_URL}/meta?url=${encodeURI(url)}`
-    );
-    const metaRes = await res.json();
-    if (metaRes.error) {
-      this.setState({
-        metaError: "Failed loading link preview",
-        loadingMeta: false,
-      });
-    } else {
-      if (!metaRes.metadata.title) {
-        metaRes.metadata.title = metaRes.metadata.url;
-      }
-      this.setState({ metadata: metaRes.metadata, loadingMeta: false });
-    }
-  };
-
+class OpinionCard extends React.PureComponent {
   render() {
     const {
       content,
@@ -40,58 +15,7 @@ class OpinionCard extends React.Component {
       stake,
       createdByMe,
     } = this.props;
-    const { loadingMeta, metadata, metaError } = this.state;
-    let metaSection = null;
-    if (content) {
-      if (loadingMeta) {
-        metaSection = (
-          <div className="OpinionCard__content-wrapper__loading">
-            <i className="fas fa-spinner fa-4x" aria-hidden="true" />
-            Loading&nbsp;
-            <a href={content} target="_blank" rel="noopener noreferrer">
-              link
-            </a>
-            &nbsp; preview
-          </div>
-        );
-      } else if (metadata) {
-        metaSection = (
-          <div className="OpinionCard__content-wrapper__content">
-            <div className="OpinionCard__content-wrapper__content__image">
-              {metadata.image ? (
-                <img src={metadata.image} alt="Article preview" />
-              ) : (
-                <i className="far fa-newspaper"></i>
-              )}
-            </div>
-            <div className="OpinionCard__content-wrapper__content__details">
-              <a href={metadata.url} target="_blank" rel="noopener noreferrer">
-                <div className="OpinionCard__content-wrapper__content__details__title">
-                  {metadata.title}
-                </div>
-              </a>
-              <div className="OpinionCard__content-wrapper__content__details__description">
-                {metadata.description}
-              </div>
-              <div className="OpinionCard__content-wrapper__content__details__domain">
-                {Formatter.getBaseUrl(metadata.url)}
-              </div>
-            </div>
-          </div>
-        );
-      } else if (metaError) {
-        metaSection = (
-          <div className="OpinionCard__content-wrapper__error">
-            <i className="fas fa-link fa-4x" />
-            Error loading&nbsp;
-            <a href={content} target="_blank" rel="noopener noreferrer">
-              link
-            </a>
-            &nbsp; preview
-          </div>
-        );
-      }
-    }
+
     return (
       <div
         className="OpinionCard"
@@ -117,7 +41,7 @@ class OpinionCard extends React.Component {
               {moment(created).fromNow()}
             </div>
           </div>
-          {metaSection}
+          {contentType === "link" && <LinkPreview url={content} />}
           {contentType === "created" ? (
             <div className="OpinionCard__content-wrapper__loading">
               <span>
