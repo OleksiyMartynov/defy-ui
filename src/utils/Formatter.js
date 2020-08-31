@@ -53,7 +53,7 @@ export default class Formatter {
   static getLinkHostName(text) {
     const parser = document.createElement("a");
     parser.href = text;
-    return `${parser.protocol  }//${  parser.host}`;
+    return `${parser.protocol}//${parser.host}`;
   }
 
   static convertUnicode(input) {
