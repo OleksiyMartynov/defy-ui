@@ -20,6 +20,10 @@ const MyResponsiveStream = ({ data /* see data tab */ }) => (
       tickRotation: 0,
       legend: "Hour",
       legendOffset: 36,
+      tickValues:
+        data.length <= 26
+          ? Array(10).keys()
+          : Array.from(Array(parseInt(1 + data.length / 12, 10)), (_, i) => i * 12),
     }}
     axisLeft={{
       orient: "left",

@@ -138,12 +138,17 @@ class DebateDetails extends Component {
     );
   };
 
-  goBack = () => {
-    this.props.history.goBack();
+  goBack = (fromHome) => {
+    const { history } = this.props;
+    if (fromHome) {
+      history.goBack();
+    } else {
+      history.push("/");
+    }
   };
 
   render() {
-    const { match, debateDetails } = this.props;
+    const { match, debateDetails, debateList } = this.props;
     const { showSection, showChart, showTitleBar } = this.state;
     const debateId = match.params.slug;
     let winningText = null;
@@ -189,12 +194,13 @@ class DebateDetails extends Component {
                   mobileDescription="Put your ₿ where your mouth is."
                 />
               }
+              goBack={() => this.goBack(debateList.data)}
             />
             <div className="DebateDetails__content">
               <div className="DebateDetails__head-content">
                 <button
                   className="DebateDetails__head-content__back"
-                  onClick={this.goBack}
+                  onClick={() => this.goBack(debateList.data)}
                 >
                   <i
                     style={{ fontSize: "25px" }}
@@ -228,7 +234,12 @@ class DebateDetails extends Component {
               <div className="DebateDetails__tags">
                 {debateDetails.data.debate.tags.map((tag) => (
                   <div className="DebateDetails__tags__tag">
-                    <Link to={`/debates/${tag.name}`}>
+                    <Link
+                      to={{
+                        pathname: `/debates/${tag.name}`,
+                        state: { from: "/debate" },
+                      }}
+                    >
                       <FloatingButton onClick={this.onCreateDebate}>
                         <i className="fas fa-hashtag" />
                         <span>
@@ -455,5 +466,6 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   debateDetails: state.debates.debateDetails,
   ui: state.ui,
+  debateList: state.debateList,
 });
 export default connect(mapStateToProps, mapDispatchToProps)(DebateDetails);
