@@ -5,19 +5,43 @@ import Toggle from "../components/Toggle";
 const CONTENT = [
   {
     title: "What exactly is Defy.fyi?",
-    detailHeight: "100px",
+    detailHeight: "200px",
     detail: () => (
       <span>
-        Talk is cheap, but not when you attach world&apos;s best store of value
-        to it.
+        This platform allows users to collaboratively find an answer to a debate
+        topic by attaching a monetary cost to information. Unlike other social
+        debate platforms, Defy separates signal from the noise by sorting
+        debates by the total monetary stake attached to each debate. Also the
+        users have a financial incentive to research and provide strong evidence
+        for their side of the debate, because the winning side takes all the
+        stake.
         <br />
-        The goals of the platform are:
         <ul>
+          <li>Debates have two sides, Pro and Con</li>
           <li>
-            Filter our the noise and find answers to today&apos;s hot debate
-            topics
+            The side in the majority at debate completion time will take all the
+            stake
           </li>
-          <li>Reward users for participation and strong debate skills</li>
+          <li>
+            Debate completes in 24 hours from the moment last evidence item was
+            posted
+          </li>
+          <li>You can vote by locking up sats(unit of Bitcoin)</li>
+          <li>
+            You can provide evidence such as links to a research paper, tweets
+            or youtube videos to help convince other users to vote for your side
+            of the debate
+          </li>
+          <li>
+            The stake amount for new evidence information has to be greater than
+            previous evidence stake. This prevents debates from continuing
+            indefinitely
+          </li>
+          <li>
+            Winning side receives their stake back plus relative fraction of the
+            losing side
+          </li>
+          <li>Losing side will lose all their stake</li>
         </ul>
       </span>
     ),

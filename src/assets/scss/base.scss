@@ -59,19 +59,19 @@ $background-gradient: linear-gradient(135deg, $bg-color-dark, $bg-color-middle);
     linear-gradient(
       to right,
       transparent 0%,
-      transparent calc(90% - 0.81px),
-      $font-color-light calc(90% - 0.8px),
-      $font-color-light calc(90% + 0.8px),
-      transparent calc(90% + 0.9px),
+      transparent calc(93% - 0.81px),
+      $font-color-light calc(93% - 0.8px),
+      $font-color-light calc(93% + 0.8px),
+      transparent calc(93% + 0.9px),
       transparent 100%
     ),
     linear-gradient(
       to right,
       transparent 0%,
-      transparent calc(10% - 0.9px),
-      $font-color-light calc(10% - 0.9px),
-      $font-color-light calc(10% + 0.9px),
-      transparent calc(10% + 0.9px),
+      transparent calc(7% - 0.9px),
+      $font-color-light calc(7% - 0.9px),
+      $font-color-light calc(7% + 0.9px),
+      transparent calc(7% + 0.9px),
       transparent 100%
     ),
     linear-gradient(to bottom, $bg-color-middle, $bg-color-middle);

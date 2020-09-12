@@ -41,7 +41,7 @@ class App extends React.Component {
       showDepositDialog,
       showWithdrawalDialog,
       showCreateDebateDialog,
-      showWelcomeDialog
+      showWelcomeDialog,
     } = ui;
     const {
       closeDepositDialog,
@@ -49,7 +49,12 @@ class App extends React.Component {
       closeCreateDebateDialog,
       closeWelcomeDialog,
     } = this.props;
-    if (showWithdrawalDialog || showCreateDebateDialog || showDepositDialog || showWelcomeDialog) {
+    if (
+      showWithdrawalDialog ||
+      showCreateDebateDialog ||
+      showDepositDialog ||
+      showWelcomeDialog
+    ) {
       const dialogData = {};
       if (showDepositDialog) {
         dialogData.onClose = closeDepositDialog;
@@ -63,9 +68,10 @@ class App extends React.Component {
       } else {
         dialogData.onClose = closeWelcomeDialog;
         dialogData.content = Welcome;
+        dialogData.extraStyle = " App__dialog-wrapper--small";
       }
       return (
-        <div className="App__dialog-wrapper">
+        <div className={`App__dialog-wrapper${dialogData?.extraStyle ?? ""}`}>
           <div className="App__dialog">
             <div className="App__dialog__nav">
               <Button accent onClick={dialogData.onClose}>

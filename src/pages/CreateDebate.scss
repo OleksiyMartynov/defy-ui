@@ -22,6 +22,7 @@
     &__inner {
       @extend %common-container-inverse;
       width: 100%;
+      background: initial;
     }
   }
   &__label {

@@ -5,6 +5,13 @@
   display: flex;
   flex-direction: column;
   padding-bottom: $space-normal;
+  & ol {
+    padding-left: $space-small;
+  }
+  &__center-toggle-wrapper {
+    display:flex;
+    justify-content: center;
+  }
   &__content {
     margin-left: auto;
     margin-right: auto;
@@ -13,9 +20,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    &__description {
+      padding-left: $space-normal;
+      padding-right: $space-normal;
+      @include mobile {
+        padding: 0;
+      }
+    }
     &__error {
       @extend %common-subtitle;
       color: #ff0000;
+    }
+    &__more-info{
+      max-height: fit-content;
+      transition: all 500ms ease;
+      & span, ul{
+        @extend %fade-in;
+      }
     }
   }
   &__heading {

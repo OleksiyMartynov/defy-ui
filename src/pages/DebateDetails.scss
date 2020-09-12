@@ -40,6 +40,9 @@
       display: inline-block;
       &__stake {
         @extend %common-stake-badge-small;
+        @include mobile {
+          display: inline-block;
+        }
       }
       &__creator-banner {
         @extend %common-card-creator-banner;
@@ -197,6 +200,7 @@
             color: #d1d1d1;
             font-size: 20px;
             line-height: 22px !important;
+            margin-top: 4px;
           }
         }
         &--winnings {

@@ -25,6 +25,33 @@
     right: 0;
     bottom: 0;
     overflow-y: auto;
+    &--small {
+      background: linear-gradient(
+        to right,
+        rgba($gradient-start-color, 0.8),
+        rgba($gradient-end-color, 0.8) 40%
+      );
+      .App__dialog {
+
+      display:flex;
+      align-items: center;
+      justify-items: center;
+      }
+      .App__dialog__nav {
+        display: none;
+      }
+      .App__dialog__content {
+        @extend %common-container;
+        box-shadow: -4px -4px 8px rgba(0, 0, 0, 0.15),
+        4px 4px 8px rgba(0, 0, 0, 0.15);
+        min-width: max-content;
+        margin: auto;
+        height: min-content;
+        @include mobile {
+          min-width: 100%;
+        }
+      }
+    }
   }
   &__dialog {
     @extend %fade-in;

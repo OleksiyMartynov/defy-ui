@@ -18,14 +18,17 @@ $card-image-width: 120px;
     max-width: 550px;
     z-index: 1;
     @extend %common-container-small;
+    box-shadow: $box-shadow-high;
     width: 70%;
     &--small {
       @extend %common-container-small;
+      box-shadow: $box-shadow-high;
       width: fit-content;
       min-width: 200px;
     }
     &--created {
       @extend %common-container-small;
+      box-shadow: $box-shadow-high;
       min-width: 200px;
       width: initial;
       height: fit-content;
