@@ -51,8 +51,8 @@ const CONTENT = [
     detailHeight: "60px",
     detail: () => (
       <span>
-        In order to open the platform to as many users as possible with least
-        amount of work we decided to support the official currency of the
+        In order to open the platform to as many users as possible with the
+        least amount of work we decided to support the official currency of the
         internet, Bitcoin.
       </span>
     ),
@@ -63,7 +63,7 @@ const CONTENT = [
     detail: () => (
       <span>
         Everyone loves Bitcoin! But due to its monetary policy the base-layer is
-        not optimal for micro-payments. You would&apos;nt go to a central bank
+        not optimal for micro-payments. You wouldn&apos;t go to a central bank
         to pay for a coffee, would you? So we chose to use Lightning Network, a
         second layer network on top of Bitcoin. If Bitcoin is a central bank,
         Lightning is Visa. Lightning Network has the following properties:
@@ -82,9 +82,9 @@ const CONTENT = [
     detail: () => (
       <span>
         We would strongly recommend running your own Bitcoin and Lightning
-        nodes. But we understand that some of us dont have the technical
+        nodes. But we understand that some of us don&apos;t have the technical
         resources to set up our own nodes, or just lazy, in that case please
-        reffer to{" "}
+        refer to{" "}
         <a
           href="https://99bitcoins.com/bitcoin/lightning-network/wallets/"
           target="_blank"
@@ -92,7 +92,7 @@ const CONTENT = [
         >
           this
         </a>{" "}
-        article to choose the wallet thats right for you.
+        article to choose the wallet that&apos;s right for you.
       </span>
     ),
   },
@@ -112,7 +112,7 @@ const CONTENT = [
   },
   {
     title: "How is debate duration set?",
-    detailHeight: "80px",
+    detailHeight: "40px",
     detail: () => (
       <span>
         Debate ends 24 hours after it is created unless new evidence is added,
@@ -125,11 +125,11 @@ const CONTENT = [
     detailHeight: "70px",
     detail: () => (
       <span>
-        For any ongoing debate users can vote for a side by locking up a any
+        For any ongoing debate users can vote for a side by locking up any
         amount. Votes on the winning majority stake side will receive the
-        initial stake in addition to weighted fraction of the losing side stake.
-        Votes on the losing minority side will lose all of their stake to the
-        winning side.
+        initial stake in addition to a weighted fraction of the losing side
+        stake. Votes on the losing minority side will lose all of their stake to
+        the winning side.
       </span>
     ),
   },
@@ -139,14 +139,13 @@ const CONTENT = [
     detail: () => (
       <span>
         Evidence is a link to information that backs up that specific side of
-        the debate. This can be news article, research paper, youtube video, or
-        even a facebook post. Same rules apply to evidence and votes. For any
-        ongoing debate users can provide evidence for a debate side by locking
-        up a any amount. Evidence on the winning majority stake side will
-        receive the initial stake in addition to weighted fraction of the losing
-        side stake. Evidence on the losing minority side will lose all of their
-        stake to the winning side. New evidence will extend debate duration by
-        24 hours.
+        the debate. This can be news articles, research papers, youtube videos,
+        or even twitter posts. For any ongoing debate users can provide evidence
+        for a debate side by locking up any amount. Evidence on the winning
+        majority stake side will receive the initial stake in addition to a
+        weighted fraction of the losing side stake. Evidence on the losing
+        minority side will lose all of their stake to the winning side. New
+        evidence will extend debate duration by 24 hours.
       </span>
     ),
   },
@@ -161,14 +160,14 @@ const CONTENT = [
     ),
   },
   {
-    title: "How do I win oposition's stake?",
+    title: "How do I win the opposition's stake?",
     detailHeight: "80px",
     detail: () => (
       <span>
         You win a weighted fraction of the minority side&apos;s stake. The
         fraction size is determined on the size of your stake compared to the
-        total winning side&apos;s stake. To help your side of the debate win,
-        user should provide good evidence in favour of the side.
+        total winning side&apos;s stake. To help a side of the debate win, users
+        should provide good evidence in favour of the side.
       </span>
     ),
   },

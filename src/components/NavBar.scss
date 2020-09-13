@@ -6,6 +6,24 @@
   position: absolute;
   left: $space-normal;
   max-width: $nav-width;
+  &__social {
+    display: flex;
+    justify-content: center;
+    > a {
+      text-decoration: none;
+      color: inherit;
+      padding: 3px;
+      transition: all 200ms $common-timing-function;
+      &:hover {
+        background-color: transparentize($color: $bg-color-middle, $amount: 0.5);
+        transform: none;
+        border-radius: 10px;
+      }
+    }
+    @include mobile {
+      display: none;
+    }
+  }
   &__header {
     padding-top: $space-normal;
     display: flex;

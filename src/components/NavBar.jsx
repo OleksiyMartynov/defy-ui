@@ -32,6 +32,16 @@ class NavBar extends React.PureComponent {
             </Fragment>
           ))}
         </ul>
+        <div className="NavBar__divider" />
+        <div className="NavBar__social">
+          <a
+            href="https://twitter.com/DefyFyi"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fab fa-twitter" aria-hidden="true" />
+          </a>
+        </div>
       </div>
     );
   }
