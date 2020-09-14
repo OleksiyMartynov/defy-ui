@@ -4,44 +4,36 @@ import Toggle from "../components/Toggle";
 
 const CONTENT = [
   {
-    title: "What exactly is Defy.fyi?",
+    title: "What is Defy.fyi?",
     detailHeight: "200px",
     detail: () => (
       <span>
-        This platform allows users to collaboratively find an answer to a debate
-        topic by attaching a monetary cost to information. Unlike other social
-        debate platforms, Defy separates signal from the noise by sorting
-        debates by the total monetary stake attached to each debate. Also the
-        users have a financial incentive to research and provide strong evidence
-        for their side of the debate, because the winning side takes all the
-        stake.
+        This platform allows users to collaborate and find answers to a debate
+        topic by attaching a price to the information. Unlike other social
+        debate platforms, Defy cuts out the noise by attaching value to each
+        debate. You have a financial incentive to research and provide strong
+        evidence to your side of the debate. The winning side takes it all.
         <br />
         <ul>
           <li>Debates have two sides, Pro and Con</li>
           <li>
-            The side in the majority at debate completion time will take all the
-            stake
+            The side with the majority vote wins all the stake at the end of the
+            debate
           </li>
-          <li>
-            Debate completes in 24 hours from the moment last evidence item was
-            posted
-          </li>
+          <li>Debate closes in 24 hours unless new evidence is added</li>
           <li>You can vote by locking up sats(unit of Bitcoin)</li>
           <li>
-            You can provide evidence such as links to a research paper, tweets
-            or youtube videos to help convince other users to vote for your side
-            of the debate
+            Forms of evidence include but not limited to research papers, tweets
+            or youtube videos
           </li>
           <li>
-            The stake amount for new evidence information has to be greater than
-            previous evidence stake. This prevents debates from continuing
-            indefinitely
+            The stake amount for new evidence has to be greater than previous
           </li>
           <li>
-            Winning side receives their stake back plus relative fraction of the
-            losing side
+            Winning side receives their stake back plus the matching fraction of
+            the losing side
           </li>
-          <li>Losing side will lose all their stake</li>
+          <li>Losing side loses their stake</li>
         </ul>
       </span>
     ),
@@ -51,9 +43,8 @@ const CONTENT = [
     detailHeight: "60px",
     detail: () => (
       <span>
-        In order to open the platform to as many users as possible with the
-        least amount of work we decided to support the official currency of the
-        internet, Bitcoin.
+        The simplest way to open the platform to as many people as possible with
+        we decided to support only Bitcoin.
       </span>
     ),
   },
@@ -81,10 +72,9 @@ const CONTENT = [
     detailHeight: "60px",
     detail: () => (
       <span>
-        We would strongly recommend running your own Bitcoin and Lightning
-        nodes. But we understand that some of us don&apos;t have the technical
-        resources to set up our own nodes, or just lazy, in that case please
-        refer to{" "}
+        We strongly recommend running your own Bitcoin and Lightning nodes. We
+        understand that some users don&apos;t have the resources to set up our
+        own nodes, in this case please refer to{" "}
         <a
           href="https://99bitcoins.com/bitcoin/lightning-network/wallets/"
           target="_blank"
@@ -101,12 +91,12 @@ const CONTENT = [
     detailHeight: "100px",
     detail: () => (
       <span>
-        A debate is a topic that a user wants to find an answer too. A topic
-        will have two opposing sides (pro/con, for/against). Any user can create
-        a debate by providing a name, description, and locking up a stake that
-        will initially signal the importance of the debate. Once the debate is
-        inactive for 24 hours the debate will be marked as closed and the
-        creator will receive their initially locked up stake.
+        A debate is a discussion with opposing viewpoints. A topic will have two
+        opposing sides (pro/con or for/against). Any user can create a debate by
+        providing a name, description, and locking up a stake that will set the
+        initial weight of the debate. Once the debate is inactive for 24 hours
+        the debate will be closed and the creator will receive their initially
+        locked up stake.
       </span>
     ),
   },
@@ -121,32 +111,22 @@ const CONTENT = [
     ),
   },
   {
-    title: "What is a vote in a debate?",
+    title: "What is the difference between vote and evidence?",
     detailHeight: "70px",
     detail: () => (
       <span>
-        For any ongoing debate users can vote for a side by locking up any
-        amount. Votes on the winning majority stake side will receive the
-        initial stake in addition to a weighted fraction of the losing side
-        stake. Votes on the losing minority side will lose all of their stake to
-        the winning side.
+        Evidence requires you to attach a link supporting your argument, and a
+        set minimum stake amount. A vote does not require a link and there is no
+        set minimum stake amount.
       </span>
     ),
   },
   {
-    title: "What is evidence in a debate?",
-    detailHeight: "120px",
+    title:
+      "Why does my stake have to be greater than the previous amount posted?",
+    detailHeight: "40px",
     detail: () => (
-      <span>
-        Evidence is a link to information that backs up that specific side of
-        the debate. This can be news articles, research papers, youtube videos,
-        or even twitter posts. For any ongoing debate users can provide evidence
-        for a debate side by locking up any amount. Evidence on the winning
-        majority stake side will receive the initial stake in addition to a
-        weighted fraction of the losing side stake. Evidence on the losing
-        minority side will lose all of their stake to the winning side. New
-        evidence will extend debate duration by 24 hours.
-      </span>
+      <span>This prevents debates from continuing indefinitely.</span>
     ),
   },
   {
@@ -155,7 +135,7 @@ const CONTENT = [
     detail: () => (
       <span>
         You can lose the funds that you have staked in a debate if those funds
-        are in the minority side.
+        are on the losing side.
       </span>
     ),
   },
@@ -164,10 +144,12 @@ const CONTENT = [
     detailHeight: "80px",
     detail: () => (
       <span>
-        You win a weighted fraction of the minority side&apos;s stake. The
-        fraction size is determined on the size of your stake compared to the
-        total winning side&apos;s stake. To help a side of the debate win, users
-        should provide good evidence in favour of the side.
+        You win a matching percentage of the minority side&apos;s stake. The
+        percentage is determined on the size of your stake compared to the total
+        winning side&apos;s stake, i.e. if your stake is 10% of the
+        majority&apos;s side, you will receive your stake plus 10% of the
+        minority&apos;s side. To help a side of the debate win, users should
+        provide good evidence in favour of the side.
       </span>
     ),
   },
@@ -176,8 +158,7 @@ const CONTENT = [
     detailHeight: "40px",
     detail: () => (
       <span>
-        We don&apos;t collect any data about our users. But we do charge 1% from
-        the winning majority side&apos;s total winnings.
+        We charge 1% from the winning majority side&apos;s total winnings.
       </span>
     ),
   },
