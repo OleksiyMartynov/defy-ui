@@ -10,6 +10,7 @@ import { fetchDebatesWithFilter } from "../actions/debates";
 import DebateFilter from "../models/DebateFilter";
 // import AccountModel from "../models/Account";
 import Button from "../components/Button";
+import LoginTest from '../components/LoginTest';
 
 class Debates extends React.Component {
   constructor(props) {
@@ -86,6 +87,10 @@ class Debates extends React.Component {
 
     return (
       <div className="Debates">
+        <div>
+          Testing login
+          <LoginTest />
+        </div>
         <div className="Debates__content">
           <div className="Debates__content__heading">
             <div className="Debates__content__heading__text">Debates</div>

@@ -24,7 +24,8 @@
     "redux": "^4.0.5",
     "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.3.0",
-    "remark-toc": "^7.0.0"
+    "remark-toc": "^7.0.0",
+    "webln": "^0.2.2"
   },
   "scripts": {
     "start-debug-browser": "/Applications/Brave\\ Browser.app/Contents/MacOS/Brave\\ Browser --remote-debugging-port=9222  http://localhost:3000",
