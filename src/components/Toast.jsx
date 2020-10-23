@@ -1,9 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { MODELS } from "../constants";
+
 import "./Toast.scss";
 
 function Toast() {
-  const showToast = useSelector((state) => state.ui.showToast);
+  const [showToast] = MODELS.TOAST.useRepoDataModel();
   return (
     <div className={`Toast ${showToast.show ? "Toast--show" : "Toast--hide"}`}>
       {showToast.text ? showToast.text : "..."}

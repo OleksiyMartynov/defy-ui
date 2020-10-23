@@ -12,19 +12,20 @@ import depositInvoice from "./depositInvoice";
 import withdrawalInvoice from "./withdrawalInvoice";
 import invoiceInfo from "./invoiceInfo";
 
-const rootReducer = combineReducers({
-  account,
-  debates,
-  opinionList,
-  createOpinion,
-  ui,
-  accountInfo,
-  debateList,
-  createDebate,
-  history,
-  depositInvoice,
-  withdrawalInvoice,
-  invoiceInfo,
-});
+const rootReducer = (other) =>
+  combineReducers({
+    account,
+    debates,
+    opinionList,
+    createOpinion,
+    accountInfo,
+    debateList,
+    createDebate,
+    history,
+    depositInvoice,
+    withdrawalInvoice,
+    invoiceInfo,
+    ...other,
+  });
 
 export default rootReducer;

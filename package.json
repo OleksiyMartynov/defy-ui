@@ -22,6 +22,7 @@
     "react-syntax-highlighter": "^13.5.0",
     "react-tweet-embed": "^1.2.2",
     "redux": "^4.0.5",
+    "redux-dao-repo": "0.0.2",
     "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.3.0",
     "remark-toc": "^7.0.0"

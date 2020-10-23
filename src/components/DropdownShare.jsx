@@ -1,18 +1,15 @@
 import React from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { toggleToast } from "../actions/ui";
 import "./DropdownShare.scss";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { MODELS } from '../constants';
 
-class DropdownShare extends React.PureComponent {
-  onCopy = (text) => {
-    const { toggleToast } = this.props;
+export default ({ mobileTitle, mobileDescription }) => {
+  const [_, toggleToast] = MODELS.TOAST.useToastModel();
+  const onCopy = () => {
     toggleToast("Link coppied");
   };
 
-  mobileShare = () => {
-    const { mobileTitle, mobileDescription } = this.props;
+  const mobileShare = () => {
     if (navigator.share) {
       navigator.share({
         text: mobileTitle,
@@ -22,31 +19,22 @@ class DropdownShare extends React.PureComponent {
     }
   };
 
-  render() {
-    return (
-      <div className="DropdownShare">
-        <i className="fas fa-share-alt" />
-        <div className="DropdownShare__dropdown">
-          <div className="DropdownShare__dropdown__content">
-            <CopyToClipboard text={window.location} onCopy={this.onCopy}>
-              <div
-                className="DropdownShare__dropdown__content__item"
-                onClick={this.mobileShare}
-              >
-                <i className="fas fa-link" /> Copy link to Debate
-              </div>
-            </CopyToClipboard>
-          </div>
+  return (
+    <div className="DropdownShare">
+      <i className="fas fa-share-alt" />
+      <div className="DropdownShare__dropdown">
+        <div className="DropdownShare__dropdown__content">
+          <CopyToClipboard text={window.location} onCopy={onCopy}>
+            <div
+              className="DropdownShare__dropdown__content__item"
+              onClick={mobileShare}
+            >
+              <i className="fas fa-link" />
+              Copy link to Debate
+            </div>
+          </CopyToClipboard>
         </div>
       </div>
-    );
-  }
-}
-DropdownShare.propTypes = {
-  mobileTitle: PropTypes.string.isRequired,
-  mobileDescription: PropTypes.string.isRequired,
+    </div>
+  );
 };
-const mapDispatchToProps = (dispatch) => ({
-  toggleToast: (text) => dispatch(toggleToast(text)),
-});
-export default connect(null, mapDispatchToProps)(DropdownShare);

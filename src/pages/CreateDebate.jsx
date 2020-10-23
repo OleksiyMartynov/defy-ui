@@ -8,6 +8,7 @@ import { fetchCreateDebate } from "../actions/debates";
 import { closeCreateDebateDialog, toggleToast } from "../actions/ui";
 import { fetchAccountInfo } from "../actions/account";
 import Tooltip from "../components/Tooltip";
+import DebateDetailsTitle from '../components/DebateDetailsTitle';
 
 class CreateDebate extends React.PureComponent {
   constructor(props) {
@@ -20,6 +21,7 @@ class CreateDebate extends React.PureComponent {
       tagError: false,
       error: false,
       loading: false,
+      preview: false,
     };
   }
 
@@ -60,6 +62,12 @@ class CreateDebate extends React.PureComponent {
         toggleToast("Debate created");
       }
     }
+  };
+
+  onPreviewClicked = () => {
+    this.setState({
+      preview: true,
+    });
   };
 
   onTagSubmit = (event) => {
@@ -113,6 +121,7 @@ class CreateDebate extends React.PureComponent {
       error,
       loading,
       redirect,
+      preview,
     } = this.state;
     if (redirect) {
       return <Redirect push to={redirect} />;
@@ -120,137 +129,155 @@ class CreateDebate extends React.PureComponent {
     return (
       <div className="CreateDebate">
         <div className="CreateDebate__content">
-          <div className="CreateDebate__heading">Create Debate</div>
-          <div className="CreateDebate__banner">
-            <div className="CreateDebate__banner__inner">
-              <p>
-                Create debate topic by locking up stake then providing a title
-                and description of the debate. Description text supports&nbsp;
-                <a
-                  href="https://guides.github.com/features/mastering-markdown/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  &nbsp;markdown
-                </a>
-                .
-              </p>
-              <ul>
-                <li>
-                  Please choose a debate topic that can only have two outcomes,
-                  that is <b>for</b> or <b>against</b>, <b>pro</b> or <b>con</b>
-                </li>
-                <li>
-                  Debate results are concluded after 24hrs of inactivity (no new
-                  evidence)
-                </li>
-                <li>Title should briefly describe the essence of the debate</li>
-                <li>
-                  Stake amount will be returned to you after debate conclusion
-                </li>
-                <li>
-                  Debates are sorted by stake, hence higher stake signals topic
-                  importance
-                </li>
-              </ul>
+          {preview ? (
+            <div>
+              <DebateDetailsTitle debateDetails={{data:{debate:{title: title ?? "No Title", tags}}}} onBack={() => {} } />
+
             </div>
-          </div>
-          <br />
-
-          <div className="CreateDebate__label">
-            <Tooltip text="Title should capture users's attention">
-              Title:
-            </Tooltip>
-          </div>
-          <div className="CreateDebate__input-wrapper">
-            <input
-              autoComplete="off"
-              name="title"
-              id="title"
-              type="text"
-              value={title}
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <div className="CreateDebate__label">
-            <Tooltip text="High starting stake signals importance and increases visibility">
-              Stake (100 min):
-            </Tooltip>
-          </div>
-          <div className="CreateDebate__input-wrapper">
-            <input
-              autoComplete="off"
-              name="stake"
-              id="stake"
-              type="number"
-              value={stake}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="CreateDebate__label">
-            <Tooltip text="Help users find your debate">Tags:</Tooltip>
-            {tags.map((t) => (
-              <span key={t} className="CreateDebate__label__tag">
-                {t}
-                <i className="fa fa-times" onClick={() => this.removeTag(t)} />
-              </span>
-            ))}
-          </div>
-          <form onSubmit={this.onTagSubmit}>
-            <div className="CreateDebate__input-wrapper">
-              <input
-                autoComplete="off"
-                id="tag"
-                name="tag"
-                type="text"
-                value={tag}
-                onChange={this.handleChange}
-              />
-              <Button secondary disabled={loading}>
-                <i className="fa fa-plus" aria-hidden="true" />
-              </Button>
-            </div>
-          </form>
-          {tagError && (
-            <div className="CreateDebate__content__error">{tagError}</div>
-          )}
-
-          <div className="CreateDebate__label">
-            <Tooltip text="Helps users understand the debate topic">
-              Description:
-            </Tooltip>
-          </div>
-          <div className="CreateDebate__input-wrapper">
-            <textarea
-              autoComplete="off"
-              rows="5"
-              id="description"
-              name="description"
-              value={description}
-              onChange={this.handleChange}
-            />
-          </div>
-          <br />
-          {error && (
-            <>
-              <div className="CreateDebate__content__error">{error}</div>
+          ) : (
+            <div>
+              <div className="CreateDebate__heading">Create Debate</div>
+              <div className="CreateDebate__banner">
+                <div className="CreateDebate__banner__inner">
+                  <p>
+                    Create debate topic by locking up stake then providing a
+                    title and description of the debate. Description text
+                    supports&nbsp;
+                    <a
+                      href="https://guides.github.com/features/mastering-markdown/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      &nbsp;markdown
+                    </a>
+                    .
+                  </p>
+                  <ul>
+                    <li>
+                      Please choose a debate topic that can only have two
+                      outcomes, that is <b>for</b> or <b>against</b>, <b>pro</b>{" "}
+                      or <b>con</b>
+                    </li>
+                    <li>
+                      Debate results are concluded after 24hrs of inactivity (no
+                      new evidence)
+                    </li>
+                    <li>
+                      Title should briefly describe the essence of the debate
+                    </li>
+                    <li>
+                      Stake amount will be returned to you after debate
+                      conclusion
+                    </li>
+                    <li>
+                      Debates are sorted by stake, hence higher stake signals
+                      topic importance
+                    </li>
+                  </ul>
+                </div>
+              </div>
               <br />
-            </>
+
+              <div className="CreateDebate__label">
+                <Tooltip text="Title should capture users's attention">
+                  Title:
+                </Tooltip>
+              </div>
+              <div className="CreateDebate__input-wrapper">
+                <input
+                  autoComplete="off"
+                  name="title"
+                  id="title"
+                  type="text"
+                  value={title}
+                  onChange={this.handleChange}
+                />
+              </div>
+
+              <div className="CreateDebate__label">
+                <Tooltip text="High starting stake signals importance and increases visibility">
+                  Stake (100 min):
+                </Tooltip>
+              </div>
+              <div className="CreateDebate__input-wrapper">
+                <input
+                  autoComplete="off"
+                  name="stake"
+                  id="stake"
+                  type="number"
+                  value={stake}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="CreateDebate__label">
+                <Tooltip text="Help users find your debate">Tags:</Tooltip>
+                {tags.map((t) => (
+                  <span key={t} className="CreateDebate__label__tag">
+                    {t}
+                    <i
+                      className="fa fa-times"
+                      onClick={() => this.removeTag(t)}
+                    />
+                  </span>
+                ))}
+              </div>
+              <form onSubmit={this.onTagSubmit}>
+                <div className="CreateDebate__input-wrapper">
+                  <input
+                    autoComplete="off"
+                    id="tag"
+                    name="tag"
+                    type="text"
+                    value={tag}
+                    onChange={this.handleChange}
+                  />
+                  <Button secondary disabled={loading}>
+                    <i className="fa fa-plus" aria-hidden="true" />
+                  </Button>
+                </div>
+              </form>
+              {tagError && (
+                <div className="CreateDebate__content__error">{tagError}</div>
+              )}
+
+              <div className="CreateDebate__label">
+                <Tooltip text="Helps users understand the debate topic">
+                  Description:
+                </Tooltip>
+              </div>
+              <div className="CreateDebate__input-wrapper">
+                <textarea
+                  autoComplete="off"
+                  rows="5"
+                  id="description"
+                  name="description"
+                  value={description}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <br />
+              {error && (
+                <>
+                  <div className="CreateDebate__content__error">{error}</div>
+                  <br />
+                </>
+              )}
+              <Button disabled={loading} accent onClick={this.onCreateClicked}>
+                {loading ? (
+                  <>
+                    <i className="fas fa-spinner" aria-hidden="true" />
+                    <span>&nbsp;Creating</span>
+                  </>
+                ) : (
+                  <>
+                    <i className="fa fa-paper-plane" />
+                    <span>&nbsp;Create</span>
+                  </>
+                )}
+              </Button>
+              <Button onClick={this.onPreviewClicked}>Preview</Button>
+            </div>
           )}
-          <Button disabled={loading} accent onClick={this.onCreateClicked}>
-            {loading ? (
-              <>
-                <i className="fas fa-spinner" aria-hidden="true" />
-                <span>&nbsp;Creating</span>
-              </>
-            ) : (
-              <>
-                <i className="fa fa-paper-plane" />
-                <span>&nbsp;Create</span>
-              </>
-            )}
-          </Button>
         </div>
         <br />
         <br />

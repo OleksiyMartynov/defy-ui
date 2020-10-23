@@ -5,10 +5,15 @@ import { compose, createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
 import persistState from "redux-localstorage";
+import ReduxRepository from "redux-dao-repo";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import rootReducer from "./reducers/index";
 import ApiService from "./services/ApiService";
+import { MODELS } from "./constants";
+
+const repo = ReduxRepository.getInstance();
+repo.init([MODELS.UI, MODELS.TOAST]);
 
 const initServices = () => ({
   apiService: new ApiService(process.env.REACT_APP_API_URL),
@@ -23,7 +28,7 @@ const enhancer = composeEnhancers(
   applyMiddleware(thunkMiddleware.withExtraArgument(initServices()))
 );
 
-const store = createStore(rootReducer, {}, enhancer);
+const store = createStore(rootReducer(repo.getReducers()), {}, enhancer);
 
 // if (process.env.NODE_ENV === "development") {
 //   // eslint-disable-next-line global-require
