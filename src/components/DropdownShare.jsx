@@ -1,10 +1,11 @@
 import React from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import "./DropdownShare.scss";
-import { MODELS } from '../constants';
+import PropTypes from "prop-types";
+import { MODELS } from "../constants";
 
-export default ({ mobileTitle, mobileDescription }) => {
-  const [_, toggleToast] = MODELS.TOAST.useToastModel();
+const DropdownShare = ({ mobileTitle = "", mobileDescription = "" }) => {
+  const [, toggleToast] = MODELS.TOAST.useToastModel();
   const onCopy = () => {
     toggleToast("Link coppied");
   };
@@ -38,3 +39,9 @@ export default ({ mobileTitle, mobileDescription }) => {
     </div>
   );
 };
+DropdownShare.propTypes = {
+  mobileTitle: PropTypes.string.isRequired,
+  mobileDescription: PropTypes.string.isRequired,
+};
+
+export default DropdownShare;

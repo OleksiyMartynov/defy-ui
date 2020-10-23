@@ -3,7 +3,6 @@ import account from "./account";
 import accountInfo from "./accountInfo";
 import debates from "./debates";
 import opinionList from "./opinionList";
-import ui from "./ui";
 import debateList from "./debateList";
 import createDebate from "./createDebate";
 import createOpinion from "./createOpinion";
