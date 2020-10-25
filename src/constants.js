@@ -1,9 +1,7 @@
 import { RepoDataModel } from "redux-dao-repo";
 import UserInterface from "./models/UserInterface";
-import Toast from './models/Toast';
-import ToastModel from './models/ToastModel';
+import Toast from "./models/Toast";
+import ToastModel from "./models/ToastModel";
 
-export const MODELS = Object.freeze({
-  UI: new RepoDataModel("ui", "UPDATE_MODALS", new UserInterface()),
-  TOAST: new Toast("toast", "UPDATE_TOAST", new ToastModel()),
-});
+export const ToastDAO = new Toast("toast", new ToastModel());
+export const DialogDAO = new RepoDataModel("dialog", new UserInterface());

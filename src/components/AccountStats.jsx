@@ -3,37 +3,21 @@ import "./AccountStats.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "./Button";
-import {
-  openDepositDialog,
-  openWithdrawalDialog,
-  openCreateDebateDialog,
-} from "../actions/ui";
 import FloatingButton from "./FloatingButton";
 import { Loader } from "./Loader";
 import Dropdown from "./Dropdown";
 import AnimatedNumber from "./AnimatedNumber";
+import { DialogDAO } from "../constants";
 
-const AccountStats = (props) => {
-  const onDeposit = () => {
-    props.openDepositDialog();
-  };
-
-  const onWithdrawal = () => {
-    props.openWithdrawalDialog();
-  };
-
-  const onCreateDebate = () => {
-    props.openCreateDebateDialog();
-  };
-
-  const itemSelectedListener = (item) => {
-    switch (item) {
+const AccountStats = ({ account, onCreateDebate, onDeposit, onWithdraw }) => {
+  const onItemSelected = (index) => {
+    switch (index) {
       case 0: {
         onDeposit();
         break;
       }
       case 1: {
-        onWithdrawal();
+        onWithdraw();
         break;
       }
       default: {
@@ -41,7 +25,6 @@ const AccountStats = (props) => {
       }
     }
   };
-  const { account } = props;
 
   let totalBalance = 0;
   if (account.data) {
@@ -76,61 +59,58 @@ const AccountStats = (props) => {
       )}
       <div className="AccountStats__divider" />
       <div className="AccountStats__rows-wrapper AccountStats__buttons-layout">
-        <div className="AccountStats__buttons-layout__dropdown">
-          <Dropdown
-            items={[
-              { style: "fas fa-piggy-bank", text: "Deposit" },
-              { style: "fas fa-wallet", text: "Withdraw" },
-              { style: "fa fa-plus-circle", text: "New Debate" },
-            ]}
-            itemSelectedListener={itemSelectedListener}
-            customButtonLayout={<i className="fas fa-ellipsis-v" />}
-            customRender={(item) => (
-              <div className="AccountStats__buttons-layout__dropdown__item">
-                <i className={item.style} />
-                {item.text}
+        <DialogDAO.Producer>
+          {(updateUI) => (
+            <>
+              <div className="AccountStats__buttons-layout__dropdown">
+                <Dropdown
+                  items={[
+                    { style: "fas fa-piggy-bank", text: "Deposit" },
+                    { style: "fas fa-wallet", text: "Withdraw" },
+                    { style: "fa fa-plus-circle", text: "New Debate" },
+                  ]}
+                  itemSelectedListener={onItemSelected}
+                  customButtonLayout={<i className="fas fa-ellipsis-v" />}
+                  customRender={(item) => (
+                    <div className="AccountStats__buttons-layout__dropdown__item">
+                      <i className={item.style} />
+                      {item.text}
+                    </div>
+                  )}
+                />
               </div>
-            )}
-          />
-        </div>
 
-        <div className="AccountStats__numbers-row">
-          <Button onClick={onDeposit}>
-            <i className="fas fa-piggy-bank" />
-            <span>&nbsp;Deposit</span>
-          </Button>
-        </div>
-        <div className="AccountStats__numbers-row">
-          <Button onClick={onWithdrawal}>
-            <i className="fas fa-wallet" />
-            <span>&nbsp;Withdraw</span>
-          </Button>
-        </div>
-        <div className="AccountStats__numbers-row">
-          <FloatingButton onClick={onCreateDebate}>
-            <i className="fa fa-plus-circle" />
-            <span>&nbsp;Start Debate</span>
-          </FloatingButton>
-        </div>
+              <div className="AccountStats__numbers-row">
+                <Button onClick={onDeposit}>
+                  <i className="fas fa-piggy-bank" />
+                  <span>&nbsp;Deposit</span>
+                </Button>
+              </div>
+              <div className="AccountStats__numbers-row">
+                <Button onClick={onWithdraw}>
+                  <i className="fas fa-wallet" />
+                  <span>&nbsp;Withdraw</span>
+                </Button>
+              </div>
+              <div className="AccountStats__numbers-row">
+                <FloatingButton onClick={onCreateDebate}>
+                  <i className="fa fa-plus-circle" />
+                  <span>&nbsp;Start Debate</span>
+                </FloatingButton>
+              </div>
+            </>
+          )}
+        </DialogDAO.Producer>
       </div>
     </div>
   );
 };
 
 AccountStats.propTypes = {
-  openCreateDebateDialog: PropTypes.func.isRequired,
-  openDepositDialog: PropTypes.func.isRequired,
-  openWithdrawalDialog: PropTypes.func.isRequired,
   account: PropTypes.object.isRequired,
 };
-
-const mapDispatchToProps = (dispatch) => ({
-  openDepositDialog: () => dispatch(openDepositDialog()),
-  openWithdrawalDialog: () => dispatch(openWithdrawalDialog()),
-  openCreateDebateDialog: () => dispatch(openCreateDebateDialog()),
-});
 
 const mapStateToProps = (state) => ({
   account: state.account,
 });
-export default connect(mapStateToProps, mapDispatchToProps)(AccountStats);
+export default connect(mapStateToProps, null)(AccountStats);

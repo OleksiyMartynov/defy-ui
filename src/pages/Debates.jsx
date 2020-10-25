@@ -17,6 +17,12 @@ class Debates extends React.Component {
     const { match } = props;
     const tag = match.params.tag;
     this.state = { showActive: true, value: "", selectedIndex: 0, tag };
+    //this.doSearch(true, true, false, false, tag);
+  }
+
+  componentDidMount() {
+    const { match } = this.props;
+    const tag = match.params.tag;
     this.doSearch(true, true, false, false, tag);
   }
 

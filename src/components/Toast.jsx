@@ -1,13 +1,11 @@
 import React from "react";
-import { MODELS } from "../constants";
 
 import "./Toast.scss";
 
-function Toast() {
-  const [showToast] = MODELS.TOAST.useRepoDataModel();
+function Toast({show, text}) {
   return (
-    <div className={`Toast ${showToast.show ? "Toast--show" : "Toast--hide"}`}>
-      {showToast.text ? showToast.text : "..."}
+    <div className={`Toast ${show ? "Toast--show" : "Toast--hide"}`}>
+      {text}
     </div>
   );
 }

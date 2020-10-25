@@ -48,7 +48,7 @@ Toggle.propTypes = {
   rightText: PropTypes.string,
   rightIcon: PropTypes.element,
   onChange: PropTypes.func.isRequired,
-  isFlat: PropTypes.func,
+  isFlat: PropTypes.bool,
 };
 Toggle.defaultProps = {
   isFlat: false,

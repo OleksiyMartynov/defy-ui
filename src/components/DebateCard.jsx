@@ -98,7 +98,7 @@ class DebateCard extends React.PureComponent {
           {tags.map((tag, index) => (
             <div key={index} className="DebateCard__tags__tag">
               <Link to={`/debates/${tag.name}`}>
-                <FloatingButton onClick={this.onCreateDebate}>
+                <FloatingButton>
                   <i className="fas fa-hashtag" />
                   <span>&nbsp;{tag.name}</span>
                 </FloatingButton>
@@ -113,8 +113,8 @@ class DebateCard extends React.PureComponent {
         )}
         <div className="DebateCard__divider" />
         <div className="DebateCard__info-bar">
-          {infoBarItems.map((item) => (
-            <div className="DebateCard__info-bar__item">
+          {infoBarItems.map((item, index) => (
+            <div className="DebateCard__info-bar__item" key={index}>
               <i className={item.iconClass} /> {item.text} {item.value}
             </div>
           ))}

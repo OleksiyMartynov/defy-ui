@@ -27,7 +27,8 @@ import TitleBar from "../components/TitleBar";
 import DropdownShare from "../components/DropdownShare";
 import { Loader } from "../components/Loader";
 import Tooltip from "../components/Tooltip";
-import DebateDetailsTitle from '../components/DebateDetailsTitle';
+import DebateDetailsTitle from "../components/DebateDetailsTitle";
+import { ToastDAO } from '../constants';
 
 class DebateDetails extends Component {
   constructor(props) {
@@ -190,15 +191,23 @@ class DebateDetails extends Component {
               title={debateDetails.data.debate.title}
               show={showTitleBar}
               extra={
-                <DropdownShare
-                  mobileTitle={debateDetails.data.debate.title}
-                  mobileDescription="Put your ₿ where your mouth is."
-                />
+                <ToastDAO.Producer>
+                  {(updateModal) => (
+                    <DropdownShare
+                      mobileTitle={debateDetails.data.debate.title}
+                      mobileDescription="Put your ₿ where your mouth is."
+                      toggleModal={updateModal.toggleToast}
+                    />
+                  )}
+                </ToastDAO.Producer>
               }
               goBack={() => this.goBack(debateList.data)}
             />
             <div className="DebateDetails__content">
-              <DebateDetailsTitle debateDetails={debateDetails} onBlack={() => this.goBack(debateList.data)}/>
+              <DebateDetailsTitle
+                debateDetails={debateDetails}
+                onBlack={() => this.goBack(debateList.data)}
+              />
               <div className="DebateDetails__description">
                 <ReactMarkdown
                   source={debateDetails.data.debate.description}

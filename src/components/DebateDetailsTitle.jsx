@@ -1,18 +1,16 @@
 import React from "react";
-import DebateTime from './DebateTime';
-import Formatter from '../utils/Formatter';
-import DropdownShare from './DropdownShare';
-import { Link } from 'react-router-dom';
-import FloatingButton from './FloatingButton';
+import DebateTime from "./DebateTime";
+import Formatter from "../utils/Formatter";
+import DropdownShare from "./DropdownShare";
+import { Link } from "react-router-dom";
+import FloatingButton from "./FloatingButton";
+import { ToastDAO } from "../constants";
 
 const DebateDetailsTitle = ({ debateDetails, onBlack }) => {
   return (
     <div>
       <div className="DebateDetails__head-content">
-        <button
-          className="DebateDetails__head-content__back"
-          onClick={onBlack}
-        >
+        <button className="DebateDetails__head-content__back" onClick={onBlack}>
           <i
             style={{ fontSize: "25px" }}
             className="fas fa-chevron-left fa-2x"
@@ -37,10 +35,15 @@ const DebateDetailsTitle = ({ debateDetails, onBlack }) => {
               debateDetails.data.debate.totalCon
           )}
         </div>
-        <DropdownShare
-          mobileTitle={debateDetails.data.debate.title}
-          mobileDescription="Put your ₿ where your mouth is."
-        />
+        <ToastDAO.Producer>
+          {(updateModal) => (
+            <DropdownShare
+              mobileTitle={debateDetails.data.debate.title}
+              mobileDescription="Put your ₿ where your mouth is."
+              toggleModal={updateModal.toggleToast}
+            />
+          )}
+        </ToastDAO.Producer>
       </div>
       <div className="DebateDetails__tags">
         {debateDetails.data.debate.tags.map((tag) => (
