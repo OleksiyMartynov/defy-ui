@@ -36,11 +36,11 @@ const DebateDetailsTitle = ({ debateDetails, onBlack }) => {
           )}
         </div>
         <ToastDAO.Producer>
-          {(updateModal) => (
+          {(updateToast) => (
             <DropdownShare
               mobileTitle={debateDetails.data.debate.title}
               mobileDescription="Put your ₿ where your mouth is."
-              toggleModal={updateModal.toggleToast}
+              toggleToast={updateToast.toggleToast}
             />
           )}
         </ToastDAO.Producer>

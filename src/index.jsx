@@ -10,7 +10,7 @@ import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import rootReducer from "./reducers/index";
 import ApiService from "./services/ApiService";
-import {ToastDAO, DialogDAO} from "./constants";
+import { ToastDAO, DialogDAO } from "./constants";
 
 const repo = ReduxRepository.getInstance();
 repo.init([ToastDAO, DialogDAO]);

@@ -1,126 +1,103 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import "./Deposit.scss";
-import { connect } from "react-redux";
 import moment from "moment";
 import QRCode from "qrcode.react";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchDepositInvoice, fetchInvoiceInfo } from "../actions/payment";
-import { closeDepositDialog, toggleToast } from "../actions/ui";
-import { fetchAccountInfo } from "../actions/account";
 import CountdownCounter from "../components/CountdownCounter";
 import Button from "../components/Button";
 import { Loader } from "../components/Loader";
+import { ToastDAO, DialogDAO } from "../constants";
+import { fetchAccountInfo } from "../actions/account";
+import { useLifecycle } from "../utils/Hooks";
 
 let pollerId;
-
-class Deposit extends React.Component {
-  constructor(props) {
-    super(props);
-    this.getInvoice();
-  }
-
-  componentWillUnmount() {
-    clearInterval(pollerId);
-  }
-
-  async getInvoice() {
-    const { fetchDepositInvoice } = this.props;
-    const result = await fetchDepositInvoice();
-    if (result?.data?.invoice?.data) {
-      this.startPoller(result.data.invoice.data);
+const Deposit = () => {
+  const dispatch = useDispatch();
+  const [, updateModals] = DialogDAO.useRepoDataModel();
+  const [, updateToast] = ToastDAO.useRepoDataModel();
+  useLifecycle(
+    () => {
+      console.log("onAttach");
+      const fetchData = async () => {
+        const result = await dispatch(fetchDepositInvoice());
+        if (result?.data?.invoice?.data) {
+          const invoice = result?.data?.invoice?.data;
+          pollerId = setInterval(async () => {
+            const invoiceResult = await dispatch(fetchInvoiceInfo(invoice));
+            if (invoiceResult?.data?.invoice?.status === "paid") {
+              updateModals.reset();
+              dispatch(fetchAccountInfo()); // todo: change to AccountDAO model
+              updateToast.toggleToast("Deposit successful");
+            }
+          }, 5 * 1000);
+        }
+      };
+      fetchData();
+    },
+    () => {
+      console.log("onDetached");
+      clearInterval(pollerId);
     }
-  }
+  );
 
-  onCopy = (text) => {
-    const { toggleToast } = this.props;
-    toggleToast("Text coppied");
-  };
-
-  startPoller(invoice) {
-    const {
-      fetchInvoiceInfo,
-      closeDepositDialog,
-      fetchAccountInfo,
-      toggleToast,
-    } = this.props;
-    pollerId = setInterval(async () => {
-      const result = await fetchInvoiceInfo(invoice);
-      if (result?.data?.invoice?.status === "paid") {
-        closeDepositDialog();
-        fetchAccountInfo();
-        toggleToast("Deposit successful");
-      }
-    }, 5 * 1000);
-  }
-
-  render() {
-    const { depositInvoice } = this.props;
-    return (
-      <div className="Deposit">
-        <div className="Deposit__content">
-          <div className="Deposit__heading">Deposit Funds</div>
-          {depositInvoice.loading && <Loader />}
-          {depositInvoice.error && <div>Error making deposit</div>}
-          {depositInvoice.data && (
-            <>
-              <span>
-                Scan or copy the lightning invoice below into your Lightning
-                wallet in order to deposit funds
-              </span>
-              <br />
-              <div className="Deposit__banner">
-                <div className="Deposit__banner__inner">
-                  <QRCode
-                    renderAs="svg"
-                    style={{ width: "100%", height: "auto" }}
-                    value={depositInvoice.data.invoice.data}
-                  />
-                </div>
-              </div>
-              <div className="Deposit__invoice">
-                <input
-                  disabled
-                  type="text"
+  const depositInvoice = useSelector((state) => state.depositInvoice); // todo: chage to DAO model
+  return (
+    <div className="Deposit">
+      <div className="Deposit__content">
+        <div className="Deposit__heading">Deposit Funds</div>
+        {depositInvoice.loading && <Loader />}
+        {depositInvoice.error && <div>Error making deposit</div>}
+        {depositInvoice.data && (
+          <>
+            <span>
+              Scan or copy the lightning invoice below into your Lightning
+              wallet in order to deposit funds
+            </span>
+            <br />
+            <div className="Deposit__banner">
+              <div className="Deposit__banner__inner">
+                <QRCode
+                  renderAs="svg"
+                  style={{ width: "100%", height: "auto" }}
                   value={depositInvoice.data.invoice.data}
                 />
-                <CopyToClipboard
-                  text={depositInvoice.data.invoice.data}
-                  onCopy={this.onCopy}
-                >
-                  <Button secondary onClick={() => {}}>
-                    <i className="far fa-clipboard" aria-hidden="true"></i>
-                  </Button>
-                </CopyToClipboard>
               </div>
-              <div className="Deposit__expiry">
-                <CountdownCounter
-                  format
-                  interval={1000}
-                  endTime={moment(
-                    depositInvoice.data.invoice.expiryTimestamp
-                  ).unix()}
-                />
-              </div>
-              <div className="Deposit__spinner">
-                <i className="fas fa-spinner fa-4x" aria-hidden="true" />
-              </div>
-            </>
-          )}
-        </div>
+            </div>
+            <div className="Deposit__invoice">
+              <input
+                disabled
+                type="text"
+                value={depositInvoice.data.invoice.data}
+              />
+              <CopyToClipboard
+                text={depositInvoice.data.invoice.data}
+                onCopy={() => updateToast.toggleToast("Text coppied")}
+              >
+                <Button secondary onClick={() => {}}>
+                  <i className="far fa-clipboard" aria-hidden="true"></i>
+                </Button>
+              </CopyToClipboard>
+            </div>
+            <div className="Deposit__expiry">
+              <CountdownCounter
+                format
+                interval={1000}
+                endTime={moment(
+                  depositInvoice.data.invoice.expiryTimestamp
+                ).unix()}
+              />
+            </div>
+            <div className="Deposit__spinner">
+              <i className="fas fa-spinner fa-4x" aria-hidden="true" />
+            </div>
+          </>
+        )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchDepositInvoice: () => dispatch(fetchDepositInvoice()),
-  fetchInvoiceInfo: (invoice) => dispatch(fetchInvoiceInfo(invoice)),
-  closeDepositDialog: () => dispatch(closeDepositDialog()),
-  fetchAccountInfo: () => dispatch(fetchAccountInfo()),
-  toggleToast: (text) => dispatch(toggleToast(text)),
-});
-const mapStateToProps = (state) => ({
-  depositInvoice: state.depositInvoice,
-  fetchInvoiceInfo: state.fetchInvoiceInfo,
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Deposit);
+export default Deposit;

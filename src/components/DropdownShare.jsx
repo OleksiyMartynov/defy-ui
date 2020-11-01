@@ -3,9 +3,9 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import "./DropdownShare.scss";
 import PropTypes from "prop-types";
 
-const DropdownShare = ({ mobileTitle = "", mobileDescription = "", toggleModal }) => {
+const DropdownShare = ({ mobileTitle = "", mobileDescription = "", toggleToast }) => {
   const onCopy = () => {
-    toggleModal("Link coppied");
+    toggleToast("Link coppied");
   };
 
   const mobileShare = () => {

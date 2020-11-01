@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 
 export function usePrevious(value) {
   const ref = useRef();
@@ -7,4 +7,11 @@ export function usePrevious(value) {
     ref.current = value;
   });
   return ref.current;
+}
+
+export function useLifecycle(onMount, onUnmount) {
+  useEffect(() => {
+    onMount();
+    return onUnmount;
+  }, []);
 }
