@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Deposit.scss";
 import moment from "moment";
 import QRCode from "qrcode.react";

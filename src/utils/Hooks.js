@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import { useRef, useEffect, useState, useCallback } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useRef, useEffect } from "react";
 
 export function usePrevious(value) {
   const ref = useRef();
